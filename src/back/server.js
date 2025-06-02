@@ -6,9 +6,7 @@ const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 
-const routes = require('./routes');
-
-
+const routes = require('./../db/routes.js');
 
 const app = express();
 app.use(express.static(path.join(__dirname, '..', 'front')));
