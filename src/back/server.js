@@ -6,12 +6,15 @@ const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 
+const routes = require('./routes');
+
 
 
 const app = express();
 app.use(express.static(path.join(__dirname, '..', 'front')));
 app.use(cors());
 app.use(express.json());
+app.use('/api', routes);
 app.post('/api/forgot-password', async (req, res) => {
   const { email } = req.body;
   if (!email) return res.status(400).json({ error: 'E-mail é obrigatório.' });
@@ -159,7 +162,5 @@ app.post('/api/login', (req, res) => {
 });
 
 // Iniciar o servidor
-const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
-});
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
