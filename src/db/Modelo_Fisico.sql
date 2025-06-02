@@ -45,47 +45,44 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Funcionario` (
   PRIMARY KEY (`Codigo`))
 ENGINE = InnoDB;
 
-
 -- -----------------------------------------------------
 -- Table `mydb`.`Emprestimo`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Emprestimo` (
-  `Codigo` INT NULL,
+  `Codigo` INT NOT NULL,
   `Descricao` VARCHAR(45) NULL,
   `Data_Retirada` DATE NULL,
-  `Data_Devolucao` VARCHAR(45) NULL,
+  `Data_Devolucao` DATE NULL,
   `Codigo_Funcionario` INT NOT NULL,
   PRIMARY KEY (`Codigo`),
-  INDEX `fk_Emprestimo_Funcionario_idx` (`Codigo_Funcionario` ASC) VISIBLE,
+  INDEX `idx_Emp_Funcionario` (`Codigo_Funcionario`),
   CONSTRAINT `fk_Emprestimo_Funcionario`
     FOREIGN KEY (`Codigo_Funcionario`)
     REFERENCES `mydb`.`Funcionario` (`Codigo`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
+    ON UPDATE NO ACTION
+) ENGINE=InnoDB;
 
 -- -----------------------------------------------------
 -- Table `mydb`.`Emprestimo_Ferramenta`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Emprestimo_Ferramenta` (
   `Codigo_Emprestimo` INT NOT NULL,
-  `Codigo_Funcionario` INT NOT NULL,
-  PRIMARY KEY (`Codigo_Emprestimo`, `Codigo_Funcionario`),
-  INDEX `fk_Emprestimo_has_Ferramenta_Ferramenta1_idx` (`Codigo_Funcionario` ASC) VISIBLE,
-  INDEX `fk_Emprestimo_has_Ferramenta_Emprestimo1_idx` (`Codigo_Emprestimo` ASC) VISIBLE,
-  CONSTRAINT `fk_Emprestimo_has_Ferramenta_Emprestimo1`
+  `Codigo_Ferramenta` INT NOT NULL,
+  PRIMARY KEY (`Codigo_Emprestimo`, `Codigo_Ferramenta`),
+  INDEX `idx_EmpFerr_CodFerr`    (`Codigo_Ferramenta`),
+  INDEX `idx_EmpFerr_CodEmprest`  (`Codigo_Emprestimo`),
+  CONSTRAINT `fk_EmpFerr_Emprestimo`
     FOREIGN KEY (`Codigo_Emprestimo`)
     REFERENCES `mydb`.`Emprestimo` (`Codigo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Emprestimo_has_Ferramenta_Ferramenta1`
-    FOREIGN KEY (`Codigo_Funcionario`)
+  CONSTRAINT `fk_EmpFerr_Ferramenta`
+    FOREIGN KEY (`Codigo_Ferramenta`)
     REFERENCES `mydb`.`Ferramenta` (`Codigo`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
+    ON UPDATE NO ACTION
+) ENGINE=InnoDB;
 
 -- -----------------------------------------------------
 -- Table `mydb`.`Compra`
@@ -96,13 +93,15 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Compra` (
   `Data_Entrega` DATE NULL,
   `Funcionario_Codigo` INT NOT NULL,
   PRIMARY KEY (`Codigo`),
-  INDEX `fk_Compra_Funcionario1_idx` (`Funcionario_Codigo` ASC) VISIBLE,
+  -- índice simplificado, sem ASC nem VISIBLE
+  KEY `fk_Compra_Funcionario1_idx` (`Funcionario_Codigo`),
   CONSTRAINT `fk_Compra_Funcionario1`
     FOREIGN KEY (`Funcionario_Codigo`)
     REFERENCES `mydb`.`Funcionario` (`Codigo`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+    ON UPDATE NO ACTION
+) ENGINE=InnoDB;
+
 
 
 -- -----------------------------------------------------
@@ -117,6 +116,16 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Material` (
   PRIMARY KEY (`Codigo`))
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `mydb`.`Usuario`
+-- -----------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `mydb`.`Administrador` (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(100) NOT NULL,
+  email VARCHAR(100) NOT NULL UNIQUE,
+  senha VARCHAR(255) NOT NULL
+) ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `mydb`.`Compra_Material`
@@ -125,8 +134,9 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Compra_Material` (
   `Compra_Codigo` INT NOT NULL,
   `Material_Codigo` INT NOT NULL,
   PRIMARY KEY (`Compra_Codigo`, `Material_Codigo`),
-  INDEX `fk_Compra_has_Material_Material1_idx` (`Material_Codigo` ASC) VISIBLE,
-  INDEX `fk_Compra_has_Material_Compra1_idx` (`Compra_Codigo` ASC) VISIBLE,
+  -- índices simplificados
+  KEY `fk_Compra_has_Material_Material1_idx` (`Material_Codigo`),
+  KEY `fk_Compra_has_Material_Compra1_idx`  (`Compra_Codigo`),
   CONSTRAINT `fk_Compra_has_Material_Compra1`
     FOREIGN KEY (`Compra_Codigo`)
     REFERENCES `mydb`.`Compra` (`Codigo`)
@@ -136,8 +146,9 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Compra_Material` (
     FOREIGN KEY (`Material_Codigo`)
     REFERENCES `mydb`.`Material` (`Codigo`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+    ON UPDATE NO ACTION
+) ENGINE=InnoDB;
+
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
