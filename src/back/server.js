@@ -1,12 +1,12 @@
 const path = require('path');
-const express = require('express');
+const express = require("express");
 const mysql = require('mysql2');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 
-const routes = require('./../db/routes.js');
+const routes = require('./routes.js');
 
 const app = express();
 app.use(express.static(path.join(__dirname, '..', 'front')));

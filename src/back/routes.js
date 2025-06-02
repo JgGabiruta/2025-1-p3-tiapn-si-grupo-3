@@ -1,13 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const db = require('./db'); // certifique-se de que esse arquivo exporta sua conexão com o MySQL
+const db = require('../db/db'); // certifique-se de que esse arquivo exporta sua conexão com o MySQL
 
 // Função genérica para criar rotas GET de cada tabela
 function criarRotaParaTabela(nomeTabela) {
-  router.get(`/${nomeTabela.toLowerCase()}`, async (req, res) => {
+  router.get(`/${nomeTabela}`, async (req, res) => {
+
     try {
       const [rows] = await db.query(`SELECT * FROM ${nomeTabela}`);
       res.json(rows);
+
     } catch (err) {
       console.error(err);
       res.status(500).json({ error: `Erro ao buscar dados da tabela ${nomeTabela}` });
