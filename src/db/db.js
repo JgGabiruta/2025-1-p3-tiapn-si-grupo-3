@@ -1,12 +1,13 @@
 const mysql = require('mysql2/promise');
 
 const pool = mysql.createPool({
-  host: 'manejodb-manejodb.e.aivencloud.com',
-  user: 'avnadmin',
-  password: 'AVNS_IhA5Mm_jN9pq0lKZtfG',
-  database: 'defaultdb',
-  port: 22932,
-  ssl: { rejectUnauthorized: true } // conexão segura com Aiven
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT,
+  ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: true } : false,
+  connectionLimit: 10,
 });
 
 module.exports = pool;
