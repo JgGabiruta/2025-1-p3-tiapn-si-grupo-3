@@ -17,6 +17,22 @@ function criarRotaParaTabela(nomeTabela) {
   });
 }
 
+function EmprestimoFuncionario(){
+
+    router.get(`/EmprestimoFuncionario`, async (req, res) => {
+
+    try {
+      const [rows] = await db.query(`SELECT Funcionario.Nome, Funcionario.Departamento_Codigo, Emprestimo.Data_Retirada, Emprestimo.Data_Devolucao FROM Funcionario inner join Emprestimo on Funcionario.Codigo = Emprestimo.Operario_Funcionario_Codigo`);
+      res.json(rows);
+
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: `Erro ao buscar dados da tabela ` });
+    }
+  });
+
+}
+
 // Lista de tabelas
 const tabelas = [
   'Departamento',
@@ -35,5 +51,6 @@ const tabelas = [
 
 // Cria as rotas automaticamente
 tabelas.forEach(criarRotaParaTabela);
+EmprestimoFuncionario();
 
 module.exports = router;

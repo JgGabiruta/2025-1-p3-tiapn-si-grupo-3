@@ -6,10 +6,29 @@ menuButton.addEventListener('click', () => {
 });
 
 let listaEmprestimos = document.getElementById("listaEmprestimos");
+let dadosFunc, dadosEmp;
 
 window.onload = () =>{
+  
+  fetch('http://localhost:3000/funcionario')
+  .then(response => response.json())
+  .then(dados => {
 
-    imprimeEmprestimos();
+    dadosFunc = dados;
+    console.log(dadosFunc)
+     imprimeEmprestimos();  
+  })
+
+  fetch('http://localhost:3000/emprestimo')
+  .then(response => response.json())
+  .then(dados => {
+
+    dadosEmp = dados;
+    console.log(dadosEmp)
+    imprimeEmprestimos();  
+  }) 
+  
+  
 }
 
 const pesquisar = () => {
@@ -54,25 +73,28 @@ const pesquisar = () => {
 
 function imprimeEmprestimos() {
     
-    let str = '';
-    let nomes = ["Getúlio vargas", "Ana Maria", "Veronica Almeida", "Theordor Vieira", "Arthur Gomes"]
-    let departamentos = ["Construção", "Administração", "Operação", "Recursos Humanos", "Construção"]
+    let str = ''
     let codigos = ["1287-01", "3242-73", "8923-21", "8392-32", "1282-21"]
+    
 
-    for(let i = 0 ; i < 5 ; i++){
+    for(let i = 0 ; i < 3 ; i++){
+        
+      let aux = dadosEmp[i].Data_Retirada.split("T");
+      let aux2 = aux[0].split("-");
+      let data = `${aux2[2]}-${aux2[1]}-${aux2[0]}`
 
-        str += `<div class="emprestimo">
+      str += `<div class="emprestimo">
 
               <div id="grupo1">
 
                 <div>
                   <p class="label">Nome</p>
-                  <p class="text nomes">${nomes[i]}</p>
+                  <p class="text nomes">${dadosFunc[i].Nome}</p>
                 </div>
 
                 <div>
                   <p class="label">Data de Empréstimo</p>
-                  <p class="text">02/12/24 - 12:39</p>
+                  <p class="text">${data}</p>
                 </div>
 
               </div>
@@ -81,7 +103,7 @@ function imprimeEmprestimos() {
 
                 <div>
                   <p class="label">Departamento</p> 
-                  <p class="text departamentos">${departamentos[i]}</p>
+                  <p class="text departamentos">{departamentos[i]}</p>
                 </div>
 
                 <div>
