@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login / Cadastro</title>
   <link rel="stylesheet" href="login.css">
+  <style>
+    
+  </style>
 </head>
 
 <body>
@@ -13,22 +16,46 @@
     <div class="form-container sign-in-container">
       <form>
         <h1>Entrar</h1>
-
         <input type="email" placeholder="Email" required />
         <input type="password" placeholder="Password" required />
         <button type="submit">Entrar</button>
         <p><a href="forgot-password.html">Esqueceu a senha?</a></p>
       </form>
     </div>
+
     <div class="form-container sign-up-container">
-      <form>
-        <h1>Criar conta</h1>
-        <input type="text" placeholder="Name" required />
-        <input type="email" placeholder="Email" required />
-        <input type="password" placeholder="Password" required />
-        <button type="submit">Criar Conta</button>
+      <h1>Criar conta</h1>
+      <form id="multiStepForm">
+
+        <!-- Etapa 1 -->
+        <div class="step active">
+          <input type="text" name="nome" placeholder="Nome completo" required />
+          <input type="email" name="email" placeholder="Email" required />
+          <input type="password" name="senha" placeholder="Senha" required />
+          <button type="button" onclick="nextStep()">Próximo</button>
+        </div>
+
+        <!-- Etapa 2 -->
+        <div class="step">
+          <input type="text" name="cargo" placeholder="Cargo" required />
+          <input type="text" name="cpf" placeholder="CPF" maxlength="14" oninput="formatarCPF(this)" required />
+          <input type="text" name="telefone" placeholder="Telefone" maxlength="15" oninput="formatarTelefone(this)" required />
+          <input type="date" name="nascimento" placeholder="Data de nascimento" required />
+          <button type="button" onclick="prevStep()">Voltar</button>
+          <button type="button" onclick="nextStep()">Próximo</button>
+        </div>
+
+        <!-- Etapa 3 -->
+        <div class="step">
+          <input type="text" name="rua" placeholder="Rua" required />
+          <input type="number" name="numero" placeholder="Número" required />
+          <input type="text" name="cidade" placeholder="Cidade" required />
+          <button type="button" onclick="prevStep()">Voltar</button>
+          <button type="submit">Criar Conta</button>
+        </div>
       </form>
     </div>
+
     <div class="overlay-container">
       <div class="overlay">
         <div class="overlay-panel overlay-left">
@@ -42,14 +69,15 @@
           <h2>Bem-vindo à</h2>
           <h1>Manejo GR!</h1>
           <p>Novo por aqui?</p>
-
           <button id="sign-up">Criar Conta</button>
           <img src="./../assets/Logo.png" alt="Logo Manejo" width="110px">
         </div>
       </div>
     </div>
   </div>
+
   <script src="login.js"></script>
+  
 </body>
 
 </html>

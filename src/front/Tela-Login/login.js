@@ -1,5 +1,49 @@
-// login.js
+// Script para que o front da pagina de login funcione devidamente
 
+// Funções para passar para próximo e anterior
+let currentStep = 0;
+    const steps = document.querySelectorAll('.sign-up-container .step');
+
+    function showStep(index) {
+      steps.forEach((step, i) => step.classList.remove('active' /*, i === index */));
+      setTimeout(() => {
+        steps[index].classList.add('active');
+      }, 10);
+    }
+
+    function nextStep() {
+      if (currentStep < steps.length - 1) {
+        currentStep++;
+        showStep(currentStep);
+      }
+    }
+
+    function prevStep() {
+      if (currentStep > 0) {
+        currentStep--;
+        showStep(currentStep);
+      }
+    }
+//------------------------------------------
+// Funções para formatar o cpf e o telefone
+function formatarTelefone(input) {
+  let v = input.value.replace(/\D/g, '');
+  if (v.length > 11) v = v.slice(0, 11);
+  v = v.replace(/(\d{2})(\d)/, '($1) $2');
+  v = v.replace(/(\d{5})(\d)/, '$1-$2');
+  input.value = v;
+}
+
+function formatarCPF(input) {
+  let v = input.value.replace(/\D/g, '');
+  if (v.length > 11) v = v.slice(0, 11);
+  v = v.replace(/(\d{3})(\d)/, '$1.$2');
+  v = v.replace(/(\d{3})(\d)/, '$1.$2');
+  v = v.replace(/(\d{3})(\d{2})$/, '$1-$2');
+  input.value = v;
+}
+
+  
 const container = document.getElementById('container');
 document.getElementById('sign-up').addEventListener('click', () => {
   container.classList.add('right-panel-active');
