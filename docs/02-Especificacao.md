@@ -2,10 +2,6 @@
 
 <span style="color:red">Pré-requisitos: <a href="01-Contexto.md"> Documentação de contexto</a></span>
 
-Definição do problema e ideia de solução a partir da perspectiva do usuário. É composta pela definição do  diagrama de personas, histórias de usuários, requisitos funcionais e não funcionais além das restrições do projeto.
-
-Apresente uma visão geral do que será abordado nesta parte do documento, enumerando as técnicas e/ou ferramentas utilizadas para realizar a especificações do projeto.
-
 ## Personas
 
 
@@ -95,6 +91,9 @@ Com base na análise das personas, foram identificadas as seguintes histórias d
 |Usuário do sistema  | Acompanhar histórico de empréstimos de cada usuário           | Identificar padrões de uso e tomar decisões sobre renovação de acervo      |
 |Usuário do sistema  | Visualizar um histórico de movimentações de cada equipamento.        | Acompanhar trocas, devoluções e manutenções realizadas em cada equipamento.  |
 |Usuário do sistema  | Registrar os dados de retirada e devolução no sistema.         | Garantir um maior controle de equipamentos disponíveis e já alocados.  |
+|Usuário do sistema  | Pesquisar equipamentos disponíveis por categoria ou status.    | Encontrar rapidamente o que preciso para o trabalho.  |
+|Usuário do sistema  | Solicitar empréstimo de equipamento diretamente pelo sistema.         | Simplificar o processo e agilizar a aprovação.  |
+|Usuário do sistema  | Atualizar meus dados pessoais e de contato no perfil do sistema.         | Manter as informações corretas para comunicação eficiente.  |
 |Administrador       | Criar categorias para diferentes tipos de recursos                | Facilitar a organização e busca dentro do sistema |
 |Administrador       | Editar ou excluir registros de equipamentos e recursos                | Manter o banco de dados atualizado e organizado |
 |Administrador       | Gerenciar permissões de usuários               | Controlar quem pode cadastrar, editar e visualizar dados no sistema |
@@ -102,7 +101,6 @@ Com base na análise das personas, foram identificadas as seguintes histórias d
 |Administrador       | Definir regras para empréstimo e devolução de equipamentos, incluindo prazos.             | Garantir a padronização do processo e evitar falhas humanas. |
 |Administrador       | Gerar relatórios de cada equipamento emprestado, quem está com o equipamento atualmente, etc.               | Garantir o controle das locações. |
 
-Apresente aqui as histórias de usuários que são relevantes para o projeto da sua solução. As histórias de usuários consistem em uma ferramenta poderosa para a compreensão e elicitação dos requisitos funcionais e não funcionais da sua aplicação. Se possível, agrupe as histórias de usuários por contexto, para facilitar consultas recorrentes a esta parte do documento.
 
 ## Requisitos
 
@@ -158,11 +156,9 @@ Com base nas histórias de usuários, enumere os requisitos da sua solução. Cl
   desempenho, confiabilidade, segurança ou outro (ex: suporte a
   dispositivos iOS e Android).
 
-Lembre-se de que cada requisito deve corresponder a uma e somente uma característica-alvo da sua solução. Além disso, certifique-se de que todos os aspectos capturados nas histórias de usuários foram cobertos.
 
 ## Restrições
 
-Enumere as restrições à sua solução. Lembre-se de que as restrições geralmente limitam a solução candidata.
 
 O projeto está restrito aos itens apresentados na tabela a seguir.
 
@@ -180,7 +176,6 @@ O projeto está restrito aos itens apresentados na tabela a seguir.
 
 ## Diagrama de casos de uso
 
-O diagrama de casos de uso é o próximo passo após a elicitação de requisitos. Ele utiliza um modelo gráfico e uma tabela com as descrições sucintas dos casos de uso e dos atores. O diagrama contempla a fronteira do sistema e o detalhamento dos requisitos funcionais, com a indicação dos atores, casos de uso e seus relacionamentos.
 
  ![Diagrama](images/diagrama.png)
 
