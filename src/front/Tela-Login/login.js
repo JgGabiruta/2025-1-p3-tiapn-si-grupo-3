@@ -42,8 +42,64 @@ function formatarCPF(input) {
   v = v.replace(/(\d{3})(\d{2})$/, '$1-$2');
   input.value = v;
 }
+// ----------------------------------------------
+// Cadastro para a tabela funcionários
+const multiStepForm = document.getElementById('multiStepForm');
+multiStepForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const form = e.target;
 
-  
+  const data = {
+    nome: form.nome.value,
+    email: form.email.value,
+    senha: form.senha.value,
+    cargo: form.cargo.value,
+    telefone: form.telefone.value,
+    nascimento: form.nascimento.value,
+    rua: form.rua.value,
+    numero: form.numero.value,
+    cidade: form.cidade.value
+  };
+  if (!data.email || !data.senha) {
+    alert('Preencha todos os campos!');
+    return;
+  }
+  try {
+    const resFunc = await fetch ('http://localhost:3000/api/funcionario', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify(data)
+    });
+    if (!resFunc.ok) {
+      const err = await resFunc.json();
+      alert(err.error || 'Erro ao cadastrar funcionário');
+      return;
+    }
+    const resAdm = await fetch('http://localhost:3000/api/administrador', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        nome: data.nome,
+        email: data.email,
+        senha: data.senha
+      })
+    });
+    if (!resAdm.ok) {
+      const errAdm = await resAdm.json();
+      alert(errAdm.error || 'Erro ao cadastrar administrador');
+      return;
+    }
+    alert('Cadastro realizado com sucesso!');
+    form.reset();
+    currentStep = 0;
+    showStep(currentStep);
+    container.classList.remove('right-panel-active');
+  } catch (error){
+        console.error(error);
+        alert('Erro ao conectar ao servidor');
+      }
+});
+
 const container = document.getElementById('container');
 document.getElementById('sign-up').addEventListener('click', () => {
   container.classList.add('right-panel-active');
@@ -52,39 +108,7 @@ document.getElementById('sign-in').addEventListener('click', () => {
   container.classList.remove('right-panel-active');
 });
 
-// Cadastro de usuário
-const signUpForm = document.querySelector('.sign-up-container form');
-signUpForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
 
-  const nome = signUpForm.querySelector('input[placeholder="Name"]').value.trim();
-  const email = signUpForm.querySelector('input[placeholder="Email"]').value.trim();
-  const senha = signUpForm.querySelector('input[placeholder="Password"]').value.trim();
-
-  if (!nome || !email || !senha) {
-    alert('Preencha todos os campos!');
-    return;
-  }
-
-  try {
-    const response = await fetch('http://localhost:3000/api/administrador', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nome, email, senha })
-    });
-    const data = await response.json();
-    if (response.ok) {
-      alert('Cadastro realizado com sucesso!');
-      container.classList.remove('right-panel-active'); // volta para login
-      signUpForm.reset();
-    } else {
-      alert(data.error || 'Erro ao cadastrar');
-    }
-  } catch (err) {
-    console.error(err);
-    alert('Erro ao conectar ao servidor.');
-  }
-});
 
 // Login de usuário
 const signInForm = document.querySelector('.sign-in-container form');
@@ -92,7 +116,7 @@ signInForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 
   const email = signInForm.querySelector('input[placeholder="Email"]').value.trim();
-  const senha = signInForm.querySelector('input[placeholder="Password"]').value.trim();
+  const senha = signInForm.querySelector('input[placeholder="Senha"]').value.trim();
 
   if (!email || !senha) {
     alert('Preencha todos os campos!');
