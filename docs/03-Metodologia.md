@@ -121,7 +121,7 @@ Legenda:
 
 Conforme orientação da professora Amália, o grupo deve designar um Scrum Master diferente para cada sprint, garantindo assim uma supervisão contínua e diversificada do processo. Essa responsabilidade inclui a gestão do mecanismo de controle utilizado pela equipe para a execução das tarefas, o GitHub Projects. Essa ferramenta possibilita a organização das atividades a serem desenvolvidas, além do acompanhamento detalhado do progresso de cada tarefa, permitindo identificar claramente quem é o responsável por sua execução e qual o seu status atual. Dessa forma, o grupo implementa de maneira prática o framework Scrum, utilizando o recurso de gerenciamento de projetos do GitHub para monitorar o andamento do trabalho, garantir a transparência no desenvolvimento e facilitar a colaboração entre os membros da equipe.
 
-![Manejo GitHub Projects](images/Manejo_GitProjects.jpg)
+![Manejo GitHub Projects](images/Manejo_GitProjects.png)
  
 ## Relação de ambientes de trabalho
 
