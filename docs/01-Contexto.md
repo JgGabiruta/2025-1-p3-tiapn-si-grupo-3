@@ -24,6 +24,10 @@ Desenvolver a aplicação da empresa Manejo GR, com o objetivo de oferecer um se
 
 Além disso, os integrantes do grupo deverão aprimorar competências em gestão e organização de projetos, modelagem de processos de negócios, desenvolvimento front-end e back-end, gerenciamento de banco de dados, bem como outras habilidades essenciais para o desenvolvimento de aplicações voltadas à automação de processos empresariais, com foco no trabalho colaborativo.
 
+## Objetivos Específicos
+
+O objetivo específico é desenvolver uma plataforma intuitiva para cadastro, controle e rastreamento de materiais emprestados ou alugados, garantindo a integridade das informações. Para isso, será implementado um sistema eficiente de gestão de retiradas e devoluções, com notificações automatizadas que permitem o acompanhamento dos prazos. A aplicação também contará com a integração de relatórios e dashboards, visando otimizar a tomada de decisões. Além disso, será assegurada a segurança dos dados por meio da aplicação de boas práticas em banco de dados e mecanismos de autenticação. Por fim, o projeto busca promover o desenvolvimento de habilidades técnicas em tecnologia, assim como competências em gestão de projetos e trabalho em equipe entre os integrantes do grupo.
+
 ## Justificativa
 
 Os usuários precisam que os dados se relacionem de maneira prática e intuitiva. A implementação de um sistema de gestão de recursos internos e ativos permite o controle preciso de materiais, ferramentas e demais recursos utilizados pelos colaboradores na realização de suas atividades, promovendo a produtividade e a qualidade dos processos.
@@ -36,4 +40,4 @@ O tipo de solução que será implementada atende a variados setores, todos com 
 
 ## Público-alvo
 
-Empresas e empreendedores individuais que ainda não utilizam sistemas digitalizados para o controle de materiais ou que fazem uso de métodos baseados em anotações manuais e planilhas com baixa usabilidade e funcionalidade. O público-alvo abrange profissionais de todas as faixas etárias e segmentos de atuação, sem restrições quanto ao porte ou área de atividade.
+O público-alvo da aplicação Manejo GR são empresas de pequeno e médio porte, bem como empreendedores individuais, que ainda utilizam métodos tradicionais e pouco eficientes para o controle de materiais, como anotações manuais e planilhas simples. Essas organizações geralmente enfrentam dificuldades na gestão de recursos devido à falta de sistemas digitais acessíveis, intuitivos e integrados. A solução é direcionada a profissionais de diversos segmentos e níveis de experiência, que buscam otimizar seus processos operacionais, melhorar a rastreabilidade dos materiais e aumentar a produtividade. Independentemente do porte ou área de atuação, essas empresas têm em comum a necessidade de modernizar a gestão interna, reduzir perdas e desperdícios, e garantir maior controle sobre os ativos utilizados no dia a dia.

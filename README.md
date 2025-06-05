@@ -6,7 +6,9 @@
 
 `1º semestre/2025`
 
-Escreva um ou dois parágrafos resumindo o objetivo do seu projeto.
+O projeto Manejo GR visa desenvolver uma plataforma intuitiva e eficiente para o cadastro, controle e rastreamento de materiais emprestados ou alugados, garantindo a integridade das informações. A aplicação será equipada com um sistema de gestão de retiradas e devoluções que inclui notificações automatizadas para facilitar o acompanhamento dos prazos, promovendo maior organização e redução de erros. Além disso, a plataforma integrará relatórios e dashboards para otimizar a tomada de decisões, oferecendo uma visão clara e atualizada do uso dos recursos.
+
+Paralelamente ao desenvolvimento técnico, o projeto busca aprimorar as competências da equipe em gestão de projetos, modelagem de processos, desenvolvimento front-end e back-end, e gerenciamento de banco de dados. Com foco no trabalho colaborativo, o grupo também visa fortalecer habilidades essenciais para o desenvolvimento de soluções tecnológicas que automatizem processos empresariais, contribuindo para a melhoria contínua e a inovação nas organizações atendidas.
 
 ## Integrantes
 
