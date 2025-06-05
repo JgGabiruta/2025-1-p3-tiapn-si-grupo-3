@@ -37,7 +37,7 @@ Os wireframes do projeto Manejo apresentam a estrutura visual e a organização 
 
 ### Tela principal do sistema
 
-Na tela principal, o usuário terá acesso a menus rápidos com links diretos para todas as outras funcionalidades da aplicação, além de possuir widgets que informam a quantidade de funcionários ativos na empresa, o número de ferramentas presentes no estoque e um mural de lembretes.
+Tela Home: é a tela inicial do projeto, utilizada como um painel de controle para visualizar rapidamente o número de funcionários ativos e a quantidade de ferramentas disponíveis em estoque. Conta também com uma aba de lembretes, onde é possível adicionar, excluir e marcar itens como lidos, facilitando a organização das atividades do dia a dia.
 
 ![Tela-Home](images/Manejo_Home.png)
 
@@ -45,7 +45,7 @@ Na tela principal, o usuário terá acesso a menus rápidos com links diretos pa
 
 ###  Telas de Emprestimo
 
-Na tela inicial de Empréstimo, o usuário tem acesso aos menus de edição de departamento, empréstimo de material e bloqueio de empréstimo. Alémde uma seção dedicada a um aviso de empréstimos em atraso.
+Tela de Empréstimo: permite o gerenciamento dos empréstimos de materiais solicitados pelos funcionários. Nela, é possível listar os empréstimos em andamento, registrar um novo empréstimo para um funcionário, editar informações relacionadas ao departamento e até bloquear funcionários de realizar novos empréstimos, quando necessário. Essa tela centraliza o controle das movimentações de recursos, garantindo mais organização e rastreabilidade.
 
 ![image](https://github.com/user-attachments/assets/5b18b3d0-b54f-4a38-9c45-b2f9e45cb88b)
 
@@ -57,9 +57,9 @@ Na tela de Listar Empréstimos, o usuário consegue ver e filtrar todos os empr�
 
 
 
-### Telas de Compra de Ferramentas
+### Tela de Estoque
 
-Após a compra de ferramentas, o usuário pode adicioná-las no estoque, infromando dados relevantes para a organização, como por exemplo a quantidade de determinada ferramenta, seu nome e código.
+Tela de Estoque: permite ao usuário uma visualização clara e objetiva de todas as ferramentas sob responsabilidade da empresa, facilitando sua organização e manejo. A tela exibe informações como código da ferramenta, nome, quantidade disponível, categoria, localização e uma ação que, ao ser clicada, permite visualizar o histórico de uso da ferramenta e seus detalhes. Além disso, o sistema possibilita a geração de relatórios sobre sua utilização, contribuindo para um controle mais eficiente e estratégico dos recursos. 
 
 
 ![image](https://github.com/user-attachments/assets/62aff239-7ff3-4d63-b74d-a3180adbba44)
