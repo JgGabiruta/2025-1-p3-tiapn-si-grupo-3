@@ -135,8 +135,8 @@ router.post('/login', async (req, res) => {
     );
     if (admRows.length > 0) {
       const admin = admRows[0];
-      const match = await bcrypt.compare(senha, admin.senha);
-      if (match) {
+      //const match = await bcrypt.compare(senha, admin.senha);
+      if (senha == admin.senha) {
         return res.json({
           message: 'Login de administrador bem-sucedido.',
           user: { id: admin.id, email: admin.email, tipo: 'administrador' }
@@ -155,8 +155,8 @@ router.post('/login', async (req, res) => {
     );
     if (funcRows.length > 0) {
       const func = funcRows[0];
-      const matchFunc = await bcrypt.compare(senha, func.senha);
-      if (matchFunc) {
+      //const matchFunc = await bcrypt.compare(senha, func.senha);
+      if (senha == func.senha) {
         return res.json({
           message: 'Login de funcionário bem-sucedido.',
           user: { id: func.id, nome: func.nome, email: func.email, tipo: 'funcionario' }

@@ -180,7 +180,7 @@ signInForm.addEventListener('submit', async (e) => {
     if (response.ok) {
       alert('Login bem-sucedido!');
       localStorage.setItem('user', JSON.stringify(data.user));
-      window.location.href = '/dashboard.html';
+      window.location.href = '../Tela-Home/Index.html';
     } else {
       alert(data.error || 'Credenciais inválidas.');
     }
