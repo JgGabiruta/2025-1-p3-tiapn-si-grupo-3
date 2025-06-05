@@ -109,12 +109,12 @@ Legenda:
 
 | Responsável   | Tarefa/Requisito | Iniciado em    | Prazo      | Status | Terminado em    |
 | :----         |    :----         |      :----:    | :----:     | :----: | :----:          |
-| Gabriel H.     | Tela e CRUD de funcionários | 19/05/2025     | 05/06/2025 | 📝    |       |
-| Ingrid Y.       | Tela e CRUD de empréstimos    | 19/05/2025     | 05/06/2025 | 📝     |                   |
-| João F.      | Tela de início   | 19/05/2025    | 05/06/2025  | 📝     |                  |
-| Iago M.        |  Tela e CRUD de ferramentas  |    19/05/2025        | 05/06/2025 |  📝   |       |         
-| João G.        | Tela e CRUD de login  |    19/05/2025        | 05/06/2025  |  📝   |      |
-| Luiz H.       |   |            |  |  📝   |       |
+| Gabriel H.     | Tela e CRUD de funcionários | 19/05/2025     | 05/06/2025 | ✔️    |    05/06/2025    |
+| Ingrid Y.       | Tela e CRUD de empréstimos    | 15/05/2025     | 05/06/2025 | ✔️     |          04/06/2025          |
+| João F.      | Tela de início   | 16/05/2025    | 05/06/2025  | ✔️     |           05/06/2025        |
+| Iago M.        |  Tela e CRUD de ferramentas  |    12/05/2025        | 05/06/2025 |  ✔️   |   01/06/2025     |         
+| João G.        | Tela e CRUD de login  |    17/05/2025        | 05/06/2025  |  ✔️   |   05/06/2025    |
+| Luiz H.       | HTML, CSS E JAVASCRIPT das telas de Departamento e Configurações  |  19/05/2025    |  |  ✔️   |   04/06/2025     |
 
 
 ### Processo
