@@ -246,3 +246,14 @@ document.getElementById("Excluir-Funcionario").addEventListener("click", functio
     })
     .catch(err => console.error("Erro ao excluir funcionário:", err));
 });
+
+
+document.getElementById("search-funcionario").addEventListener("input", function () {
+  const termo = this.value.toLowerCase();
+  const funcionarios = document.querySelectorAll(".funcionario");
+
+  funcionarios.forEach(funcionario => {
+    const nome = funcionario.querySelector(".nome-funci p").textContent.toLowerCase();
+    funcionario.style.display = nome.includes(termo) ? "flex" : "none";
+  });
+});
