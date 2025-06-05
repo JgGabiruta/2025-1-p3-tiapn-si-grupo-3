@@ -89,6 +89,13 @@ function clearEmptyReminder() {
   const empty = reminderList.querySelector(".empty-reminder");
   if (empty) empty.remove();
 }
+// Escreve o nome do usuário logado na tela
+window.addEventListener('DOMContentLoaded', () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user && user.nome) {
+      document.getElementById('username').textContent = user.nome;
+    }
+  });
 
 // Inicializa
 updateEmptyState();

@@ -128,49 +128,50 @@ router.post('/login', async (req, res) => {
   }
 
   try {
-    // Primeiro, tenta encontrar no Administrador
+    // 1) Buscar na tabela Administrador, fazendo JOIN com Funcionario para capturar o nome
     const [admRows] = await db.query(
-      'SELECT funcionario_codigo, email, senha FROM Administrador WHERE email = ?',
+      `
+      SELECT
+        a.Funcionario_Codigo AS administrador_id,
+        a.Email              AS administrador_email,
+        a.Senha              AS administrador_hash,
+        f.Nome               AS funcionario_nome
+      FROM Administrador AS a
+      JOIN Funcionario   AS f
+        ON f.Codigo = a.Funcionario_Codigo
+      WHERE a.Email = ?
+      `,
       [email]
     );
+
     if (admRows.length > 0) {
       const admin = admRows[0];
-      //const match = await bcrypt.compare(senha, admin.senha);
-      if (senha == admin.senha) {
+      // Aqui comparamos a senha em texto (senha) com o hash armazenado (administrador_hash)
+      //const match = await bcrypt.compare(senha, admin.administrador_hash);
+      if (senha === admin.administrador_hash) {
+        // Retorna o objeto user com o nome vindo de Funcionario.Nome
         return res.json({
           message: 'Login de administrador bem-sucedido.',
-          user: { id: admin.id, email: admin.email, tipo: 'administrador' }
+          user: {
+            id:   admin.administrador_id,     // usa o alias correto
+            nome: admin.funcionario_nome,
+            email: admin.administrador_email,
+            tipo: 'administrador'
+          }
         });
+      } else {
+        return res.status(401).json({ error: 'Credenciais inválidas.' });
       }
-      return res.status(401).json({ error: 'Credenciais inválidas.' });
     }
 
-    // Se não encontrou em Administrador, tenta no Funcionario
-    // OBS.: Como a tabela Funcionario não possui coluna 'email' nem 'senha',
-    //      esse trecho pode nem ser necessário. Caso não exista ANY login via Funcionario,
-    //      basta remover este bloco.
-    const [funcRows] = await db.query(
-      'SELECT funcionario_codigo, nome, email, senha FROM Funcionario WHERE email = ?',
-      [email]
-    );
-    if (funcRows.length > 0) {
-      const func = funcRows[0];
-      //const matchFunc = await bcrypt.compare(senha, func.senha);
-      if (senha == func.senha) {
-        return res.json({
-          message: 'Login de funcionário bem-sucedido.',
-          user: { id: func.id, nome: func.nome, email: func.email, tipo: 'funcionario' }
-        });
-      }
-      return res.status(401).json({ error: 'Credenciais inválidas.' });
-    }
-
+    // 2) Se não encontrar em Administrador, retorna “Usuário não encontrado.”
     return res.status(404).json({ error: 'Usuário não encontrado.' });
   } catch (err) {
     console.error('Erro no login:', err);
-    res.status(500).json({ error: 'Erro interno no servidor.' });
+    return res.status(500).json({ error: 'Erro interno no servidor.' });
   }
 });
+
 
 // ------------------------------
 // Rotas GET automáticas para todas as tabelas listadas
