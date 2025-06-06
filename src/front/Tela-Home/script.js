@@ -158,6 +158,13 @@ reminderInput.addEventListener("keypress", function (e) {
     this.value = "";
   }
 });
+// Escreve o nome do usuário logado na tela
+window.addEventListener('DOMContentLoaded', () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user && user.nome) {
+      document.getElementById('username').textContent = user.nome;
+    }
+  });
 
 // Passo 1: Inicializa a lista ao carregar a página
 window.addEventListener("DOMContentLoaded", carregarLembretes);
