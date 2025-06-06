@@ -1,14 +1,15 @@
 const express = require("express");
 const db = require('./../db/db');
 const cors = require('cors');
+const routes = require('./routes')
+const path = require('path');
 
-const app = express();
+app.use(express.static(path.join(__dirname, '..', 'front')));
 
+app.use(routes);
 app.use(cors());
 app.use(express.json());
 
-const teste = require("./routes")
-app.use(teste)
 
 // Iniciar o servidor
 const PORT = process.env.PORT || 3000;
