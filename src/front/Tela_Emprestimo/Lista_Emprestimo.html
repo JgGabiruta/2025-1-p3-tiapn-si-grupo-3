@@ -125,54 +125,45 @@
     <main>
       <article>
 
-        <h1>Menu Rápido</h1>
-
-        <a href="Lista_Emprestimo.html"><button>Listar Emprestimos</button></a>
-        <a href="GeraEmprestimo.html"><button>Emprestimo de Material</button></a>
+        <h1>Lista de Empréstimo</h1>
 
         <div class="divider"></div>
 
-        <div class="container" id="container_index">
+        <div class="container">
 
-            <div id="links_pags">
+          <div id="filtragem">
+            
+            <div class="input-icons">
 
-                <div class="link_pag">
-                    <a href="#">
-                        <i class="material-icons">edit</i>
-                        <div class="divider"></div>
-                        <p>Editar Departamentos</p>
-                    </a>
-                </div>
+              <i id="icon_search" class="material-icons">search</i>
 
-                <div class="link_pag">
-                    <a href="GeraEmprestimo.html">
-                        <i class="material-icons">add</i>
-                        <div class="divider"></div>
-                        <p>Emprestimo de Material</p>
-                    </a>
-                </div>
-
-                <div class="link_pag">
-                    <a href="#">
-                        <i class="material-icons">block</i>
-                        <div class="divider"></div>
-                        <p>Bloquear Emprestimo</p>
-                    </a>
-                </div>
-                
+              <input type="text" name="nome" id="inputNome" placeholder="Nome" onkeyup="pesquisar()">
             </div>
 
-            <div id="lista_emprestimo">
-               
+            <select name="selectPeca" id="selectPeca" onchange="pesquisar()">
 
-                
-            </div>
+            </select>
+
+            <select name="selectDepartamento" id="selectDepartamento" onchange="pesquisar()">
+              
+            </select>
+
+            <a href="index.html" style="color:black"><i class="material-icons">close</i></a>
+
+          </div>
+
+          <div class="divider"></div>
+
+          <div id="listaEmprestimos" class="container2">
+        
+          </div>
+          
         </div>
       </article>
     </main>
   </div>
  
-  <script src="script.js"></script>
+  <script src="script2.js"></script>
 </body>
 
 </html>

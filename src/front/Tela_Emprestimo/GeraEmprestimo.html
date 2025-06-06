@@ -24,7 +24,7 @@
 
         <div class="navbar-left">
             <button class="menu-button">&#9776;</button>
-            <a href="#">
+            <a href=".#">
                 <img src="./../assets/Logo-Manejo_Laranja.png" alt="Logo Manejo" class="logo-img" />
             </a>
 
@@ -125,54 +125,94 @@
     <main>
       <article>
 
-        <h1>Menu Rápido</h1>
-
-        <a href="Lista_Emprestimo.html"><button>Listar Emprestimos</button></a>
-        <a href="GeraEmprestimo.html"><button>Emprestimo de Material</button></a>
+        <h1>Gerar Novo Empréstimo</h1>
 
         <div class="divider"></div>
 
-        <div class="container" id="container_index">
+        <div class="container">
 
-            <div id="links_pags">
+          <div class="container2">
+        
+            <div class="container4">
 
-                <div class="link_pag">
-                    <a href="#">
-                        <i class="material-icons">edit</i>
-                        <div class="divider"></div>
-                        <p>Editar Departamentos</p>
-                    </a>
+              <!--
+                <div id="grupo1">
+                    <p>Nome:</p>
+                    <input type="text" id="inputNome" placeholder="Insria o nome">
+                </div>
+              -->
+                <div class="grupo2">
+
+                    <div id="grupo2-sub1">
+                        <p>Codigo Funcionario:</p>
+                        <select name="selectCodFunc" id="selectFuncionario" >
+                            
+                            
+                        </select>
+                    </div>
+
+                    <div id="grupo2-sub2">
+                        <p>Codigo Da Ferramenta</p>
+                        <select name="selectCodFerr" id="selectFerramenta" >
+                            
+                        </select>
+                    </div>
+                    
                 </div>
 
-                <div class="link_pag">
-                    <a href="GeraEmprestimo.html">
-                        <i class="material-icons">add</i>
-                        <div class="divider"></div>
-                        <p>Emprestimo de Material</p>
-                    </a>
+                <div class="grupo2">
+
+                    <div id="grupo2-sub1" class="corrigeEspc" style="margin-right: 70px;">
+                        <p>Quantida de Emprestimo</p>
+                        <input type="text" id="inputQuantidade" placeholder="Insria a quantidade">
+                    </div>
+
+                    <div id="grupo2-sub2">
+                        
+                        <p>Data para Devolução</p>
+
+                        <div class="input-icons">
+                            <i id="icon_date_range" class="material-icons">date_range</i>
+                            <input type="text" id="inputData" placeholder="AAAA-MM-DD" style="text-indent: 40px;">
+                        </div>   
+
+                    </div>                
                 </div>
 
-                <div class="link_pag">
-                    <a href="#">
-                        <i class="material-icons">block</i>
-                        <div class="divider"></div>
-                        <p>Bloquear Emprestimo</p>
-                    </a>
+                <div class="grupo2" >
+
+                  <div id="grupo2-sub1" style="margin-right: 0px;">
+                    <p>Descrição</p>
+                    <input type="text" id="inputDescricao" placeholder="Insria a descricao">
+                  </div>
+                  
+                  <button onclick="criaEmprestimo()">Emprestar</button>
+                </div>
+
+            </div>
+
+            <div id="erro" class="container5">
+
+                <h1>Error: Funcionario bloqueado para o emprestimo</h1>
+
+                <p>Alguns possiveis motivos: Setor não tem autorização para emprestimo da ferramenta especifica, funcionario penalizado etc</p>
+
+                <div class="button-icons">
+
+                    <i id="icon_error_outline" class="material-icons">error_outline</i>
+
+                    <button>Emprestar mesmo assim</button>
                 </div>
                 
             </div>
-
-            <div id="lista_emprestimo">
-               
-
-                
-            </div>
+          </div>
+          
         </div>
       </article>
     </main>
   </div>
  
-  <script src="script.js"></script>
+  <script src="script3.js"></script>
 </body>
 
 </html>
