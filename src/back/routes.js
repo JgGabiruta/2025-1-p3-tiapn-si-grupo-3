@@ -1,26 +1,34 @@
-const express = require('express');
-const bcrypt = require('bcrypt');
-const router = express.Router();
-const db = require('../db/db'); // pool mysql2/promise apontando para o seu banco
+// routes.js
 
-// ------------------------------
-// Função genérica para GET em cada tabela
-// ------------------------------
+const express    = require('express');
+const bcrypt     = require('bcrypt');
+const jwt        = require('jsonwebtoken');
+const nodemailer = require('nodemailer');
+const router     = express.Router();
+const db         = require('../db/db'); // seu pool mysql2/promise
+const JWT_SECRET   = 'MINHA_CHAVE_SUPER_SECRETA'; 
+const FRONTEND_URL = 'http://localhost:3000';
+const MAIL_USER    = 'jg.gabiruta@yahoo.com'; 
+const MAIL_PASS    = 'cpbmgxniplmaoafb';
+
+// -------------------------------------------------
+// Função genérica para GET em todas as tabelas
+// -------------------------------------------------
 function criarRotaParaTabela(nomeTabela) {
   router.get(`/${nomeTabela}`, async (req, res) => {
     try {
       const [rows] = await db.query(`SELECT * FROM \`${nomeTabela}\``);
-      res.json(rows);
+      return res.json(rows);
     } catch (err) {
       console.error(err);
-      res.status(500).json({ error: `Erro ao buscar dados da tabela ${nomeTabela}` });
+      return res.status(500).json({ error: `Erro ao buscar dados da tabela ${nomeTabela}` });
     }
   });
 }
 
-// ------------------------------
-// Rota personalizada de JOIN: EmprestimoFuncionario
-// ------------------------------
+// -------------------------------------------------
+// Rota de JOIN de exemplo (mantém igual)
+// -------------------------------------------------
 function EmprestimoFuncionario() {
   router.get('/EmprestimoFuncionario', async (req, res) => {
     try {
@@ -30,53 +38,46 @@ function EmprestimoFuncionario() {
         INNER JOIN Emprestimo AS E
           ON F.Codigo = E.Operario_Funcionario_Codigo
       `);
-      res.json(rows);
+      return res.json(rows);
     } catch (err) {
       console.error(err);
-      res.status(500).json({ error: 'Erro ao buscar dados de EmprestimoFuncionario' });
+      return res.status(500).json({ error: 'Erro ao buscar dados de EmprestimoFuncionario' });
     }
   });
 }
 
-// ------------------------------
-// Rotas de Cadastro (POST)
-// ------------------------------
-
-// 1) Cadastro de Administrador
-// Ajuste na rota de cadastro de Administrador para receber funcionario_codigo
+// -------------------------------------------------
+// Rota de cadastro de Administrador
+// -------------------------------------------------
 router.post('/administrador', async (req, res) => {
-  // Agora esperamos 3 campos no body: email, senha e funcionario_codigo
   const { email, senha, funcionario_codigo } = req.body;
   if (!email || !senha || !funcionario_codigo) {
-    return res
-      .status(400)
-      .json({ error: 'email, senha e funcionario_codigo são obrigatórios.' });
+    return res.status(400).json({ error: 'email, senha e funcionario_codigo são obrigatórios.' });
   }
 
   try {
-    //Criptografa em hash a senha
-    const hash = await bcrypt.hash(senha, 10);
-    // Insere na tabela Administrador TENDO a FK funcionario_codigo disponível
+    // Gera hash da senha antes de salvar
+    const senhaHash = await bcrypt.hash(senha, 10);
+
     const [result] = await db.query(
-      'INSERT INTO Administrador (email, senha, Funcionario_Codigo) VALUES (?, ?, ?)',
-      [email, hash, funcionario_codigo]
+      'INSERT INTO Administrador (Email, Senha, Funcionario_Codigo) VALUES (?, ?, ?)',
+      [email, senhaHash, funcionario_codigo]
     );
-    res
+    return res
       .status(201)
       .json({ message: 'Administrador cadastrado com sucesso.', id: result.insertId });
   } catch (err) {
     console.error('Erro ao cadastrar administrador:', err);
     if (err.code === 'ER_DUP_ENTRY') {
-      return res
-        .status(409)
-        .json({ error: 'Já existe um administrador com este e-mail ou funcionário.' });
+      return res.status(409).json({ error: 'Já existe um administrador com este e-mail.' });
     }
-    res.status(500).json({ error: 'Erro interno ao cadastrar administrador.' });
+    return res.status(500).json({ error: 'Erro interno ao cadastrar administrador.' });
   }
 });
 
-
-// 2) Cadastro de Funcionário
+// -------------------------------------------------
+// Rota de cadastro de Funcionário
+// -------------------------------------------------
 router.post('/funcionario', async (req, res) => {
   const {
     nome,
@@ -85,44 +86,36 @@ router.post('/funcionario', async (req, res) => {
     data_nascimento,
     rua,
     numero,
-    cidade
+    cidade,
+    cpf // caso exista na tabela
   } = req.body;
 
-  // Retirei email e senha daqui, pois a tabela Funcionario não as possui
   if (!nome || !cargo || !telefone || !data_nascimento || !rua || !numero || !cidade) {
     return res.status(400).json({ error: 'Todos os campos são obrigatórios.' });
   }
 
   try {
-    // INSIRA NA TABELA Funcionario APENAS OS CAMPOS EXISTENTES:
     const [result] = await db.query(
       `INSERT INTO Funcionario
-        (nome, cargo, telefone, data_nascimento, rua, numero, cidade)
-       VALUES (?, ?, ?, ?, ?, ?, ?)`,
-      [
-        nome,
-        cargo,
-        telefone,
-        data_nascimento, // formato YYYY-MM-DD esperado pelo tipo DATE
-        rua,
-        numero,
-        cidade
-      ]
+         (Nome, Cargo, Telefone, Data_Nascimento, Rua, Numero, Cidade, CPF)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+      [nome, cargo, telefone, data_nascimento, rua, numero, cidade, cpf || null]
     );
-    res.status(201).json({ message: 'Funcionário cadastrado com sucesso.', id: result.insertId });
+    return res
+      .status(201)
+      .json({ message: 'Funcionário cadastrado com sucesso.', id: result.insertId });
   } catch (err) {
     console.error('Erro ao cadastrar funcionário:', err);
     if (err.code === 'ER_DUP_ENTRY') {
-      // Pode ajustar a mensagem ou a lógica caso você tenha alguma coluna UNIQUE na tabela Funcionario
       return res.status(409).json({ error: 'Erro de duplicação no cadastro de funcionário.' });
     }
-    res.status(500).json({ error: 'Erro interno ao cadastrar funcionário.' });
+    return res.status(500).json({ error: 'Erro interno ao cadastrar funcionário.' });
   }
 });
 
-// ------------------------------
-// Rota de Login (POST)
-// ------------------------------
+// -------------------------------------------------
+// Rota de Login (POST /login)
+// -------------------------------------------------
 router.post('/login', async (req, res) => {
   const { email, senha } = req.body;
   if (!email || !senha) {
@@ -130,7 +123,6 @@ router.post('/login', async (req, res) => {
   }
 
   try {
-    // 1) Buscar na tabela Administrador, fazendo JOIN com Funcionario para capturar o nome
     const [admRows] = await db.query(
       `
       SELECT
@@ -148,14 +140,12 @@ router.post('/login', async (req, res) => {
 
     if (admRows.length > 0) {
       const admin = admRows[0];
-      // Aqui comparamos a senha em texto (senha) com o hash armazenado (administrador_hash)
       const match = await bcrypt.compare(senha, admin.administrador_hash);
       if (match) {
-        // Retorna o objeto user com o nome vindo de Funcionario.Nome
         return res.json({
           message: 'Login de administrador bem-sucedido.',
           user: {
-            id:   admin.administrador_id,     // usa o alias correto
+            id:   admin.administrador_id,
             nome: admin.funcionario_nome,
             email: admin.administrador_email,
             tipo: 'administrador'
@@ -166,7 +156,6 @@ router.post('/login', async (req, res) => {
       }
     }
 
-    // 2) Se não encontrar em Administrador, retorna “Usuário não encontrado.”
     return res.status(404).json({ error: 'Usuário não encontrado.' });
   } catch (err) {
     console.error('Erro no login:', err);
@@ -174,10 +163,114 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// -------------------------------------------------
+// Rota para iniciar recuperação de senha (POST /forgot-password)
+// -------------------------------------------------
+router.post('/forgot-password', async (req, res) => {
+  const { email } = req.body;
+  if (!email) {
+    return res.status(400).json({ error: 'O e-mail é obrigatório.' });
+  }
 
-// ------------------------------
-// Rotas GET automáticas para todas as tabelas listadas
-// ------------------------------
+  try {
+    // 1) Verifica se esse e-mail existe em Administrador (JOIN para obter Nome)
+    const [admRows] = await db.query(
+      `
+      SELECT
+        a.Funcionario_Codigo AS administrador_id,
+        a.Email              AS administrador_email,
+        f.Nome               AS funcionario_nome
+      FROM Administrador AS a
+      JOIN Funcionario     AS f
+        ON f.Codigo = a.Funcionario_Codigo
+      WHERE a.Email = ?
+      `,
+      [email]
+    );
+
+    if (admRows.length === 0) {
+      return res.status(404).json({ error: 'E-mail não cadastrado.' });
+    }
+    const admin = admRows[0];
+
+    // 2) Gera o JWT que expira em 1 hora
+    const jwtPayload = { administradorId: admin.administrador_id };
+    const token = jwt.sign(jwtPayload, JWT_SECRET, { expiresIn: '1h' });
+
+    // 3) Monta o link de reset
+    const resetUrl = `${FRONTEND_URL}/Tela-Login/reset-password.html?token=${token}`;
+
+    // 4) Envia o e-mail com o link de reset
+    const transporter = nodemailer.createTransport({
+      service: 'yahoo',
+      auth: {
+        user: MAIL_USER,
+        pass: MAIL_PASS
+      }
+    });
+
+    const mailOptions = {
+      from: `EquipeManejo <${MAIL_USER}>`,
+      to: admin.administrador_email,
+      subject: 'Redefinição de senha',
+      text:
+        `Olá ${admin.funcionario_nome},\n\n` +
+        `Clique no link abaixo para redefinir sua senha:\n\n` +
+        `${resetUrl}\n\n` +
+        `Este link expira em 1 hora.\n\n` +
+        `Se você não solicitou a redefinição, ignore este e-mail.`
+    };
+
+    await transporter.sendMail(mailOptions);
+
+    return res.json({
+      message: `Link de recuperação enviado para ${admin.administrador_email}.`
+    });
+  } catch (err) {
+    console.error('Erro na rota /forgot-password:', err);
+    return res.status(500).json({ error: 'Erro interno no servidor.' });
+  }
+});
+
+// -------------------------------------------------
+// Rota para finalizar redefinição de senha (POST /reset-password)
+// -------------------------------------------------
+router.post('/reset-password', async (req, res) => {
+  const { token, novaSenha } = req.body;
+  if (!token || !novaSenha) {
+    return res.status(400).json({ error: 'Token e nova senha são obrigatórios.' });
+  }
+
+  try {
+    // 1) Verifica e decodifica o JWT
+    let payload;
+    try {
+      payload = jwt.verify(token, JWT_SECRET);
+    } catch (err) {
+      return res.status(400).json({ error: 'Token inválido ou expirado.' });
+    }
+
+    const administradorId = payload.administradorId;
+
+    // 2) Faz hash da nova senha
+    const novaSenhaHash = await bcrypt.hash(novaSenha, 10);
+
+    // 3) Atualiza a senha no banco
+    await db.query(
+      'UPDATE Administrador SET Senha = ? WHERE Funcionario_Codigo = ?',
+      [novaSenhaHash, administradorId]
+    );
+
+    return res.json({ message: 'Senha redefinida com sucesso!' });
+  } catch (err) {
+    console.error('Erro na rota /reset-password:', err);
+    return res.status(500).json({ error: 'Erro interno no servidor.' });
+  }
+});
+
+// -------------------------------------------------
+// Rotas GET automáticas e JOIN
+// -------------------------------------------------
 const tabelas = [
   'Departamento',
   'Funcionario',
@@ -193,8 +286,6 @@ const tabelas = [
   'Emprestimo_Ferramenta'
 ];
 tabelas.forEach(criarRotaParaTabela);
-
-// Rota personalizada
 EmprestimoFuncionario();
 
 module.exports = router;
