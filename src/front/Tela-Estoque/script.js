@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const novaLinha = document.createElement("tr");
                 novaLinha.innerHTML = `
                     <td>${String(ferramenta.Codigo).padStart(3, '0')}</td>
-                    <td>${ferramenta.Nome}</td>
+                    <td>${ferramenta.nome}</td>
                     <td>${ferramenta.Tipo}</td>
                     <td>${ferramenta.Quantidade}</td>
                     <td>${ferramenta.Localizacao}</td>
