@@ -35,7 +35,10 @@
       align-items: center;
       transition: all 0.6s ease-in-out;
     }
-
+    .form-container form {
+      position: relative;
+      min-height: 300px;
+    }
     .sign-in-container {
       left: 0;
       z-index: 2;
@@ -47,12 +50,16 @@
       color: #FDBE00;
       text-decoration: none;
     }
-
     .sign-up-container {
       left: 0;
       opacity: 0;
       z-index: 1;
+      
     }
+    .sign-up-container form {
+      position: relative;
+    }
+
 
     /* Estado ativo: esconde login e mostra cadastro */
     .container.right-panel-active .sign-in-container {
@@ -163,4 +170,53 @@
       top: 0;
       right: 0;
       transform: translateX(0);
+    }
+
+ /* ──────────────────────────────────────────────────────────
+   2.1. Wrapper geral que faz o “recorte” para os steps
+────────────────────────────────────────────────────────── */
+.steps-wrapper {
+  position: relative;
+  width: 100%;        /* ou largura fixa, se preferir */
+  height: 100%;       /* ou uma altura fixa (p.ex. 300px) */
+  overflow: hidden;   /* esconde o conteúdo fora da área */
+}
+
+/* ──────────────────────────────────────────────────────────
+   2.2. Definição base para cada step (tanto ativo como inativo)
+────────────────────────────────────────────────────────── */
+.step {
+  position: absolute;        /* mantém todos no mesmo lugar */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  opacity: 0;                /* invisível quando “inativo” */
+  transform: translateX(20px); /* posicionado à direita (fora da vista) */
+  pointer-events: none;      /* não recebe clique quando não está ativo */
+  
+  display: flex;             /* para poder usar flex por padrão */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+/*  ──────────────────────────────────────────────────────────
+     2.3. Estado “active” — visível e no lugar certo
+   ────────────────────────────────────────────────────────── */
+.step.active {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;  /* volta a receber clique */
+  z-index: 2;            /* garante que fique acima dos inativos */
+}
+
+
+    .step button:last-of-type {
+      margin-top: 12px;
     }
