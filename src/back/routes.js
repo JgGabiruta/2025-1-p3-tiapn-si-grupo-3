@@ -129,7 +129,7 @@ router.post('/Ferramenta', async (req, res) => {
   }
 
   try {
-    const query = 'INSERT INTO Ferramenta (Nome, Tipo, Quantidade, Localizacao) VALUES (?, ?, ?, ?)';
+    const query = 'INSERT INTO Ferramenta (nome, Tipo, Quantidade, Localizacao) VALUES (?, ?, ?, ?)';
     // No seu schema do DB, o nome da coluna é 'Localização'? Se for, ajuste abaixo.
     // Estou assumindo que seja 'Localizacao' sem o 'ç' e 'ã' para compatibilidade.
     const [result] = await db.query(query, [nome, tipo, quantidade, localizacao]);
@@ -161,7 +161,7 @@ router.put('/Ferramenta/:id', async (req, res) => {
   }
 
   try {
-    const query = 'UPDATE Ferramenta SET Nome = ?, Tipo = ?, Quantidade = ?, Localizacao = ? WHERE Codigo = ?';
+    const query = 'UPDATE Ferramenta SET nome = ?, Tipo = ?, Quantidade = ?, Localizacao = ? WHERE Codigo = ?';
     const [result] = await db.query(query, [nome, tipo, quantidade, localizacao, id]);
 
     if (result.affectedRows === 0) {
