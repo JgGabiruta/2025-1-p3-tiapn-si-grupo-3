@@ -1,6 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db/db'); // certifique-se de que esse arquivo exporta sua conexão com o MySQL
+const bcrypt     = require('bcrypt');
+const jwt        = require('jsonwebtoken');
+const nodemailer = require('nodemailer');
+const JWT_SECRET   = 'MINHA_CHAVE_SUPER_SECRETA'; 
+const FRONTEND_URL = 'http://localhost:3000';
+const MAIL_USER    = 'jg.gabiruta@yahoo.com'; 
+const MAIL_PASS    = 'cpbmgxniplmaoafb';
 
 // Função genérica para criar rotas GET de cada tabela
 function criarRotaParaTabela(nomeTabela) {
