@@ -54,10 +54,12 @@ router.post('/administrador', async (req, res) => {
   }
 
   try {
+    //Criptografa em hash a senha
+    const hash = await bcrypt.hash(senha, 10);
     // Insere na tabela Administrador TENDO a FK funcionario_codigo disponível
     const [result] = await db.query(
       'INSERT INTO Administrador (email, senha, Funcionario_Codigo) VALUES (?, ?, ?)',
-      [email, senha, funcionario_codigo]
+      [email, hash, funcionario_codigo]
     );
     res
       .status(201)
@@ -147,8 +149,8 @@ router.post('/login', async (req, res) => {
     if (admRows.length > 0) {
       const admin = admRows[0];
       // Aqui comparamos a senha em texto (senha) com o hash armazenado (administrador_hash)
-      //const match = await bcrypt.compare(senha, admin.administrador_hash);
-      if (senha === admin.administrador_hash) {
+      const match = await bcrypt.compare(senha, admin.administrador_hash);
+      if (match) {
         // Retorna o objeto user com o nome vindo de Funcionario.Nome
         return res.json({
           message: 'Login de administrador bem-sucedido.',
