@@ -225,7 +225,7 @@ function Rotas() {
 
     try {
       const [result] = await db.query(
-        `INSERT INTO Lembrete (${2},Observacao, Administrador_Funcionario_Codigo) VALUES (?, ?)`,
+        `INSERT INTO Lembrete (Observacao, Administrador_Funcionario_Codigo) VALUES (?, ?)`,
         [observacao, administrador_codigo]
       );
       res.status(201).json({ Codigo: result.insertId, Observacao: observacao });
