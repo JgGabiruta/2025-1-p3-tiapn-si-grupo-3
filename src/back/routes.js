@@ -49,7 +49,7 @@ function EmprestimoFuncionario() {
 // -------------------------------------------------
 // Rota de cadastro de Administrador
 // -------------------------------------------------
-router.post('/administrador', async (req, res) => {
+router.post('/api/administrador', async (req, res) => {
   const { email, senha, funcionario_codigo } = req.body;
   if (!email || !senha || !funcionario_codigo) {
     return res.status(400).json({ error: 'email, senha e funcionario_codigo são obrigatórios.' });
@@ -78,7 +78,7 @@ router.post('/administrador', async (req, res) => {
 // -------------------------------------------------
 // Rota de cadastro de Funcionário
 // -------------------------------------------------
-router.post('/funcionario', async (req, res) => {
+router.post('/api/funcionario', async (req, res) => {
   const {
     nome,
     cargo,
@@ -116,7 +116,7 @@ router.post('/funcionario', async (req, res) => {
 // -------------------------------------------------
 // Rota de Login (POST /login)
 // -------------------------------------------------
-router.post('/login', async (req, res) => {
+router.post('/api/login', async (req, res) => {
   const { email, senha } = req.body;
   if (!email || !senha) {
     return res.status(400).json({ error: 'Email e senha são obrigatórios.' });
@@ -166,7 +166,7 @@ router.post('/login', async (req, res) => {
 // -------------------------------------------------
 // Rota para iniciar recuperação de senha (POST /forgot-password)
 // -------------------------------------------------
-router.post('/forgot-password', async (req, res) => {
+router.post('/api/forgot-password', async (req, res) => {
   const { email } = req.body;
   if (!email) {
     return res.status(400).json({ error: 'O e-mail é obrigatório.' });
@@ -235,7 +235,7 @@ router.post('/forgot-password', async (req, res) => {
 // -------------------------------------------------
 // Rota para finalizar redefinição de senha (POST /reset-password)
 // -------------------------------------------------
-router.post('/reset-password', async (req, res) => {
+router.post('/api/reset-password', async (req, res) => {
   const { token, novaSenha } = req.body;
   if (!token || !novaSenha) {
     return res.status(400).json({ error: 'Token e nova senha são obrigatórios.' });
