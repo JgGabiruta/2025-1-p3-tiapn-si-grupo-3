@@ -122,10 +122,10 @@ Legenda:
 | :----         |    :----         |      :----:    | :----:     | :----: | :----:          |
 | Gabriel H.     | Tela funcionários em REACT |     | 21/06/2025 |  📝    |     |
 | Ingrid Y.       | Tela empréstimos em REACT   |      | 21/06/2025 |  📝     |                 |
-| João F.      | Tela início em REACT  |     | 21/05/2025 |  📝     |             |
+| João F.      | Tela início em REACT  |     | 21/06/2025 |  📝     |             |
 | Iago M.        |  Telas ferramentas, agenda e assinatura em REACT  |           | 21/06/2025 |   📝   |     |         
 | João G.        | Tela login e cadastro em REACT  |          | 21/06/2025  |   📝   |     |
-| Luiz H.       | Telas departamento e configurações em REACT |    | 21/05/2025 |   📝   |     |
+| Luiz H.       | Telas departamento e configurações em REACT |    | 21/06/2025 |   📝   |     |
 
 ### Processo
 
