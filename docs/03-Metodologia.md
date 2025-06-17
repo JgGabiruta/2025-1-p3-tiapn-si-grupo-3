@@ -116,6 +116,16 @@ Legenda:
 | João G.        | Tela e CRUD de login  |    17/05/2025        | 05/06/2025  |  ✔️   |   05/06/2025    |
 | Luiz H.       | HTML, CSS E JAVASCRIPT das telas de Departamento e Configurações  |  19/05/2025    |  |  ✔️   |   04/06/2025     |
 
+#### Sprint 5
+
+| Responsável   | Tarefa/Requisito | Iniciado em    | Prazo      | Status | Terminado em    |
+| :----         |    :----         |      :----:    | :----:     | :----: | :----:          |
+| Gabriel H.     | Tela funcionários em REACT |     | 05/06/2025 |  📝    |     |
+| Ingrid Y.       | Tela empréstimos em REACT   |      | 05/06/2025 |  📝     |                 |
+| João F.      | Tela início em REACT  | 16/05/2025    |  |  📝     |             |
+| Iago M.        |  Telas ferramentas, agenda e assinatura em REACT  |           | 05/06/2025 |   📝   |     |         
+| João G.        | Tela login e cadastro em REACT  |          | 05/06/2025  |   📝   |   05/06/2025    |
+| Luiz H.       | Telas departamento e configurações em REACT |    |  |   📝   |     |
 
 ### Processo
 
