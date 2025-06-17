@@ -125,7 +125,7 @@ Legenda:
 | João F.      | Tela início em REACT  |     | 21/05/2025 |  📝     |             |
 | Iago M.        |  Telas ferramentas, agenda e assinatura em REACT  |           | 21/06/2025 |   📝   |     |         
 | João G.        | Tela login e cadastro em REACT  |          | 21/06/2025  |   📝   |     |
-| Luiz H.       | Telas departamento e configurações em REACT |    | 16/05/2025 |   📝   |     |
+| Luiz H.       | Telas departamento e configurações em REACT |    | 21/05/2025 |   📝   |     |
 
 ### Processo
 
