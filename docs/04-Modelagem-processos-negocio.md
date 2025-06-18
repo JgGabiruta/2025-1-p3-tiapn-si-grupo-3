@@ -33,7 +33,7 @@ Ao garantir maior previsibilidade e agilidade na reposição de itens, essa melh
 
 ## Modelagem dos processos
 
-[PROCESSO 1 - Empréstimo de Ferramentas](./docs/images/TO-BE-emprestimo-ferramenta.png "Detalhamento do processo 1.")
+[PROCESSO 1 - Empréstimo de Ferramentas](./images/TO-BE-emprestimo-ferramenta.png "Detalhamento do processo 1.")
 
 [PROCESSO 2 - Compra de Material](./processes/processo-2-nome-do-processo.md "Detalhamento do processo 2.")
 
