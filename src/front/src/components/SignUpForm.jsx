@@ -135,12 +135,12 @@ function SignUpForm({ onSignUpSuccess }) {
    * Lida com o envio final do formulário após todas as etapas.
    * @param {Event} e - O evento de envio do formulário.
    */
-  const handleSubmit = async (e) => {
+ const handleSubmit = async (e) => {
     e.preventDefault();
-    setMessage(''); // Limpa mensagens anteriores
+    setMessage('');
     setMessageType('');
 
-    // Validação final de todos os campos antes de enviar
+    // Validação final (pode manter como está)
     if (
       !formData.nome || !formData.email || !formData.senha ||
       !formData.cargo || !formData.cpf || !formData.telefone || !formData.nascimento ||
@@ -152,59 +152,43 @@ function SignUpForm({ onSignUpSuccess }) {
     }
 
     try {
-      // 1º passo: cadastrar o funcionário
-      const resFunc = await fetch('/api/funcionario', {
+      // Faz uma ÚNICA chamada para a nova rota /api/register
+      const response = await fetch('/api/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        // Envia todos os dados do formulário de uma vez
         body: JSON.stringify({
           nome: formData.nome,
+          email: formData.email,
+          senha: formData.senha,
           cargo: formData.cargo,
-          telefone: formData.telefone.replace(/\D/g, ''), // Envia apenas dígitos
-          data_nascimento: formData.nascimento,
+          cpf: formData.cpf.replace(/\D/g, ''),
+          telefone: formData.telefone.replace(/\D/g, ''),
+          nascimento: formData.nascimento,
           rua: formData.rua,
           numero: formData.numero,
           cidade: formData.cidade,
-          cpf: formData.cpf.replace(/\D/g, '') // Envia apenas dígitos
         })
       });
 
-      if (!resFunc.ok) {
-        const err = await resFunc.json();
-        setMessage(err.error || 'Erro ao cadastrar funcionário.');
+      // Se a resposta não for OK (ex: 409 - e-mail duplicado)
+      if (!response.ok) {
+        const err = await response.json();
+        setMessage(err.error || 'Ocorreu um erro no cadastro.'); // Mostra o erro do backend
         setMessageType('error');
         return;
       }
 
-      const jsonFunc = await resFunc.json();
-      const funcionarioId = jsonFunc.id; // Assumindo que o ID do funcionário é retornado
-
-      // 2º passo: cadastrar o administrador, informando funcionario_codigo
-      const resAdm = await fetch('/api/administrador', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: formData.email,
-          senha: formData.senha,
-          funcionario_codigo: funcionarioId // Associa o administrador ao funcionário recém-criado
-        })
-      });
-
-      if (!resAdm.ok) {
-        const errAdm = await resAdm.json();
-        setMessage(errAdm.error || 'Erro ao cadastrar administrador.');
-        setMessageType('error');
-        return;
-      }
-
+      // Se chegou aqui, o cadastro foi um sucesso
       setMessage('Cadastro realizado com sucesso!');
       setMessageType('success');
-      // Limpa o formulário
       setFormData({
         nome: '', email: '', senha: '', cargo: '', cpf: '',
         telefone: '', nascimento: '', rua: '', numero: '', cidade: ''
       });
-      setCurrentStep(0); // Volta para a primeira etapa
-      onSignUpSuccess(); // Chama o callback para o componente pai (AuthPage)
+      setCurrentStep(0);
+      onSignUpSuccess();
+
     } catch (error) {
       console.error("Erro na requisição:", error);
       setMessage('Erro ao conectar ao servidor. Verifique sua conexão ou tente novamente mais tarde.');

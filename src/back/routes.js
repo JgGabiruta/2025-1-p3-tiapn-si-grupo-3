@@ -47,69 +47,71 @@ function EmprestimoFuncionario() {
 }
 
 // -------------------------------------------------
-// Rota de cadastro de Administrador
+// Rota ÚNICA e SEGURA de Cadastro com Transação
 // -------------------------------------------------
-router.post('/api/administrador', async (req, res) => {
-  const { email, senha, funcionario_codigo } = req.body;
-  if (!email || !senha || !funcionario_codigo) {
-    return res.status(400).json({ error: 'email, senha e funcionario_codigo são obrigatórios.' });
-  }
-
-  try {
-    // Gera hash da senha antes de salvar
-    const senhaHash = await bcrypt.hash(senha, 10);
-
-    const [result] = await db.query(
-      'INSERT INTO Administrador (Email, Senha, Funcionario_Codigo) VALUES (?, ?, ?)',
-      [email, senhaHash, funcionario_codigo]
-    );
-    return res
-      .status(201)
-      .json({ message: 'Administrador cadastrado com sucesso.', id: result.insertId });
-  } catch (err) {
-    console.error('Erro ao cadastrar administrador:', err);
-    if (err.code === 'ER_DUP_ENTRY') {
-      return res.status(409).json({ error: 'Já existe um administrador com este e-mail.' });
-    }
-    return res.status(500).json({ error: 'Erro interno ao cadastrar administrador.' });
-  }
-});
-
-// -------------------------------------------------
-// Rota de cadastro de Funcionário
-// -------------------------------------------------
-router.post('/api/funcionario', async (req, res) => {
+router.post('/api/register', async (req, res) => {
+  // 1. Pega todos os dados do corpo da requisição
   const {
-    nome,
-    cargo,
-    telefone,
-    data_nascimento,
-    rua,
-    numero,
-    cidade,
-    cpf // caso exista na tabela
+    nome, email, senha, cargo, cpf, telefone,
+    nascimento, rua, numero, cidade
   } = req.body;
 
-  if (!nome || !cargo || !telefone || !data_nascimento || !rua || !numero || !cidade) {
-    return res.status(400).json({ error: 'Todos os campos são obrigatórios.' });
+  // Validação básica
+  if (!email || !senha || !nome) {
+    return res.status(400).json({ error: 'Nome, e-mail e senha são obrigatórios.' });
   }
 
+  let connection;
   try {
-    const [result] = await db.query(
-      `INSERT INTO Funcionario
-         (Nome, Cargo, Telefone, Data_Nascimento, Rua, Numero, Cidade, CPF)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-      [nome, cargo, telefone, data_nascimento, rua, numero, cidade, cpf || null]
+    // Inicia uma conexão do pool para controlar a transação
+    connection = await db.getConnection();
+    await connection.beginTransaction();
+
+    // 2. VERIFICA PRIMEIRO SE O E-MAIL JÁ EXISTE
+    const [existingAdmin] = await connection.query(
+      'SELECT Email FROM Administrador WHERE Email = ?', [email]
     );
-    return res
-      .status(201)
-      .json({ message: 'Funcionário cadastrado com sucesso.', id: result.insertId });
-  } catch (err) {
-    console.error('Erro ao cadastrar funcionário:', err);
-    if (err.code === 'ER_DUP_ENTRY') {
-      return res.status(409).json({ error: 'Erro de duplicação no cadastro de funcionário.' });
+
+    // Se encontrou um e-mail, interrompe a operação
+    if (existingAdmin.length > 0) {
+      await connection.rollback(); // Cancela a transação
+      connection.release();       // Libera a conexão de volta para o pool
+      return res.status(409).json({ error: 'Este e-mail já está em uso.' }); // 409 Conflict
     }
-    return res.status(500).json({ error: 'Erro interno ao cadastrar funcionário.' });
+
+    // 3. Se o e-mail for único, insere o Funcionário
+    const [funcResult] = await connection.query(
+      `INSERT INTO Funcionario (Nome, Cargo, Telefone, Data_Nascimento, Rua, Numero, Cidade, CPF)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+      [nome, cargo, telefone, nascimento, rua, numero, cidade, cpf || null]
+    );
+    const funcionarioId = funcResult.insertId;
+
+    // 4. Insere o Administrador, associando ao funcionário recém-criado
+    const senhaHash = await bcrypt.hash(senha, 10);
+    await connection.query(
+      'INSERT INTO Administrador (Email, Senha, Funcionario_Codigo) VALUES (?, ?, ?)',
+      [email, senhaHash, funcionarioId]
+    );
+
+    // 5. Se tudo correu bem, confirma as alterações no banco
+    await connection.commit();
+
+    return res.status(201).json({ message: 'Cadastro realizado com sucesso!', id: funcionarioId });
+
+  } catch (err) {
+    // 6. Se qualquer erro ocorreu, desfaz todas as operações da transação
+    if (connection) {
+      await connection.rollback();
+    }
+    console.error('Erro na transação de cadastro:', err);
+    return res.status(500).json({ error: 'Erro interno ao realizar o cadastro.' });
+
+  } finally {
+    // 7. Libera a conexão de volta para o pool em qualquer cenário (sucesso ou erro)
+    if (connection) {
+      connection.release();
+    }
   }
 });
 

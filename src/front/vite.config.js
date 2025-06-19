@@ -9,7 +9,6 @@ export default defineConfig({
       '/api': {
         target: 'http://localhost:3001', // O endereço do seu backend
         changeOrigin: true, // Necessário para hospedeiros virtuais
-        rewrite: (path) => path.replace(/^\/api/, '') // Remove o /api antes de enviar para o backend
       }
     }
   }
