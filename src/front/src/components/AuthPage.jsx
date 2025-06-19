@@ -29,7 +29,7 @@ function AuthPage() {
         <div className="overlay">
           {/* Painel esquerdo do overlay (aparece quando o painel de login está ativo) */}
           <div className="overlay-panel overlay-left">
-            <h2>Bem-vindo de volta à</h2>
+            <h2>Bem-vindo de volta ao</h2>
             <h1>Manejo GR!</h1>
             <p>Já possui uma conta?</p>
             <button id="sign-in" onClick={handleSignInClick}>Entrar</button>
@@ -39,7 +39,7 @@ function AuthPage() {
           </div>
           {/* Painel direito do overlay (aparece quando o painel de cadastro está ativo) */}
           <div className="overlay-panel overlay-right">
-            <h2>Bem-vindo à</h2>
+            <h2>Bem-vindo ao</h2>
             <h1>Manejo GR!</h1>
             <p>Novo por aqui?</p>
             <button id="sign-up" onClick={handleSignUpClick}>Criar Conta</button>

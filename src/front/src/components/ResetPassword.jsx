@@ -8,6 +8,7 @@ import '../styles/forgot.css'; // Reutilizando os estilos de forgot password
  */
 function ResetPassword() {
   const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState(''); // Estado para mensagens de feedback
   const [messageType, setMessageType] = useState(''); // 'success' ou 'error'
   const location = useLocation();
@@ -41,7 +42,12 @@ function ResetPassword() {
       return;
     }
 
-    // Validação básica da senha (opcional, adicione mais complexidade se necessário)
+    if (newPassword !== confirmPassword) {
+      setMessage('As senhas não coincidem. Tente novamente.');
+      setMessageType('error');
+      return;
+    }
+
     if (newPassword.length < 6) {
       setMessage('A nova senha deve ter pelo menos 6 caracteres.');
       setMessageType('error');
@@ -86,7 +92,15 @@ function ResetPassword() {
           onChange={(e) => setNewPassword(e.target.value)}
           required
         />
-        <button type="submit">Redefinir</button>
+        <input
+          type="password"
+          placeholder="Confirme a nova senha"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          required
+        />
+        <button type="submit" className='forgotbtn'>Redefinir</button>
+        <button type="button" className='forgotbtn' onClick={() => navigate('/login')}>Voltar</button>
       </form>
       {/* Exibe a mensagem de feedback se houver uma */}
       {message && (

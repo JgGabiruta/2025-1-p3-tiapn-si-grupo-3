@@ -15,7 +15,7 @@ const HomePage = () => {
 
   return (
     <div style={{ textAlign: 'center', marginTop: '50px' }}>
-      <h1>Bem-vindo à Manejo GR!</h1>
+      <h1>Bem-vindo ao Manejo GR!</h1>
       <p>Você está logado.</p>
       <button onClick={handleLogout}
               style={{

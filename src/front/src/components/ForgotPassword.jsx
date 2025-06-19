@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/forgot.css'; // Importa os estilos CSS
 
 /**
@@ -9,6 +10,7 @@ function ForgotPassword() {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState(''); // Estado para mensagens de feedback ao usuário
   const [messageType, setMessageType] = useState(''); // 'success' ou 'error'
+  const navigate = useNavigate();
 
   /**
    * Lida com o envio do formulário de redefinição de senha.
@@ -54,7 +56,8 @@ function ForgotPassword() {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-        <button type="submit">Continuar</button>
+        <button className='forgotbtn' type="submit">Continuar</button>
+        <button className='forgotbtn' type="button" onClick={() => navigate('/login')}>Voltar</button>
       </form>
       {/* Exibe a mensagem de feedback se houver uma */}
       {message && (

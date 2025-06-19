@@ -7,7 +7,7 @@ const nodemailer = require('nodemailer');
 const router     = express.Router();
 const db         = require('../db/db'); // seu pool mysql2/promise
 const JWT_SECRET   = 'MINHA_CHAVE_SUPER_SECRETA'; 
-const FRONTEND_URL = 'http://localhost:3000';
+const FRONTEND_URL = 'http://localhost:5173';
 const MAIL_USER    = 'jg.gabiruta@yahoo.com'; 
 const MAIL_PASS    = 'cpbmgxniplmaoafb';
 
@@ -200,7 +200,7 @@ router.post('/api/forgot-password', async (req, res) => {
     const token = jwt.sign(jwtPayload, JWT_SECRET, { expiresIn: '1h' });
 
     // 3) Monta o link de reset
-    const resetUrl = `${FRONTEND_URL}/Tela-Login/reset-password.html?token=${token}`;
+    const resetUrl = `${FRONTEND_URL}/reset-password?token=${token}`;
 
     // 4) Envia o e-mail com o link de reset
     const transporter = nodemailer.createTransport({

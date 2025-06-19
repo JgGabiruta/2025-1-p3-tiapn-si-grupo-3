@@ -30,6 +30,20 @@ p {
   color: #666;
   margin-bottom: 20px;
 }
+/* No seu arquivo de estilos (ex: forgot.css) */
+
+.forgotbtn {
+  /* 1. Para diminuir um pouco a largura dos botões */
+  width: 40%; /* Por padrão eles podem estar com 100%. Tente 90% ou 80%. */
+  
+  /* 2. Para distanciar um do outro e centralizá-los */
+  margin-top: 10px; /* Cria um espaçamento de 10px na parte de cima de cada botão. */
+  margin-left: auto;  /* Essas duas linhas centralizam os botões */
+  margin-right: auto; /* que agora não ocupam mais 100% da largura. */
+
+  /* 3. Garante que o margin: auto funcione corretamente */
+  display: block; 
+}
 
 input[type="email"],
 input[type="password"],
