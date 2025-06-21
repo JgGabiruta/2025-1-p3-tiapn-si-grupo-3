@@ -33,16 +33,17 @@ Ao garantir maior previsibilidade e agilidade na reposição de itens, essa melh
 
 ## Modelagem dos processos
 
-[PROCESSO 1 - Empréstimo de Ferramentas(AS IS)](./processes/AS-IS-Emprestimo-de-Ferramentas.md "Detalhamento do processo 1.")
+[PROCESSO 1 - Empréstimo de Ferramentas(AS-IS)](./processes/AS-IS-Emprestimo-de-Ferramentas.md "Detalhamento do processo 1.")
 <br>
-[PROCESSO 1 - Empréstimo de Ferramentas(TO BE)](./processes/TO-BE-Emprestimo-de-Ferramentas.md "Detalhamento do processo 1.")
+[PROCESSO 1 - Empréstimo de Ferramentas(TO-BE)](./processes/TO-BE-Emprestimo-de-Ferramentas.md "Detalhamento do processo 1.")
 
 
 
 
-[PROCESSO 2 - Compra de Material](./processes/TO-BE-Compra-de-Material.md "Detalhamento do processo 2.")
+[PROCESSO 2 - Compra de Material(AS-IS)](./processes/AS-IS-Compra-de-Material.md "Detalhamento do processo 2.")
 <br>
-[PROCESSO 2 - Compra de Material](./processes/AS-IS-Compra-de-Material.md "Detalhamento do processo 2.")
+[PROCESSO 2 - Compra de Material(TO-BE)](./processes/TO-BE-Compra-de-Material.md "Detalhamento do processo 2.")
+
 
 
 
