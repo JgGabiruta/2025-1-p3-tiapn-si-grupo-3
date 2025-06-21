@@ -37,8 +37,8 @@ Ao garantir maior previsibilidade e agilidade na reposição de itens, essa melh
 (./images/TO-BE-emprestimo-ferramenta.png "Detalhamento do processo 1.")
 
 
-[PROCESSO 2 - Compra de Material]<a href="./images/TO-BE-Compra-de-Materia.md"> Detalhamento do processo 2</a>
-(./processes/TO-BE-Compra-de-Materia.md "Detalhamento do processo 2.")
+[PROCESSO 2 - Compra de Material]<a href="./processes/TO-BE-Compra-de-Material.md"> Detalhamento do processo 2</a>
+(./processes/TO-BE-Compra-de-Material.md "Detalhamento do processo 2.")
 
 
 
