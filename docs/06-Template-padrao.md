@@ -24,3 +24,9 @@ Essa identidade visual traduz os princípios da empresa, alinhando-se à necessi
 
 ![Logo](images/Manejo_Logo.png)
 
+## Tipografia
+A fonte Roboto foi escolhida como tipografia principal da aplicação por reunir características essenciais para uma interface moderna, funcional e acessível. Desenvolvida com foco na legibilidade e na versatilidade, Roboto apresenta traços limpos e proporções equilibradas, facilitando a leitura em diferentes tamanhos e resoluções de tela.
+
+Sua estrutura sem serifa transmite uma sensação de simplicidade e objetividade, alinhando-se perfeitamente ao propósito da Manejo GR de oferecer uma solução clara, direta e fácil de utilizar. Além disso, sua ampla variedade de pesos (fino, regular, médio, negrito) permite a criação de hierarquias visuais bem definidas, contribuindo para uma navegação mais fluida e organizada.
+
+A escolha da Roboto também se justifica pela sua ampla compatibilidade com navegadores e dispositivos, garantindo consistência visual em diferentes plataformas. Essa tipografia reforça o compromisso da aplicação com a acessibilidade e a usabilidade, valores centrais para atender às necessidades de pequenas e médias empresas que buscam eficiência sem abrir mão de uma experiência agradável e intuitiva.
