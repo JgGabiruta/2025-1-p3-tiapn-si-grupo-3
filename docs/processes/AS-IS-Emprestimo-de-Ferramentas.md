@@ -2,7 +2,7 @@
 
 O nome do processo é "Empréstimo de Ferramenta", esse modelo AS-IS evidencia as fragilidades do processo tradicional, como a ausência de notificações, rastreamento digital e controle em tempo real. Essas lacunas justificam a proposta de melhoria apresentada no processo TO-BE.
  
-![Exemplo de um Modelo BPMN do PROCESSO 1](../images/AS-IS-emprestimo-ferramenta.png)
+![Exemplo de um Modelo BPMN do PROCESSO 1](../images/AS-IS-emprestimo-ferramentas.png)
 
 #### Detalhamento das atividades
 
