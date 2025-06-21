@@ -1,4 +1,4 @@
-### 3.3.1 Processo 1 – Empréstimo de Ferramenta
+### 3.3.3 Processo 1 – Empréstimo de Ferramenta
 
 O nome do processo é "Empréstimo de Ferramenta", esse modelo AS-IS evidencia as fragilidades do processo tradicional, como a ausência de notificações, rastreamento digital e controle em tempo real. Essas lacunas justificam a proposta de melhoria apresentada no processo TO-BE.
  
