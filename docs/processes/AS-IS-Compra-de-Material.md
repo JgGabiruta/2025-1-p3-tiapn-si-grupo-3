@@ -1,8 +1,8 @@
-### 3.3.4 Processo 1 – Empréstimo de Ferramenta
+### 3.3.4 Processo 1 – Compra de Material
 
 O nome do processo é "Empréstimo de Ferramenta", esse modelo AS-IS evidencia as fragilidades do processo tradicional, como a ausência de notificações, rastreamento digital e controle em tempo real. Essas lacunas justificam a proposta de melhoria apresentada no processo TO-BE.
  
-![Exemplo de um Modelo BPMN do PROCESSO 1](../images/AS-IS-emprestimo-ferramentas.png)
+![Imagem do WhatsApp de 2025-04-07 à(s) 14 00 53_757b960f](https://github.com/user-attachments/assets/363e9584-b8cc-4b1f-af2b-f0aa48cf064a)
 
 #### Detalhamento das atividades
 
