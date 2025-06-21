@@ -104,7 +104,6 @@ Com base na análise das personas, foram identificadas as seguintes histórias d
 
 ## Requisitos
 
-As tabelas a seguir apresentam os requisitos funcionais e não funcionais que detalham o escopo do projeto. Para determinar a prioridade dos requisitos, aplique uma técnica de priorização e detalhe como essa técnica foi aplicada.
 
 ### Requisitos funcionais
 
@@ -144,7 +143,7 @@ As tabelas a seguir apresentam os requisitos funcionais e não funcionais que de
 |RNF-008| O sistema deve contar com mecanismos para recuperação de falhas, evitando perda de dados em caso de queda de servidor ou erros inesperados |  ALTA | 
 |RNF-009| O sistema deve permitir integração com outras plataformas de gestão empresarial ERP | BAIXA | 
 
-Com base nas histórias de usuários, enumere os requisitos da sua solução. Classifique esses requisitos em dois grupos:
+
 
 - [Requisitos funcionais
  (RF)](https://pt.wikipedia.org/wiki/Requisito_funcional):
@@ -160,7 +159,6 @@ Com base nas histórias de usuários, enumere os requisitos da sua solução. Cl
 ## Restrições
 
 
-O projeto está restrito aos itens apresentados na tabela a seguir.
 
 |ID| Restrição                                             |
 |--|-------------------------------------------------------|
@@ -179,4 +177,4 @@ O projeto está restrito aos itens apresentados na tabela a seguir.
 
  ![Diagrama](images/diagrama.png)
 
-As referências abaixo irão auxiliá-lo na geração do artefato “diagrama de casos de uso”.
+
