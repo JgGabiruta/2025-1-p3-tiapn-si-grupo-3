@@ -6,6 +6,7 @@ A proposta de solução (TO BE), baseada na digitalização e sistematização d
 
 No entanto, a solução ainda apresenta limitações. A aplicação, em estágio inicial, não contempla integrações com sistemas de ERP amplamente usados no setor, nem funcionalidades avançadas como leitura por RFID ou controle offline. Além disso, a usabilidade por usuários com baixa familiaridade com tecnologia ainda requer testes
 adicionais e melhorias na interface. 
+
 Como sugestão para trabalhos futuros, recomenda-se:
 - Ampliar o escopo do sistema com funcionalidades de controle por geolocalização e
 sensores;
