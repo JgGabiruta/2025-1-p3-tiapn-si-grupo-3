@@ -1,6 +1,6 @@
 ### 3.3.4 Processo 1 – Compra de Material
 
-O nome do processo é "Empréstimo de Ferramenta", esse modelo AS-IS evidencia as fragilidades do processo tradicional, como a ausência de notificações, rastreamento digital e controle em tempo real. Essas lacunas justificam a proposta de melhoria apresentada no processo TO-BE.
+O processo "Empréstimo de Ferramenta", em sua versão AS-IS, evidencia diversas fragilidades típicas de métodos tradicionais. Entre os principais pontos de atenção estão a ausência de notificações automáticas, a falta de rastreamento digital das ferramentas e a inexistência de um controle em tempo real das movimentações. Essas lacunas comprometem a eficiência, a organização e a segurança no uso dos materiais. Diante disso, justifica-se a proposta de melhoria apresentada no modelo TO-BE, que visa modernizar e tornar o processo mais confiável e transparente.
  
 ![Imagem do WhatsApp de 2025-04-07 à(s) 14 00 53_757b960f](https://github.com/user-attachments/assets/363e9584-b8cc-4b1f-af2b-f0aa48cf064a)
 
@@ -36,59 +36,118 @@ _* **Link** - campo que armazena uma URL_
 _* **Tabela** - campo formado por uma matriz de valores_
 
 
-**Retirada de Ferramenta**
+**Gerar Requisição**
 
 | **Campo**       | **Tipo**         | **Restrições** | **Valor default** |
 | ---             | ---              | ---            | ---               |
-|    Nome do Funcionário   | Caixa de Texto    |       Máximo 50 caracteres         |                   |
-|    Dia da retirada  | Data   | 	Deve ser a data do dia da retirada |  |
+|    Nome do Funcionário   | Caixa de Texto    |       Máximo 50 caracteres         |           |
+|    Departamento  | Seleção única  | Obras / Almoxarifado / Administrativo |  |
 |    Ferramenta    | Seleção única   |  Escolher item do estoque        |                   |
-|    Quantidade    | Número    | Deve ser ≥ 1          |        1           |
+|    Descrição do Material    | 	Área de Texto    | Obrigatório          |                   |
+|    Quantidade    | 	Número    | 	Deve ser ≥ 1          |              1     |
+|    Data da Solicitação    | 	Data    | Obrigatório          |             Data atual |
 
 | **Comandos**         |  **Destino**             | **Tipo**            |
 |    ---               |  ---                     |    ---              | 
-| Registrar | Registra manualmente a retirada em planilha ou caderno  | (default) |
-| Cancelar | Cancela a operação e retorna ao estoque| (default) |
+| Enviar | Envia requisição ao escritório  | (default) |
+| Cancelar | 	Interrompe solicitação| (default) |
 
-**Uso da Ferramenta**
-
-| **Campo**       | **Tipo**         | **Restrições** | **Valor default** |
-| ---             | ---              | ---            | ---               |
-|    Descrição do uso    | Área de Texto	    |        |                   |
-|    Responsável  | Caixa de Texto   | 	Obrigatório |  |
-|    Local de uso    | Caixa de Texto    |       Opcional         |                   |
-
-| **Comandos**         |  **Destino**                   | **Tipo**          |
-| ---                  | ---                            | ---               |
-| Continuar  |O funcionário segue utilizando a ferramenta  | (default) |
-| Encerrar uso  |  Direciona à devolução da ferramenta | (default) |
-
-**Devolver Ferramenta 3**
+**Aprovar Requisição**
 
 | **Campo**       | **Tipo**         | **Restrições** | **Valor default** |
 | ---             | ---              | ---            | ---               |
-|    Nome do Funcionário   | Caixa de Texto    |       Máximo 50 caracteres         |                   |
-|    Data da retirada  | Data   | 	 |    Data Atual |
-|    Ferramenta Devolvida?    | Seleção única   |  Sim/Não        |                   |
-|    Condição do Item    | Seleção única    | Nova / Boa / Danificada          |                   |
+|    Nome do Funcionário   | Caixa de Texto    |       Obrigatório         |           |
+|    Data da Aprovação    | 	Data    | 	≥ Data da solicitação          | |
+|   Observações    | 	Área de Texto    | 		Opcional      | |
+
 | **Comandos**         |  **Destino**                   | **Tipo**          |
 | ---                  | ---                            | ---               |
-| Sim | Marca a devolução como concluída  |  |
-| Não | Direciona para registro de perda (feito de forma informal ou verbal) | seleção única |
-| Cancelar | Volta para a decisão de continuar ou não usando a ferramenta  | (default) |
+| Aprovar  |Prossegue para levantamento de orçamento  | (default) |
+| Rejeitar |  Finaliza processo | (default) |
 
-
-**Relatar Perda de Ferramenta 5**
+**Levantar Orçamento**
 
 | **Campo**       | **Tipo**         | **Restrições** | **Valor default** |
 | ---             | ---              | ---            | ---               |
-| Nome | Caixa de texto  |    50 caracteres           |                   |
-| Descrição da ferramenta    |      Área de texto     |                |  |
-| Data da perda    |    Data  |                |  |
-| Último local vista    |    Área de texo  |                |  |
+|   Fornecedor Consultado  | Caixa de Texto    |       Obrigatório         |                   |
+|   Fornecedor Consultado  | Área de Texto    |       Obrigatório         |                   |
+|   Valor Orçado  | Número    |       	Deve ser ≥ 0         |                   |
+|    Data do Orçamento  | Data   | 	Obrigatório |     |
+|    Anexo Cotação    | Arquivo  |  Obrigatório       |                   |
+|    Condição do Item    | Seleção única    | Nova / Boa / Danificada          |               |
 
 | **Comandos**         |  **Destino**                   | **Tipo**          |
 | ---                  | ---                            | ---               |
-| Enviar | Fim do processo | (default) |
-| Cancelar | Volta para a decisão de Continuar usando ferramenta? | (default) |
+| Enviar Orçamento | Direciona para aprovação de orçamento  |  (default)|
+| Cancelar | 	Interrompe o processo | (default) |
+
+
+**Aprovar Orçamento**
+
+| **Campo**       | **Tipo**         | **Restrições** | **Valor default** |
+| ---             | ---              | ---            | ---               |
+| Nome | Caixa de texto  |    Obrigatório           |                   |
+| Resultado da Análise    |     Seleção única	     |       Aprovado / Reprovado         |  |
+| Justificativa (se não aprovado)    |    Área de Texto  |        Obrigatória se reprovado   | |
+
+| **Comandos**         |  **Destino**                   | **Tipo**          |
+| ---                  | ---                            | ---               |
+| Aprovar | Direciona para compra | (default) |
+| Reprovar | Retorna para levantamento de orçamento | (default) |
+
+**Comprar Material**
+
+| **Campo**       | **Tipo**         | **Restrições** | **Valor default** |
+| ---             | ---              | ---            | ---               |
+| Responsável pela Compra | Caixa de texto  |    Obrigatório           |                   |
+| Data da Compra   |     Data   |       ≥ Data de aprovação         |  |
+| Valor Final    |    Número  |        Obrigatório       |  |
+| Comprovante da Compra    |    Arquivo  |        Obrigatório       |  |
+
+| **Comandos**         |  **Destino**                   | **Tipo**          |
+| ---                  | ---                            | ---               |
+|Confirmar Compra | Inicia processamento da compra | (default) |
+| Cancelar | Interrompe processo | (default) |
+
+**Processar Compra**
+
+| **Campo**       | **Tipo**         | **Restrições** | **Valor default** |
+| ---             | ---              | ---            | ---               |
+| Responsável  | Caixa de texto  |    Obrigatório           |                   |
+| Data do Processamento  |     Data   |       ≥ Data da compra         |  |
+
+
+| **Comandos**         |  **Destino**                   | **Tipo**          |
+| ---                  | ---                            | ---               |
+|Finalizar | Gera nota fiscal	 | (default) |
+
+**Gerar Nota Fiscal**
+
+| **Campo**       | **Tipo**         | **Restrições** | **Valor default** |
+| ---             | ---              | ---            | ---               |
+| Número da Nota Fiscal | Caixa de texto  |    Obrigatório           |                   |
+| Data de Emissão   |     Data   |       ≥ Data da compra         |  |
+| Arquivo da NF    |    Arquivo  |        Obrigatório       |  |
+
+
+| **Comandos**         |  **Destino**                   | **Tipo**          |
+| ---                  | ---                            | ---               |
+|Emitir NF | Direciona para conferência| (default) |
+
+**Conferir Nota Fiscal**
+
+| **Campo**       | **Tipo**         | **Restrições** | **Valor default** |
+| ---             | ---              | ---            | ---               |
+| Responsável pela Conferência | Caixa de texto  |    Obrigatório           |                  |
+| NF Correta?  |     	Seleção única   |      Sim / Não	        |  |
+| Observações   |    Área de Texto  |        Opcional       |  |
+
+
+| **Comandos**         |  **Destino**                   | **Tipo**          |
+| ---                  | ---                            | ---               |
+|Sim | Finaliza processo	| (default) |
+|Não | Retorna para fornecedor ou revisão| (default) |
+
+
+
 
