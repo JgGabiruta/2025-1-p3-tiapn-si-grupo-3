@@ -35,7 +35,7 @@ Ao garantir maior previsibilidade e agilidade na reposição de itens, essa melh
 
 [PROCESSO 1 - Empréstimo de Ferramentas](./images/TO-BE-emprestimo-ferramenta.png "Detalhamento do processo 1.")
 
-[PROCESSO 2 - Compra de Material](./images/TO-BE-processo-de-compra-de-materiais "Detalhamento do processo 2.")
+[PROCESSO 2 - Compra de Material](./images/TO-BE-Compra-de-Materia.md "Detalhamento do processo 2.")
 
 
 ## Indicadores de desempenho
