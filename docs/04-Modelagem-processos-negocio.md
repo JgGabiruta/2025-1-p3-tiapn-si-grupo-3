@@ -33,8 +33,7 @@ Ao garantir maior previsibilidade e agilidade na reposição de itens, essa melh
 
 ## Modelagem dos processos
 
-[PROCESSO 1 - Empréstimo de Ferramentas]<a href="02-Especificacao.md"> Especificação do projeto</a>
-(./images/TO-BE-emprestimo-ferramenta.png "Detalhamento do processo 1.")
+[PROCESSO 1 - Empréstimo de Ferramentas](./processes/TO-BE-Emprestimo-de-Ferramentas.md "Detalhamento do processo 1.")
 
 
 [PROCESSO 2 - Compra de Material](./processes/TO-BE-Compra-de-Material.md "Detalhamento do processo 2.")
