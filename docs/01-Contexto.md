@@ -26,9 +26,16 @@ Desenvolver a aplicação da empresa Manejo GR, com o objetivo de oferecer um se
 
 Além disso, os integrantes do grupo deverão aprimorar competências em gestão e organização de projetos, modelagem de processos de negócios, desenvolvimento front-end e back-end, gerenciamento de banco de dados, bem como outras habilidades essenciais para o desenvolvimento de aplicações voltadas à automação de processos empresariais, com foco no trabalho colaborativo.
 
-## Objetivos Específicos
+<p>Os objetivos específicos são:</p>
 
-O objetivo específico é desenvolver uma plataforma intuitiva para cadastro, controle e rastreamento de materiais emprestados ou alugados, garantindo a integridade das informações. Para isso, será implementado um sistema eficiente de gestão de retiradas e devoluções, com notificações automatizadas que permitem o acompanhamento dos prazos. A aplicação também contará com a integração de relatórios e dashboards, visando otimizar a tomada de decisões. Além disso, será assegurada a segurança dos dados por meio da aplicação de boas práticas em banco de dados e mecanismos de autenticação. Por fim, o projeto busca promover o desenvolvimento de habilidades técnicas em tecnologia, assim como competências em gestão de projetos e trabalho em equipe entre os integrantes do grupo.
+<ul>
+  <li>Desenvolver uma <strong>plataforma intuitiva</strong> para cadastro, controle e rastreamento de materiais emprestados ou alugados, garantindo a integridade das informações.</li>
+  <li>Implementar um <strong>sistema eficiente de gestão de retiradas e devoluções</strong>, com notificações automatizadas que permitam o acompanhamento dos prazos.</li>
+  <li>Integrar <strong>relatórios e dashboards</strong> à aplicação, com o intuito de otimizar a tomada de decisões.</li>
+  <li>Assegurar a <strong>segurança dos dados</strong> por meio da aplicação de boas práticas em banco de dados e mecanismos de autenticação.</li>
+  <li>Promover o desenvolvimento de <strong>habilidades técnicas em tecnologia</strong>.</li>
+  <li>Estimular <strong>competências em gestão de projetos e trabalho em equipe</strong> entre os integrantes do grupo.</li>
+</ul>
 
 ## Justificativa
 
