@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db/db'); // certifique-se de que esse arquivo exporta sua conexão com o MySQL
-const bcrypt     = require('bcrypt');
-const jwt        = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
-const JWT_SECRET   = 'MINHA_CHAVE_SUPER_SECRETA'; 
+const JWT_SECRET = 'MINHA_CHAVE_SUPER_SECRETA';
 const FRONTEND_URL = 'http://localhost:3000';
-const MAIL_USER    = 'jg.gabiruta@yahoo.com'; 
-const MAIL_PASS    = 'cpbmgxniplmaoafb';
+const MAIL_USER = 'jg.gabiruta@yahoo.com';
+const MAIL_PASS = 'cpbmgxniplmaoafb';
 
 // Função genérica para criar rotas GET de cada tabela
 function criarRotaParaTabela(nomeTabela) {
@@ -24,9 +24,9 @@ function criarRotaParaTabela(nomeTabela) {
   });
 }
 
-function EmprestimoFuncionario(){
+function EmprestimoFuncionario() {
 
-    router.get(`/EmprestimoFuncionario`, async (req, res) => {
+  router.get(`/EmprestimoFuncionario`, async (req, res) => {
 
     try {
 
@@ -40,11 +40,11 @@ function EmprestimoFuncionario(){
   });
 }
 
-function deletaEmprestimo (){
+function deletaEmprestimo() {
 
-  router.delete(`/emprestimo/delete/:id`, async (req, res) =>{
+  router.delete(`/emprestimo/delete/:id`, async (req, res) => {
 
-    let aux  = req.params.id.split(":");
+    let aux = req.params.id.split(":");
 
     let id = aux[1];
 
@@ -60,9 +60,9 @@ function deletaEmprestimo (){
   })
 }
 
-function EmprestimoAtrasado(){
+function EmprestimoAtrasado() {
 
-    router.get(`/EmprestimoAtrasado`, async (req, res) => {
+  router.get(`/EmprestimoAtrasado`, async (req, res) => {
 
     try {
 
@@ -76,10 +76,10 @@ function EmprestimoAtrasado(){
   });
 }
 
-function insereEmprestimo(){
-  
+function insereEmprestimo() {
+
   router.post('/Emprestimo', async (req, res) => {
-    
+
     let codigo_func = req.body.codigo_func;
     let codigo_ferr = req.body.codigo_ferr;
     let quantidade = req.body.quantidade;
@@ -89,17 +89,17 @@ function insereEmprestimo(){
     let codigo_emp = req.body.codigo_emp;
 
     try {
-    
-      const [result] = await db.query(`INSERT INTO Emprestimo (Codigo, Descricao, Data_Retirada, Data_Devolucao, Operario_Funcionario_Codigo) VALUES (?,?,?,?,?)`,[codigo_emp,desc,data_ret,data_dev,codigo_func]);
 
-      const [result2] = await db.query(`INSERT INTO Emprestimo_Ferramenta (Codigo_Ferramenta, Emprestimo_Codigo) VALUES (?,?)`,[codigo_ferr,codigo_emp]);
+      const [result] = await db.query(`INSERT INTO Emprestimo (Codigo, Descricao, Data_Retirada, Data_Devolucao, Operario_Funcionario_Codigo) VALUES (?,?,?,?,?)`, [codigo_emp, desc, data_ret, data_dev, codigo_func]);
+
+      const [result2] = await db.query(`INSERT INTO Emprestimo_Ferramenta (Codigo_Ferramenta, Emprestimo_Codigo) VALUES (?,?)`, [codigo_ferr, codigo_emp]);
 
     } catch (err) {
       console.error("Erro ao inserir ferramenta:", err);
       res.status(500).json({ error: 'Erro ao cadastrar a ferramenta.' });
     }
 
-  });  
+  });
 }
 
 // Lista de tabelas
@@ -140,14 +140,14 @@ router.post('/Ferramenta', async (req, res) => {
     // No seu schema do DB, o nome da coluna é 'Localização'? Se for, ajuste abaixo.
     // Estou assumindo que seja 'Localizacao' sem o 'ç' e 'ã' para compatibilidade.
     const [result] = await db.query(query, [nome, tipo, quantidade, localizacao]);
-    
+
     // Retorna o novo item criado com seu ID
-    res.status(201).json({ 
-        id: result.insertId, 
-        nome, 
-        tipo, 
-        quantidade, 
-        localizacao 
+    res.status(201).json({
+      id: result.insertId,
+      nome,
+      tipo,
+      quantidade,
+      localizacao
     });
 
   } catch (err) {
@@ -174,7 +174,7 @@ router.put('/Ferramenta/:id', async (req, res) => {
     if (result.affectedRows === 0) {
       return res.status(404).json({ error: 'Ferramenta não encontrada.' });
     }
-    
+
     res.json({ message: 'Ferramenta atualizada com sucesso.' });
 
   } catch (err) {
@@ -243,7 +243,7 @@ function Rotas() {
 
   });
 }
- 
+
 Rotas();
 
 // DELETE /Lembrete/:id
@@ -294,40 +294,183 @@ router.post('/administrador', async (req, res) => {
 // -------------------------------------------------
 // Rota de cadastro de Funcionário
 // -------------------------------------------------
+
 router.post('/funcionario', async (req, res) => {
-  const {
-    nome,
-    cargo,
-    telefone,
-    data_nascimento,
-    rua,
-    numero,
-    cidade,
-    cpf // caso exista na tabela
+  let {
+    Cargo,
+    Nome,
+    Telefone,
+    Data_Nascimento,
+    Rua,
+    Numero,
+    Cidade,
+    CPF,
+    Departamento_Codigo
   } = req.body;
 
-  if (!nome || !cargo || !telefone || !data_nascimento || !rua || !numero || !cidade) {
-    return res.status(400).json({ error: 'Todos os campos são obrigatórios.' });
+  // Validação dos campos obrigatórios
+  if (!Nome || !Cargo || !CPF) {
+    return res.status(400).json({ error: 'Campos Nome, Cargo e CPF são obrigatórios.' });
+  }
+
+  let dataFormatada = null;
+  if (Data_Nascimento) {
+    dataFormatada = Data_Nascimento.split('T')[0]; 
   }
 
   try {
     const [result] = await db.query(
       `INSERT INTO Funcionario
-         (Nome, Cargo, Telefone, Data_Nascimento, Rua, Numero, Cidade, CPF)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-      [nome, cargo, telefone, data_nascimento, rua, numero, cidade, cpf || null]
+         (Cargo, Nome, Telefone, Data_Nascimento, Rua, Numero, Cidade, CPF, Departamento_Codigo)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      
+      [
+        Cargo,
+        Nome,
+        Telefone || null,
+        dataFormatada,
+        Rua || null,
+        Numero || null,
+        Cidade || null,
+        CPF,
+        Departamento_Codigo || null
+      ]
     );
     return res
       .status(201)
       .json({ message: 'Funcionário cadastrado com sucesso.', id: result.insertId });
   } catch (err) {
     console.error('Erro ao cadastrar funcionário:', err);
-    if (err.code === 'ER_DUP_ENTRY') {
-      return res.status(409).json({ error: 'Erro de duplicação no cadastro de funcionário.' });
+
+    
+    if (err.code === 'ER_NO_REFERENCED_ROW_2') {
+      return res.status(400).json({ error: 'O Departamento informado não existe.' });
     }
+    
+    if (err.code === 'ER_DUP_ENTRY') {
+      return res.status(409).json({ error: 'Este CPF ou outro campo único já está cadastrado.' });
+    }
+
     return res.status(500).json({ error: 'Erro interno ao cadastrar funcionário.' });
   }
 });
+
+
+// -------------------------------------------------
+// Rota de abrir Funcionário ESPECIFICO
+// -------------------------------------------------
+
+router.get('/funcionario/:codigo', async (req, res) => {
+  const { codigo } = req.params;
+
+  try {
+    
+    const [rows] = await db.query('SELECT * FROM Funcionario WHERE Codigo = ?', [codigo]);
+
+   
+    if (rows.length === 0) {
+      return res.status(404).json({ error: 'Funcionário não encontrado.' });
+    }
+
+   
+    res.json(rows[0]);
+
+  } catch (err) {
+    console.error('Erro ao buscar funcionário:', err);
+    res.status(500).json({ error: 'Erro interno ao buscar dados do funcionário.' });
+  }
+});
+
+// -------------------------------------------------
+// Rota de EXCLUSÃO de Funcionário
+// -------------------------------------------------
+
+router.delete('/funcionario/:codigo', async (req, res) => {
+  const { codigo } = req.params;
+
+  try {
+    
+    const [result] = await db.query('DELETE FROM Funcionario WHERE Codigo = ?', [codigo]);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: 'Funcionário não encontrado para exclusão.' });
+    }
+
+    res.status(200).json({ message: 'Funcionário excluído com sucesso.' });
+
+  } catch (err) {
+    console.error('Erro ao excluir funcionário:', err);
+    
+    if (err.code === 'ER_ROW_IS_REFERENCED_2') {
+        return res.status(400).json({ error: 'Este funcionário não pode ser excluído pois possui registros associados a ele (como empréstimos ou logins).' });
+    }
+    
+    res.status(500).json({ error: 'Erro interno ao excluir o funcionário.' });
+  }
+});
+
+// -------------------------------------------------
+// Rota de Editar de Funcionário
+// -------------------------------------------------
+
+router.put('/funcionario/:codigo', async (req, res) => {
+  const { codigo } = req.params; // Pega o código da URL
+
+  const {
+    Cargo,
+    Nome,
+    Telefone,
+    Data_Nascimento,
+    Rua,
+    Numero,
+    Cidade,
+    CPF,
+    Departamento_Codigo
+  } = req.body;
+
+  if (!Nome || !Cargo || !CPF) {
+    return res.status(400).json({ error: 'Campos Nome, Cargo e CPF são obrigatórios.' });
+  }
+
+  try {
+    
+    const sql = `
+      UPDATE Funcionario
+      SET
+        Cargo = ?, Nome = ?, Telefone = ?, Data_Nascimento = ?,
+        Rua = ?, Numero = ?, Cidade = ?, CPF = ?, Departamento_Codigo = ?
+      WHERE
+        Codigo = ?
+    `;
+
+   
+    const [result] = await db.query(sql, [
+      Cargo, Nome, Telefone, Data_Nascimento, Rua, Numero,
+      Cidade, CPF, Departamento_Codigo, codigo
+    ]);
+
+    
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: 'Funcionário não encontrado para atualização.' });
+    }
+
+  
+    res.json({ message: 'Funcionário atualizado com sucesso.' });
+
+  } catch (err) {
+    console.error('Erro ao atualizar funcionário:', err);
+
+    
+    if (err.code === 'ER_DUP_ENTRY') {
+      return res.status(409).json({ error: 'Este CPF já pertence a outro funcionário.' });
+    }
+    
+    res.status(500).json({ error: 'Erro interno ao atualizar o funcionário.' });
+  }
+});
+
+
+
 
 // -------------------------------------------------
 // Rota de Login (POST /login)
@@ -361,7 +504,7 @@ router.post('/login', async (req, res) => {
         return res.json({
           message: 'Login de administrador bem-sucedido.',
           user: {
-            id:   admin.administrador_id,
+            id: admin.administrador_id,
             nome: admin.funcionario_nome,
             email: admin.administrador_email,
             tipo: 'administrador'
@@ -378,6 +521,16 @@ router.post('/login', async (req, res) => {
     return res.status(500).json({ error: 'Erro interno no servidor.' });
   }
 });
+
+
+
+
+
+
+
+
+
+
 
 // -------------------------------------------------
 // Rota para iniciar recuperação de senha (POST /forgot-password)

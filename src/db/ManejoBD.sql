@@ -19,7 +19,7 @@ Numero INT,
 Cidade VARCHAR(45),
 CPF VARCHAR(45),
 Departamento_Codigo INT,
-FOREIGN KEY (Departamento_Codigo) REFERENCES Departamento(Codigo)
+FOREIGN KEY (Departamento_Codigo) REFERENCES Departamento(codigo)
 );
 
 -- Tabela Administrador
