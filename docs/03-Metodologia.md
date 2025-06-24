@@ -137,6 +137,7 @@ Conforme orientação da professora Amália, o grupo deve designar um Scrum Mast
 
 Os artefatos do projeto são desenvolvidos a partir de diversas plataformas. Todos os ambientes e frameworks utilizados no desenvolvimento da aplicação estão listados na seção abaixo.
 
+https://vercel.com/login
 ### Ferramentas
 
 Liste todas as ferramentas que foram empregadas no projeto, justificando a escolha delas, sempre que possível.
@@ -152,3 +153,4 @@ Exemplo: os artefatos do projeto são desenvolvidos a partir de diversas platafo
 | Criação de Diagramas                 | HEFLO                            | https://app.heflo.com/Home#&logout=true                   |
 | Criação do Wireframe e UserFlow               | Figma                        |https://www.figma.com/design/VOaotVD0gdieKyhPdMuj8k/Manejo-GR?node-id=0-1&p=f&t=GQkAHKaUGfy250ad-0                 |
 | Encontros Online               | Teams                          |https://www.microsoft.com/pt-br/microsoft-teams/log-in                  |
+| Hospedagem               | Vercel                          |      https://vercel.com/login            |
