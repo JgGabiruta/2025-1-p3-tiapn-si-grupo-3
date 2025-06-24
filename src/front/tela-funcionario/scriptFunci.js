@@ -249,10 +249,6 @@ document.getElementById("Salvar-Funcionario-Editar").addEventListener("click", f
 document.getElementById("Excluir-Funcionario").addEventListener("click", function () {
   if (!funcionarioEditandoCodigo) return;
 
-  // if (!confirm(`Tem certeza de que deseja excluir o funcionário de código ${funcionarioEditandoCodigo}?`)) {
-  //     return;
-  // }
-
   fetch(`http://localhost:3000/funcionario/${funcionarioEditandoCodigo}`, {
     method: "DELETE"
   })
