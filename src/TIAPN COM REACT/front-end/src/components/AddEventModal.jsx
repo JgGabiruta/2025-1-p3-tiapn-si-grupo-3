@@ -1,4 +1,4 @@
-// frontend/src/components/AddEventModal.js
+
 import React, { useState, useEffect } from 'react';
 
 const AddEventModal = ({ isOpen, onClose, onSaveEvent, eventToEdit, onDeleteEvent }) => {
@@ -19,7 +19,6 @@ const AddEventModal = ({ isOpen, onClose, onSaveEvent, eventToEdit, onDeleteEven
     }
   }, [isOpen, eventToEdit]);
 
-  // Função completa, sem "..."
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEvent(prevEvent => ({
@@ -50,13 +49,11 @@ const AddEventModal = ({ isOpen, onClose, onSaveEvent, eventToEdit, onDeleteEven
   return (
     // DIV PRINCIPAL COM TODAS AS CLASSES PARA CENTRALIZAR E DAR O FUNDO ESCURO
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      {/* O CARD DO MODAL, COM O FUNDO BRANCO E SOMBRA */}
       <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-md">
         <h2 className="text-2xl font-semibold mb-5 text-gray-800">
           {eventToEdit ? 'Editar Evento' : 'Adicionar Novo Evento'}
         </h2>
         <form onSubmit={handleSubmit}>
-          {/* Campos do formulário com estilos completos */}
           <div className="mb-4">
             <label htmlFor="title" className="block text-sm font-medium text-gray-700">Título do Evento*</label>
             <input

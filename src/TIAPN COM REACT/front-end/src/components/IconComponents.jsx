@@ -1,4 +1,4 @@
-// frontend/src/components/IconComponents.js
+
 import {
   HomeIcon,
   ShoppingCartIcon,
@@ -13,8 +13,8 @@ import {
   PencilIcon,
   PlusIcon,
   TrashIcon,
-  ChevronLeftIcon,  // Adicionado
-  ChevronRightIcon, // Adicionado
+  ChevronLeftIcon,  
+  ChevronRightIcon, 
 } from '@heroicons/react/24/solid';
 
 export {

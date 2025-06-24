@@ -1,4 +1,4 @@
-// frontend/src/pages/StockPage.js
+
 import React, { useEffect, useState } from 'react';
 import StockTable from '../components/StockTable';
 import AddItemModal from '../components/AddItemModal';

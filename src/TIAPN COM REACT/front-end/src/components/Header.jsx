@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MagnifyingGlassIcon, BellIcon } from './IconComponents'; // UserCircleIcon não é usado aqui
+import { MagnifyingGlassIcon, BellIcon } from './IconComponents'; 
 
 const LogoIcon = () => (
   <div className="flex items-center space-x-4">
@@ -34,7 +34,7 @@ const Header = () => {
     if (Notification.permission === 'granted') {
       new Notification('Manejo de Ferramentas', {
         body: 'As notificações já estão ativadas!',
-        icon: '/imgs/Logo-Manejo_Laranja.png' // Ícone opcional
+        icon: '/imgs/Logo-Manejo_Laranja.png' 
       });
       return;
     }
@@ -92,7 +92,7 @@ const Header = () => {
         </div>
       </div>
       <div className="flex items-center space-x-6">
-        {/* O botão do sino agora tem um onClick e uma classe dinâmica */}
+
         <button 
           onClick={handleNotificationClick} 
           className={`${getBellColor()} focus:outline-none transition-colors duration-300`}

@@ -1,4 +1,4 @@
-// frontend/src/components/Sidebar.js
+
 import React from 'react'; 
 import {
   HomeIcon,

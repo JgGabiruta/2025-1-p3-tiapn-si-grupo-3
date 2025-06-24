@@ -1,6 +1,6 @@
-// frontend/src/components/StockTable.js
+
 import React from 'react';
-import { PencilIcon, TrashIcon } from './IconComponents'; // Certifique-se de que estes imports estão corretos
+import { PencilIcon, TrashIcon } from './IconComponents';
 
 const StockTable = ({ dataToDisplay, onDeleteItem, onEditItem }) => {
   if (!dataToDisplay || dataToDisplay.length === 0) {

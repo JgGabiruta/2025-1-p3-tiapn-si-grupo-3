@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react"; // Importa o useCallback
+import React, { useState, useEffect, useCallback } from "react";
 import Calendar from "./Calendar";
 import AddEventModal from "./AddEventModal";
 import { CalendarDaysIcon } from "./IconComponents";
@@ -71,14 +71,13 @@ const Agenda = () => {
     } finally {
       setIsLoading(false);
     }
-  }, []); // O array de dependências vazio significa que esta função não será recriada
+  }, []); 
 
-  // MUDANÇA 2: Este useEffect agora apenas CHAMA a função fetchAllCalendarData na montagem inicial.
+
   useEffect(() => {
     fetchAllCalendarData();
-  }, [fetchAllCalendarData]); // A dependência agora é a própria função
+  }, [fetchAllCalendarData]); 
 
-  // MUDANÇA 3: O useEffect duplicado foi removido.
 
   const handleEventClick = (event) => {
     if (!event.isManual) {
@@ -123,7 +122,7 @@ const Agenda = () => {
       await deleteEvento(eventToDelete.id);
       alert("Evento excluído com sucesso!");
       handleCloseModal();
-      await fetchAllCalendarData(); // Funciona!
+      await fetchAllCalendarData(); 
     } catch (err) {
       alert("Erro ao excluir evento.");
     }

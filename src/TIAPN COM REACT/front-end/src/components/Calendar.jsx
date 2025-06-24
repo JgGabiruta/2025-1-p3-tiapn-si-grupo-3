@@ -2,7 +2,7 @@ import React, { useState, useMemo } from "react";
 import { ChevronLeftIcon, ChevronRightIcon, PlusIcon } from "./IconComponents";
 
 const Calendar = ({ onAddEvent, events, onEventClick }) => {
-  // ALTERAÇÃO 1: Inicia o calendário com a data atual.
+
   const [currentDate, setCurrentDate] = useState(new Date());
 
   const eventsByDate = useMemo(() => {

@@ -25,12 +25,12 @@ function App() {
       case 'Departamento':
         return <PlaceholderPage title="Departamento" />;
       default:
-        return <AgendaPage />; 
+        return <Agenda />; 
     }
   };
 
   if (activePage === 'Início') {
-    // Se for, renderizamos APENAS a página de assinatura, em tela cheia.
+ 
     return <SubscriptionPage />;
   }
 
