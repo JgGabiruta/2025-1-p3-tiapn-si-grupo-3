@@ -29,6 +29,14 @@ Por exemplo:
 | Responsável pela elaboração do caso de teste | Nome do integrante da equipe. |
 
 
+| **Caso de teste**  | **CT-001 – Criar Lembretes**  |
+|:---: |:---: |
+| Requisito associado | RF-018	O sistema deverá permitir a criação de lembretes de tarefas a serem feitas. |
+| Objetivo do teste | Verificar se o usuário consegue cadastrar um lembrete na aplicação. |
+| Passos | - Acessar a página Home pelo Menu Lateral <br> - Identificar o painel de lembretes <br> - Clicar em "Adicionar um lembrete..." <br> - Preencher o campo com a informação desejada <br> - Pressionar o botão "Enter"|
+| Critério de êxito | - Lembrete gerado com sucesso. |
+| Responsável pela elaboração do caso de teste | João Felipe da Silva Prado. |
+
 ## Ferramentas de testes (opcional)
 
 Comente sobre as ferramentas de testes utilizadas.
