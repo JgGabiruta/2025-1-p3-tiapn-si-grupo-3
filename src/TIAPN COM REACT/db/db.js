@@ -1,4 +1,4 @@
-const mysql = require('./../back/node_modules/mysql2/promise');
+const mysql = require('mysql2/promise');
 
 const pool = mysql.createPool({
   host: "manejodb-manejodb.e.aivencloud.com",
