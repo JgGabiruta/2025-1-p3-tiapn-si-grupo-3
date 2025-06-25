@@ -14,7 +14,6 @@ import Header from './components/Header';
 import Sidebar from './components/SideBar'; // Corrigido de SideBar para Sidebar se for o caso
 import Agenda from './components/Agenda';
 import StockPage from './components/StockPage';
-import PlaceholderPage from './components/PlaceholderPage'; // Componente genérico
 // import SubscriptionPage from './components/SubscriptionPage'; // Descomente se necessário
 
 // =================================================================
@@ -76,13 +75,19 @@ function App() {
         case 'Agenda':
           return <Agenda />;
         case 'Empréstimos':
-          return <PlaceholderPage title="Empréstimos" />;
+         // return <PlaceholderPage title="Empréstimos" />;
         case 'Funcionários':
-          return <PlaceholderPage title="Funcionários" />;
+        //  return <PlaceholderPage title="Funcionários" />;
         case 'Configuração':
-          return <PlaceholderPage title="Configuração" />;
+         // return <PlaceholderPage title="Configuração" />;
         case 'Departamento':
-          return <PlaceholderPage title="Departamento" />;
+         // return <PlaceholderPage title="Departamento" />;
+         return (
+          <div className="flex flex-col items-center justify-center h-full text-gray-500">
+              <h1 className="text-4xl font-bold mb-4">{activeDashboardPage}</h1>
+              <p className="text-lg">Esta página está em construção.</p>
+            </div>
+         );
         default:
           return <Agenda />;
       }

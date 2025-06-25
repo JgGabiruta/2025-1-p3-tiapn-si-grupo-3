@@ -6,7 +6,7 @@ function SignInForm({ onLoginSuccess, onNavigate }) {
   const [senha, setSenha] = useState('');
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState('');
-  const backendUrl = 'http://localhost:3001'; // Corrigido para a porta do backend
+  const backendUrl = 'http://localhost:3000'; // Corrigido para a porta do backend
 
   const handleSubmit = async (e) => {
     e.preventDefault();

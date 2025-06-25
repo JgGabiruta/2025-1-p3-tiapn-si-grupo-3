@@ -11,12 +11,12 @@ console.log("--------------------------------------");
 
 
 const pool = mysql.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE,
-  port: process.env.DB_PORT,
-  ssl: { 'rejectUnauthorized': false },
+  host: "manejodb-manejodb.e.aivencloud.com",
+  user: "avnadmin",
+  password: "AVNS_IhA5Mm_jN9pq0lKZtfG",
+  database: "defaultdb",
+  port: 22932,
+  ssl: { rejectUnauthorized: false },
 });
 
 module.exports = pool;

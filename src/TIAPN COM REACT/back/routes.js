@@ -9,7 +9,6 @@ const JWT_SECRET   = 'MINHA_CHAVE_SUPER_SECRETA';
 const FRONTEND_URL = 'http://localhost:5173';
 const MAIL_USER    = 'jg.gabiruta@yahoo.com'; 
 const MAIL_PASS    = 'cpbmgxniplmaoafb';
-const express = require('express');
 
 
 function criarRotaParaTabela(nomeTabela) {
