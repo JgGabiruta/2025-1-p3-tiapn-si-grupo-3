@@ -16,6 +16,10 @@ Para cada caso de teste definido no <a href="08-Plano-testes-software.md"> Plano
 | Requisito associado | RF-00Y - A aplicação deve permitir que um usuário previamente cadastrado faça login. |
 | Registro de evidência | [www.teste.com.br/drive/ct-02](http://www.teste.com.br/drive/ct-02) |
 
+| **Caso de teste** 	| **CT-001 – Criar Lembrete** 	|
+|:---:	|:---:	|
+| Requisito associado | RF-018 O sistema deverá permitir a criação de lembretes de tarefas a serem feitas. |
+| Registro de evidência | [teste]("C:\Users\jfgam\OneDrive\Documentos\caso de teste lembrete.mp4") |
 
 > **Links úteis**:
 > - [Screencast: entenda o que é e como gravar vídeos com ele](https://rockcontent.com/br/blog/screencast/) 
