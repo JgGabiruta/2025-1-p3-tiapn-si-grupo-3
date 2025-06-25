@@ -126,6 +126,7 @@ Com base na análise das personas, foram identificadas as seguintes histórias d
 | RF-015 | O sistema deverá permitir a exibição da lista de um determinado setor com produtos emprestados, mostrando o cliente, o produto, a data e a hora do empréstimo. | MÉDIA |
 | RF-016 | O sistema poderá bloquear temporária ou permanentemente (a menos que seja revogado) um cliente de realizar empréstimos de um determinado setor/objeto. | BAIXA |
 | RF-017 | O sistema deverá permitir a revogação do bloqueio de um cliente. | BAIXA |
+| RF-018 | O sistema deverá permitir a criação de lembretes de tarefas a serem feitas. | MÉDIA |
 
 
 
