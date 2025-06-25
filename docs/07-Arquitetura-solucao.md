@@ -199,13 +199,28 @@ Explique como a hospedagem e o lançamento da plataforma foram realizados.
 
 ## Qualidade de software
 
-Conceituar qualidade é uma tarefa complexa, mas ela pode ser vista como um método gerencial que, por meio de procedimentos disseminados por toda a organização, busca garantir um produto final que satisfaça às expectativas dos stakeholders.
+### 1. Usabilidade
+- **Justificativa:** O sistema será utilizado por profissionais com diferentes níveis de familiaridade com tecnologia. A interface deve ser intuitiva.
+- **Subcaracterísticas:** Apreensibilidade, Operacionalidade  
+- **Métricas:** Tempo médio para realizar tarefas básicas, número de erros cometidos por novos usuários.
 
-No contexto do desenvolvimento de software, qualidade pode ser entendida como um conjunto de características a serem atendidas, de modo que o produto de software atenda às necessidades de seus usuários. Entretanto, esse nível de satisfação nem sempre é alcançado de forma espontânea, devendo ser continuamente construído. Assim, a qualidade do produto depende fortemente do seu respectivo processo de desenvolvimento.
+### 2. Confiabilidade
+- **Justificativa:** O sistema lida com controle de materiais e movimentações. A estabilidade é fundamental.
+- **Subcaracterísticas:** Disponibilidade, Tolerância a falhas  
+- **Métricas:** Tempo médio de inatividade, falhas críticas por período.
 
-A norma internacional ISO/IEC 25010, que é uma atualização da ISO/IEC 9126, define oito características e 30 subcaracterísticas de qualidade para produtos de software. Com base nessas características e nas respectivas subcaracterísticas, identifique as subcaracterísticas que sua equipe utilizará como base para nortear o desenvolvimento do projeto de software, considerando alguns aspectos simples de qualidade. Justifique as subcaracterísticas escolhidas pelo time e elenque as métricas que permitirão à equipe avaliar os objetos de interesse.
+### 3. Eficiência de Desempenho
+- **Justificativa:** O sistema pode ser acessado simultaneamente por vários usuários.
+- **Subcaracterísticas:** Tempo de resposta  
+- **Métricas:** Tempo médio de resposta por operação, número máximo de requisições suportadas.
 
-> **Links úteis**:
-> - [ISO/IEC 25010:2011 - Systems and Software Engineering — Systems and Software Quality Requirements and Evaluation (SQuaRE) — System and Software Quality Models](https://www.iso.org/standard/35733.html/)
-> - [Análise sobre a ISO 9126 – NBR 13596](https://www.tiespecialistas.com.br/analise-sobre-iso-9126-nbr-13596/)
-> - [Qualidade de software - Engenharia de Software](https://www.devmedia.com.br/qualidade-de-software-engenharia-de-software-29/18209)
+### 4. Manutenibilidade
+- **Justificativa:** O projeto tem potencial de ser expandido e precisa ser de fácil manutenção.
+- **Subcaracterísticas:** Modularidade, Analisabilidade  
+- **Métricas:** Tempo para corrigir defeitos, impacto de mudanças em múltiplos módulos.
+
+### 5. Segurança
+- **Justificativa:** Informações de funcionários e histórico de movimentações devem ser protegidos.
+- **Subcaracterísticas:** Confidencialidade, Autenticidade  
+- **Métricas:** Número de acessos indevidos bloqueados, tentativas de login mal-sucedidas.
+
