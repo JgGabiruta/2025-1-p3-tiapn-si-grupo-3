@@ -6,7 +6,9 @@ import React, { useState } from 'react';
  * @param {object} props - As propriedades do componente.
  * @param {function} props.onSignUpSuccess - Callback para ser executado após um cadastro bem-sucedido.
  */
+
 function SignUpForm({ onSignUpSuccess }) {
+  const backendUrl = 'http://localhost:3000';
   const [currentStep, setCurrentStep] = useState(0); // Controla a etapa atual do formulário
   const [message, setMessage] = useState(''); // Estado para mensagens de feedback
   const [messageType, setMessageType] = useState(''); // 'success' ou 'error'
@@ -153,7 +155,7 @@ function SignUpForm({ onSignUpSuccess }) {
 
     try {
       // Faz uma ÚNICA chamada para a nova rota /api/register
-      const response = await fetch('/api/register', {
+      const response = await fetch(`${backendUrl}/api/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         // Envia todos os dados do formulário de uma vez

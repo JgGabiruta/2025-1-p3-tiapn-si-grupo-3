@@ -1,33 +1,23 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import '../styles/forgot.css'; // Importa os estilos CSS
+import '../styles/forgot.css';
 
-/**
- * Componente para a funcionalidade de esqueci a senha.
- * Permite que o usuário insira seu e-mail para receber instruções de redefinição.
- */
-function ForgotPassword() {
+function ForgotPassword({ onNavigate }) { // Recebe a prop onNavigate
+  const backendUrl = 'http://localhost:3001'; // Corrigido para a porta do backend
   const [email, setEmail] = useState('');
-  const [message, setMessage] = useState(''); // Estado para mensagens de feedback ao usuário
-  const [messageType, setMessageType] = useState(''); // 'success' ou 'error'
-  const navigate = useNavigate();
-
-  /**
-   * Lida com o envio do formulário de redefinição de senha.
-   * @param {Event} e - O evento de envio do formulário.
-   */
+  const [message, setMessage] = useState('');
+  const [messageType, setMessageType] = useState('');
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setMessage("Enviando e-mail..."); // Mensagem de feedback inicial
-    setMessageType(''); // Limpa o tipo de mensagem anterior
+    setMessage("Enviando e-mail...");
+    setMessageType('');
 
     try {
-      const res = await fetch('/api/forgot-password', {
+      const res = await fetch(`${backendUrl}/api/forgot-password`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email })
       });
-
       const data = await res.json();
       if (res.ok) {
         setMessage(data.message || 'Instruções enviadas para o seu e-mail.');
@@ -48,18 +38,11 @@ function ForgotPassword() {
       <h1>Esqueceu sua senha?</h1>
       <p>Informe seu e-mail cadastrado no site para enviarmos as instruções de redefinição da senha.</p>
       <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          name="email"
-          placeholder="Seu e-mail"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
+        <input type="email" name="email" placeholder="Seu e-mail" value={email} onChange={(e) => setEmail(e.target.value)} required />
         <button className='forgotbtn' type="submit">Continuar</button>
-        <button className='forgotbtn' type="button" onClick={() => navigate('/login')}>Voltar</button>
+        {/* Botão Voltar agora chama a prop onNavigate */}
+        <button className='forgotbtn' type="button" onClick={() => onNavigate('Login')}>Voltar</button>
       </form>
-      {/* Exibe a mensagem de feedback se houver uma */}
       {message && (
         <p className={`message-box ${messageType === 'success' ? 'message-success' : 'message-error'}`}>
           {message}

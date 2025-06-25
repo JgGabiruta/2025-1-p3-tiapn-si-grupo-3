@@ -1,29 +1,29 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
 
-function SignInForm() {
+// Recebe onLoginSuccess e onNavigate como props
+function SignInForm({ onLoginSuccess, onNavigate }) {
   const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState(''); // Padronizado para 'senha' e 'setSenha'
+  const [senha, setSenha] = useState('');
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState('');
-  const navigate = useNavigate();
+  const backendUrl = 'http://localhost:3001'; // Corrigido para a porta do backend
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage('');
     setMessageType('');
 
-    if (!email || !senha) { // Usa 'senha'
+    if (!email || !senha) {
       setMessage('Por favor, preencha todos os campos!');
       setMessageType('error');
       return;
     }
 
     try {
-      const response = await fetch('/api/login', {
+      const response = await fetch(`${backendUrl}/api/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, senha }) // Envia 'senha'
+        body: JSON.stringify({ email, senha })
       });
       const data = await response.json();
 
@@ -31,7 +31,8 @@ function SignInForm() {
         setMessage('Login bem-sucedido!');
         setMessageType('success');
         localStorage.setItem('user', JSON.stringify(data.user));
-        navigate('/home');
+        // Chama a função de sucesso do App.jsx em vez de navegar diretamente
+        onLoginSuccess();
       } else {
         setMessage(data.error || 'Credenciais inválidas.');
         setMessageType('error');
@@ -47,22 +48,11 @@ function SignInForm() {
     <div className="form-container sign-in-container">
       <form onSubmit={handleSubmit}>
         <h1>Entrar</h1>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Senha"
-          value={senha} // Usa 'senha'
-          onChange={(e) => setSenha(e.target.value)} // Usa 'setSenha'
-          required
-        />
+        <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        <input type="password" placeholder="Senha" value={senha} onChange={(e) => setSenha(e.target.value)} required />
         <button type="submit">Entrar</button>
-        <p><Link to="/forgot-password">Esqueceu a senha?</Link></p>
+        {/* Link para "Esqueceu a senha?" agora chama a prop onNavigate */}
+        <p><a href="#" onClick={(e) => { e.preventDefault(); onNavigate('ForgotPassword'); }}>Esqueceu a senha?</a></p>
         {message && (
           <p className={`message-box ${messageType === 'success' ? 'message-success' : 'message-error'}`}>
             {message}

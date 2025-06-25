@@ -1,61 +1,74 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, useNavigate, Navigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+
+// Seus componentes de autenticação
 import AuthPage from './components/AuthPage';
 import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
+//import Sidebar from './components/SideBar';
+//import Header from './components/Header';
+//import StockPage from './components/StockPage';
+//import Agenda from './components/Agenda';
+//import SubscriptionPage from './components/SubscriptionPage';
 
-// Um placeholder simples para sua página inicial
-const HomePage = () => {
-  const navigate = useNavigate(); // Usando useNavigate para navegação programática
-
-  const handleLogout = () => {
-    localStorage.removeItem('user'); // Remove o usuário do localStorage
-    navigate('/login'); // Redireciona para a página de login
+// Componente de carregamento para o Dashboard
+const Dashboard = ({ activePage, setActivePage }) => {
+  const renderDashboardPage = () => {
+    switch (activePage) {
+      // case 'Estoque': return <StockPage />;
+      // case 'Agenda': return <Agenda />;
+      default: return <div><h1>Página Principal (Ex: Agenda)</h1></div>;
+    }
   };
 
   return (
-    <div style={{ textAlign: 'center', marginTop: '50px' }}>
-      <h1>Bem-vindo ao Manejo GR!</h1>
-      <p>Você está logado.</p>
-      <button onClick={handleLogout}
-              style={{
-                backgroundColor: '#141E5A',
-                color: '#fff',
-                border: 'none',
-                borderRadius: '5px',
-                padding: '10px 20px',
-                cursor: 'pointer',
-                fontSize: '16px',
-                fontWeight: 'bold',
-                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-                transition: 'background-color 0.3s ease',
-              }}
-              onMouseOver={(e) => e.target.style.backgroundColor = '#141E6A'}
-              onMouseOut={(e) => e.target.style.backgroundColor = '#141E5A'}
-      >
-        Sair
-      </button>
+    <div className="min-h-screen flex flex-col bg-gray-100">
+      {/* <Header /> */}
+      <div className="flex flex-1">
+        {/* <Sidebar activeItem={activePage} setActiveItem={setActivePage} /> */}
+        <div className="flex-1 flex flex-col">
+          {renderDashboardPage()}
+        </div>
+      </div>
     </div>
   );
 };
 
+
 function App() {
-  return (
-    <Router>
-      <Routes>
-        {/* Rota para a página de autenticação (login/cadastro) */}
-        <Route path="/login" element={<AuthPage />} />
-        {/* Rota para a página de esqueci a senha */}
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        {/* Rota para a página de redefinir senha */}
-        <Route path="/reset-password" element={<ResetPassword />} />
-        {/* Rota para a página inicial após o login */}
-        <Route path="/home" element={<HomePage />} />
-        {/* Redirecionamento padrão para /login se a rota não for reconhecida */}
-        <Route path="/" element={<Navigate to="/login" />} />
-      </Routes>
-    </Router>
-  );
+  const [activePage, setActivePage] = useState('Login');
+  const [resetToken, setResetToken] = useState(null);
+
+  // Efeito para verificar se a URL é de redefinição de senha na carga inicial
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get('token');
+    if (token && window.location.pathname.includes('reset-password')) {
+      setResetToken(token);
+      setActivePage('ResetPassword');
+    }
+  }, []); // O array vazio [] faz com que isso rode apenas uma vez
+
+  const handleNavigate = (page) => setActivePage(page);
+  const handleLoginSuccess = () => setActivePage('Dashboard'); // Vai para o Dashboard
+
+  const authPages = ['Login', 'ForgotPassword', 'ResetPassword'];
+
+  if (authPages.includes(activePage)) {
+    switch (activePage) {
+      case 'Login':
+        return <AuthPage onLoginSuccess={handleLoginSuccess} onNavigate={handleNavigate} />;
+      case 'ForgotPassword':
+        return <ForgotPassword onNavigate={handleNavigate} />;
+      case 'ResetPassword':
+        // Passa o token e a função de navegação como props
+        return <ResetPassword onNavigate={handleNavigate} token={resetToken} />;
+      default:
+        return <AuthPage onLoginSuccess={handleLoginSuccess} onNavigate={handleNavigate} />;
+    }
+  }
+
+  // Se não for uma página de autenticação, renderiza o Dashboard
+  return <Dashboard activePage={activePage} setActivePage={setActivePage} />;
 }
 
 export default App;
