@@ -1,15 +1,18 @@
-require('dotenv').config();
-const express = require('express');
+const express = require("express");
 const db = require('./db/db');
 const cors = require('cors');
-
+const routes = require('./routes');
 const app = express();
+const path = require('path');
+
+
+//app.use('/Tela-Home', express.static(path.join(__dirname, 'src', 'Tela-Home')));
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, '..', 'front')));
 
-const teste = require("./routes")
-app.use('/api', teste)
+app.use(routes);
 
 // Iniciar o servidor
 const PORT = process.env.PORT || 3000;

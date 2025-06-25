@@ -19,13 +19,13 @@ Numero INT,
 Cidade VARCHAR(45),
 CPF VARCHAR(45),
 Departamento_Codigo INT,
-FOREIGN KEY (Departamento_Codigo) REFERENCES Departamento(Codigo)
+FOREIGN KEY (departamento_Codigo) REFERENCES departamento(Codigo)
 );
 
 -- Tabela Administrador
 CREATE TABLE Administrador (
 Email VARCHAR(50),
-Senha VARCHAR(50),
+Senha VARCHAR(255),
 Funcionario_Codigo INT PRIMARY KEY,
 FOREIGN KEY (Funcionario_Codigo) REFERENCES Funcionario(Codigo)
 );

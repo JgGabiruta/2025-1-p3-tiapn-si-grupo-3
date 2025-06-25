@@ -1,0 +1,105 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #FDBE00;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center; /* Adicionado para centralizar o texto no container */
+}
+
+h1 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+/* No seu arquivo de estilos (ex: forgot.css) */
+
+.forgotbtn {
+  /* 1. Para diminuir um pouco a largura dos botões */
+  width: 40%; /* Por padrão eles podem estar com 100%. Tente 90% ou 80%. */
+  
+  /* 2. Para distanciar um do outro e centralizá-los */
+  margin-top: 10px; /* Cria um espaçamento de 10px na parte de cima de cada botão. */
+  margin-left: auto;  /* Essas duas linhas centralizam os botões */
+  margin-right: auto; /* que agora não ocupam mais 100% da largura. */
+
+  /* 3. Garante que o margin: auto funcione corretamente */
+  display: block; 
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"], /* Adicionado para inputs de texto genéricos */
+input[type="date"], /* Adicionado para inputs de data */
+input[type="number"] /* Adicionado para inputs de número */
+{
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #141E5A;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #141E6A;
+}
+
+/* Estilos para mensagens de feedback */
+.message-box {
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.message-success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.message-error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/* Responsividade básica para telas menores */
+@media (max-width: 600px) {
+  .container {
+    margin: 20px;
+    padding: 20px;
+  }
+}

@@ -1,0 +1,239 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #FDBE00;
+}
+
+.container {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  width: 768px;
+  max-width: 100%;
+  min-height: 480px;
+  position: relative;
+  overflow: hidden;
+}
+
+.form-container {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.6s ease-in-out;
+}
+.form-container form {
+  position: relative;
+  min-height: 300px;
+}
+.sign-in-container {
+  left: 0;
+  z-index: 2;
+  opacity: 1;
+
+}
+
+.sign-in-container a {
+  color: black;
+  text-decoration: none;
+}
+.sign-up-container {
+  left: 0;
+  opacity: 0;
+  z-index: 1;
+  
+}
+.sign-up-container form {
+  position: relative;
+}
+
+
+/* Estado ativo: esconde login e mostra cadastro */
+.container.right-panel-active .sign-in-container {
+  transform: translateX(100%);
+  opacity: 0;
+  z-index: 1;
+}
+
+.container.right-panel-active .sign-up-container {
+  transform: translateX(100%);
+  opacity: 1;
+  z-index: 2;
+}
+
+form {
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+}
+
+input {
+  background: #eee;
+  border: none;
+  padding: 12px;
+  margin: 8px 0;
+  width: 100%;
+  border-radius: 20px;
+}
+
+button {
+  border: none;
+  padding: 12px 45px;
+  background-color: #141E5A;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 20px;
+  box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 0.5);
+  transition: transform 10ms ease-in;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+h1 {
+  font-weight: bold;
+}
+
+.overlay-container {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  transition: transform 0.6s ease-in-out;
+  z-index: 100;
+  background-color: #3B378C;
+}
+
+.container.right-panel-active .overlay-container {
+  transform: translateX(-100%);
+}
+
+.overlay {
+  background: #3B378C;
+  color: #fff;
+  position: relative;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container.right-panel-active .overlay {
+  transform: translateX(50%);
+
+}
+
+.overlay-panel {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 40px;
+  text-align: center;
+  height: 100%;
+  width: 50%;
+}
+
+.overlay-left {
+  top: 0;
+  left: 0;
+  transform: translateX(0);
+}
+
+.overlay-right {
+  top: 0;
+  right: 0;
+  transform: translateX(0);
+}
+
+.overlay-panel h1 {
+  color: #FDBE00; /* Usando o mesmo amarelo do seu logo para criar identidade visual */
+  font-weight: bold;
+  font-size: 2.5em; /* Opcional: para aumentar um pouco o tamanho */
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+/* Muda a cor dos textos "Novo por aqui?" e "Já possui uma conta?" */
+.overlay-panel p {
+  color: #FFFFFF; /* Deixando o texto branco para melhor leitura */
+  font-size: 18px;
+  font-weight: 100;
+  line-height: 20px;
+  letter-spacing: 0.5px;
+  margin: 20px 0 30px;
+}
+
+/* ──────────────────────────────────────────────────────────
+   2.1. Wrapper geral que faz o “recorte” para os steps
+────────────────────────────────────────────────────────── */
+.steps-wrapper {
+  position: relative;
+  width: 100%;        /* ou largura fixa, se preferir */
+  height: 100%;       /* ou uma altura fixa (p.ex. 300px) */
+  overflow: hidden;   /* esconde o conteúdo fora da área */
+}
+
+/* ──────────────────────────────────────────────────────────
+   2.2. Definição base para cada step (tanto ativo como inativo)
+────────────────────────────────────────────────────────── */
+.step {
+  position: absolute;        /* mantém todos no mesmo lugar */
+  top: 20px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  opacity: 0;                /* invisível quando “inativo” */
+  transform: translateX(20px); /* posicionado à direita (fora da vista) */
+  pointer-events: none;      /* não recebe clique quando não está ativo */
+  
+  display: flex;             /* para poder usar flex por padrão */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+/* ──────────────────────────────────────────────────────────
+     2.3. Estado “active” — visível e no lugar certo
+   ────────────────────────────────────────────────────────── */
+.step.active {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;  /* volta a receber clique */
+  z-index: 2;            /* garante que fique acima dos inativos */
+}
+
+
+.step button:last-of-type {
+  margin-top: 12px;
+}
