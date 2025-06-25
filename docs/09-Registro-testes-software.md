@@ -19,7 +19,8 @@ Para cada caso de teste definido no <a href="08-Plano-testes-software.md"> Plano
 | **Caso de teste** 	| **CT-001 – Criar Lembrete** 	|
 |:---:	|:---:	|
 | Requisito associado | RF-018 O sistema deverá permitir a criação de lembretes de tarefas a serem feitas. |
-| Registro de evidência | [teste]("C:\Users\jfgam\OneDrive\Documentos\caso de teste lembrete.mp4") |
+| Registro de evidência |  [Teste Criação Lembrete](https://drive.google.com/file/d/1OSIfO9uy3BSxYGjahiTFpTFONgi1Ev-U/view?usp=sharing) |
+
 
 > **Links úteis**:
 > - [Screencast: entenda o que é e como gravar vídeos com ele](https://rockcontent.com/br/blog/screencast/) 
