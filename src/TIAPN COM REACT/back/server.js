@@ -1,19 +1,34 @@
+// backend/server.js
+
 const express = require("express");
-const db = require('./db/db');
 const cors = require('cors');
-const routes = require('./routes');
-const app = express();
 const path = require('path');
+require('dotenv').config(); 
 
 
-//app.use('/Tela-Home', express.static(path.join(__dirname, 'src', 'Tela-Home')));
+const authRoutes = require('./routes/authRoutes');
+const apiRoutes = require('./routes/apiRoutes');
 
-app.use(cors());
-app.use(express.json());
-app.use(express.static(path.join(__dirname, '..', 'front')));
+const app = express();
 
-app.use(routes);
 
-// Iniciar o servidor
+app.use(cors()); 
+app.use(express.json()); 
+
+
+app.use('/api/auth', authRoutes); 
+
+
+app.use('/api', apiRoutes);
+
+
+app.use(express.static(path.join(__dirname, '..', 'front', 'dist'))); // Assumindo que a pasta do build é 'dist'
+
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'front', 'dist', 'index.html'));
+});
+
+// 5. Inicia o servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));

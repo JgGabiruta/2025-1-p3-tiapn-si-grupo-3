@@ -6,7 +6,6 @@ import App from './App.jsx';
 // O index.css provavelmente contém as diretivas do Tailwind.
 // O login.css contém os estilos específicos da sua tela de autenticação.
 import './index.css';
-import './styles/login.css';
 
 // Pega o elemento 'root' do seu HTML
 const container = document.getElementById('root');

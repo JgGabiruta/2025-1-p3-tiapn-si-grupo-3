@@ -1,14 +1,37 @@
-import React, { useState } from 'react';
-import '../styles/forgot.css';
+// Em src/components/ResetPassword.jsx
+
+import React, { useState, useEffect } from 'react'; // ✅ Passo 1: Adicionado o useEffect
+
+// ✅ Passo 2: Importando a URL do CSS, em vez do arquivo inteiro
+import forgotStylesHref from '../styles/forgot.css?url';
 
 // Recebe onNavigate e o token como props
 function ResetPassword({ onNavigate, token }) {
-  const backendUrl = 'http://localhost:3001'; // Corrigido para a porta do backend
+  const backendUrl = 'http://localhost:3001';
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState('');
 
+  // ✅ Passo 3: Adicionado o useEffect para gerenciar o CSS
+  useEffect(() => {
+    const link = document.createElement('link');
+    link.href = forgotStylesHref;
+    link.rel = 'stylesheet';
+    link.id = 'reset-password-styles'; // ID único para este estilo
+
+    document.head.appendChild(link);
+
+    // Função de limpeza que remove o CSS quando o componente sai da tela
+    return () => {
+      const linkElement = document.getElementById('reset-password-styles');
+      if (linkElement) {
+        document.head.removeChild(linkElement);
+      }
+    };
+  }, []); // Array vazio para rodar apenas ao montar/desmontar
+
+  // Nenhuma alteração necessária na sua lógica de formulário
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage('');
@@ -41,7 +64,7 @@ function ResetPassword({ onNavigate, token }) {
         setMessage(data.message || 'Senha redefinida com sucesso!');
         setMessageType('success');
         setTimeout(() => {
-          onNavigate('Login'); // Navega para a página de Login
+          onNavigate('Login');
         }, 2000);
       } else {
         setMessage(data.error || 'Erro ao redefinir senha. Tente novamente.');

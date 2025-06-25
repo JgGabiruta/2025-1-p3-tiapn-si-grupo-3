@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
-import Calendar from "./Calendar";
-import AddEventModal from "./AddEventModal";
-import { CalendarDaysIcon } from "./IconComponents";
+import Calendar from "../components/Calendar";
+import AddEventModal from "../components/AddEventModal";
+import { CalendarDaysIcon } from "../components/IconComponents";
 import {
   getEmprestimos,
   getEventos,
@@ -71,13 +71,11 @@ const Agenda = () => {
     } finally {
       setIsLoading(false);
     }
-  }, []); 
-
+  }, []);
 
   useEffect(() => {
     fetchAllCalendarData();
-  }, [fetchAllCalendarData]); 
-
+  }, [fetchAllCalendarData]);
 
   const handleEventClick = (event) => {
     if (!event.isManual) {
@@ -122,7 +120,7 @@ const Agenda = () => {
       await deleteEvento(eventToDelete.id);
       alert("Evento excluído com sucesso!");
       handleCloseModal();
-      await fetchAllCalendarData(); 
+      await fetchAllCalendarData();
     } catch (err) {
       alert("Erro ao excluir evento.");
     }

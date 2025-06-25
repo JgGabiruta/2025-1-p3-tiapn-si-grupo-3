@@ -1,53 +1,46 @@
-import React, { useState } from 'react';
-import '../styles/forgot.css';
+// Em src/components/ForgotPassword.jsx
 
-function ForgotPassword({ onNavigate }) { // Recebe a prop onNavigate
-  const backendUrl = 'http://localhost:3001'; // Corrigido para a porta do backend
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
-  const [messageType, setMessageType] = useState('');
-  
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setMessage("Enviando e-mail...");
-    setMessageType('');
+import React, { useEffect } from 'react';
 
-    try {
-      const res = await fetch(`${backendUrl}/api/forgot-password`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email })
-      });
-      const data = await res.json();
-      if (res.ok) {
-        setMessage(data.message || 'Instruções enviadas para o seu e-mail.');
-        setMessageType('success');
-      } else {
-        setMessage(data.error || 'Erro ao enviar e-mail. Tente novamente.');
-        setMessageType('error');
+// Passo 1: Importe a URL do CSS do formulário de "esqueci a senha"
+import forgotStylesHref from '../styles/forgot.css?url';
+
+function ForgotPassword({ onNavigate }) {
+
+  // Passo 2: Adicione o useEffect para gerenciar o ciclo de vida do CSS
+  useEffect(() => {
+    const link = document.createElement('link');
+    link.href = forgotStylesHref;
+    link.rel = 'stylesheet';
+    link.id = 'forgot-styles'; // ID único para este CSS
+
+    document.head.appendChild(link);
+
+    // Função de limpeza para remover o estilo ao sair da página
+    return () => {
+      const linkElement = document.getElementById('forgot-styles');
+      if (linkElement) {
+        document.head.removeChild(linkElement);
       }
-    } catch (error) {
-      console.error("Erro na requisição:", error);
-      setMessage("Erro ao conectar ao servidor. Tente novamente mais tarde.");
-      setMessageType('error');
-    }
+    };
+  }, []); // Array vazio para rodar apenas ao montar/desmontar
+
+  const handleBackToLogin = (e) => {
+    e.preventDefault();
+    onNavigate('Login');
   };
 
   return (
     <div className="container">
-      <h1>Esqueceu sua senha?</h1>
-      <p>Informe seu e-mail cadastrado no site para enviarmos as instruções de redefinição da senha.</p>
-      <form onSubmit={handleSubmit}>
-        <input type="email" name="email" placeholder="Seu e-mail" value={email} onChange={(e) => setEmail(e.target.value)} required />
-        <button className='forgotbtn' type="submit">Continuar</button>
-        {/* Botão Voltar agora chama a prop onNavigate */}
-        <button className='forgotbtn' type="button" onClick={() => onNavigate('Login')}>Voltar</button>
+      <h1>Recuperar Senha</h1>
+      <p>Digite seu e-mail para receber um link de recuperação.</p>
+      <form>
+        <input type="email" placeholder="Seu e-mail" required />
+        <button type="submit">Enviar Link</button>
+        <button type="button" className="forgotbtn" onClick={handleBackToLogin} style={{ marginTop: '10px', backgroundColor: '#6c757d' }}>
+          Voltar para o Login
+        </button>
       </form>
-      {message && (
-        <p className={`message-box ${messageType === 'success' ? 'message-success' : 'message-error'}`}>
-          {message}
-        </p>
-      )}
     </div>
   );
 }
