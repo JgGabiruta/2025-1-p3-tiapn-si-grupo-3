@@ -591,13 +591,16 @@ main > article > div.container > div.container2 > div.container4 > div.grupo2 > 
 
   padding:5px 15px;
   margin:0px;
+  margin-top: 10px;
   height: 5.5vh;
 }
 
 main > article > div.container > div.container2 > div.container4 > div.grupo2 > div#grupo2-sub1 > input#inputDescricao{
 
   width:20vw;
+  margin:0;
   margin-right: 20px;
+  padding: 6.7px ;
 
 }
 
@@ -755,7 +758,7 @@ main > article > button:hover, main > article > div#container_index > div#lista_
   
 }
 
- input.teste {
+input.teste {
 
   padding: 5px 10px;
   background-color: #FDBE00;

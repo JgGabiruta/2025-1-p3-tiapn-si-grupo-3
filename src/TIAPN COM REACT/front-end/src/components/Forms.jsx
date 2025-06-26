@@ -153,10 +153,10 @@ function Forms(){
 
               <div className="grupo2" >
 
-                <div id="grupo2-sub1" style={{marginRight: 0 + 'px'}}>
+                <div id="grupo2-sub1" style={{marginRight: 60 + 'px'}}>
 
                   <p>Descrição</p>
-                  <input type="text" value={descricao}
+                  <input className='inputDescricao' type="text" value={descricao}
                   onChange={(event) => setDescricao(event.target.value)} id="inputDescricao" placeholder="Insria a descricao"/>
 
                 </div>
