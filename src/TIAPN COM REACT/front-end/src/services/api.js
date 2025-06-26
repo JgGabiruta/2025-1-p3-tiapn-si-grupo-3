@@ -112,55 +112,101 @@ export const getDepartamentos = async () => {
 };
 
 export const getFuncionarios = async () => {
-    try {
-        const response = await api.get('/Funcionario');
-        return response.data;
-    } catch (error) {
-        console.error('Erro ao buscar funcionários:', error);
-        throw error;
-    }
+
+  try {
+
+    const response = await api.get('/Funcionario');
+    return response.data;
+
+  }catch (error) {
+    console.error('Erro ao buscar funcionários:', error);
+    throw error;
+  }
 };
 
 
 // Rotas para Lembrete
-
 // GET /Lembrete
 
 export const getLembrete = async () => {
+
   try{
-      const response = await api.get('/Lembrete');
-        return response.data;
+
+    const response = await api.get('/Lembrete');
+    return response.data;
+
   } catch(error){
-    console.error('Erro ao buscar lembretes:', error);
-        throw error;
+
+    console.error('Erro ao buscar lembretes aqui:', error);
+    throw error;
   }
 }
 
-
 export const postLembrete = async (observacao, administrador_codigo) => {
+
   try{
+
   const response = await api.post(`/Lembrete`, observacao, administrador_codigo);
   return response.data;
 
   } catch(erro){
-
+    console.log(erro)
   }
 
 }
 
-
-
-
 export const deleteLembrete = async (codigo) => {
+
   try{
+
     const response = await api.delete(`/Lembrete/${codigo}`);
+
   }catch(err){
-  console.error('Erro ao deletar lembrete:', error);
+
+  console.err('Erro ao deletar lembrete:', err);
     throw err;
   }
 }
 
+export const getEmprestimoAtrasado = async () => {
 
+    try {
 
+      const response = await api.get('/EmprestimoAtrasado')
+      return response.data
+
+    } catch (error) {
+
+      console.error('Erro ao buscar emprestimo atrasado:', error);
+      throw error;
+    }
+}
+
+export const getEmprestimoFuncionario = async () => {
+
+    try {
+
+      const response = await api.get('/EmprestimoFuncionario')
+      return response.data
+
+    } catch (error) {
+
+      console.error('Erro ao buscar emprestimo:', error);
+      throw error;
+    }
+}
+
+export const deleteEmprestimo = async (codigo) => {
+
+  try{
+
+    const response = await api.delete(`/Emprestimo/${codigo}`);
+
+  }catch(err){
+
+  console.log('Erro ao deletar emprestimo:', err);
+    throw err;
+  }
+}
 
 export default api;

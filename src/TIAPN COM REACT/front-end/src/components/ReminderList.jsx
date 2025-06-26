@@ -4,25 +4,26 @@ import { getLembrete, postLembrete, deleteLembrete} from './../services/api';
 const adminId = 14;
 
 export default function ReminderList() {
+
   const [input, setInput] = useState('');
   const [lembretes, setlembretes] = useState ([]);
 
-const fetchlembretes = async () => {
+  const fetchlembretes = async () => {
+
     try{
+      
       const data = await getLembrete();
       setlembretes(data);
 
     }catch(err){
-      console.log("atenção");
+
+      console.log(err);
     }
   }
 
    useEffect(() => {
       fetchlembretes();
     }, [lembretes]);
- 
-
- 
 
   async function addReminder() {
 
@@ -32,13 +33,20 @@ const fetchlembretes = async () => {
     };
 
     if (!input.trim()) return;
+
+    let res
+
     try{
-        const res = await postLembrete( processedData);
+
+      res = await postLembrete( processedData);
+
     }catch(er){
+
       console.log(er);
     }
 
     if (res.ok) {
+
       setInput('');
       const updated = await res.json();
       setlembretes((prev) => [...prev, updated]);

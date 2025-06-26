@@ -4,7 +4,9 @@ import App from './App.jsx';
 import { BrowserRouter, createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from "./pages/Home.jsx";
 import StockPage from './pages/StockPage.jsx';
-
+import Emprestimo from './pages/Emprestimo.jsx'
+import GerarEmprestimo from './pages/GerarEmprestimo.jsx'
+import ListaEmprestimos from './pages/ListaEmprestimos.jsx'
 
 // Cria a raiz da aplicação usando a API moderna do React 18
 //const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -24,6 +26,15 @@ const router = createBrowserRouter([
   }, {
     path: "/Estoque",
     element: <StockPage/>
+  },{
+    path: "/Emprestimo",
+    element: <Emprestimo/>
+  },{
+    path: "/GerarEmprestimo",
+    element: <GerarEmprestimo/>
+  },{
+    path: "/ListaEmprestimos",
+    element: <ListaEmprestimos/>
   }
 ])
 

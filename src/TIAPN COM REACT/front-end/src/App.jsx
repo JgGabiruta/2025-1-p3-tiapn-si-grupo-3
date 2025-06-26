@@ -35,8 +35,7 @@ function App() {
 
 
   return (
-    <AuthPage/>
-    
+    <AuthPage/>    
   )
 }
 
