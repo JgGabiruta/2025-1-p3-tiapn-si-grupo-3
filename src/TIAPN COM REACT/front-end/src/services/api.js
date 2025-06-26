@@ -121,4 +121,46 @@ export const getFuncionarios = async () => {
     }
 };
 
+
+// Rotas para Lembrete
+
+// GET /Lembrete
+
+export const getLembrete = async () => {
+  try{
+      const response = await api.get('/Lembrete');
+        return response.data;
+  } catch(error){
+    console.error('Erro ao buscar lembretes:', error);
+        throw error;
+  }
+}
+
+
+export const postLembrete = async (observacao, administrador_codigo) => {
+  try{
+  const response = await api.post(`/Lembrete`, observacao, administrador_codigo);
+  return response.data;
+
+  } catch(erro){
+
+  }
+
+}
+
+
+
+
+export const deleteLembrete = async (codigo) => {
+  try{
+    const response = await api.delete(`/Lembrete/${codigo}`);
+  }catch(err){
+  console.error('Erro ao deletar lembrete:', error);
+    throw err;
+  }
+}
+
+
+
+
 export default api;

@@ -1,21 +1,45 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
+import React, { StrictMode } from 'react';
+import {ReactDOM, createRoot } from 'react-dom/client';
 import App from './App.jsx';
+import { BrowserRouter, createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Home from "./pages/Home.jsx";
+import StockPage from './pages/StockPage.jsx';
 
-// Importa os dois arquivos CSS necessários.
-// O index.css provavelmente contém as diretivas do Tailwind.
-// O login.css contém os estilos específicos da sua tela de autenticação.
-import './index.css';
-
-// Pega o elemento 'root' do seu HTML
-const container = document.getElementById('root');
 
 // Cria a raiz da aplicação usando a API moderna do React 18
-const root = createRoot(container);
+//const root = ReactDOM.createRoot(document.getElementById('root'));
+
+const router = createBrowserRouter([
+
+  {
+
+    path: "/",
+    element: <App/>
+
+  }, {
+
+    path: "/Home",
+    element: <Home/>
+
+  }, {
+    path: "/Estoque",
+    element: <StockPage/>
+  }
+])
 
 // Renderiza a aplicação
-root.render(
+/*root.render(
   <React.StrictMode>
-    <App />
+
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+    
   </React.StrictMode>
-);
+);*/
+
+createRoot (document.getElementById ('root')).render(
+  <StrictMode>
+    <RouterProvider router ={router} />
+  </StrictMode>
+)

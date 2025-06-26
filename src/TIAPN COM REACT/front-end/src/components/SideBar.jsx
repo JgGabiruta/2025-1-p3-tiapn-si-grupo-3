@@ -1,58 +1,51 @@
+import './../styles/home.css';
+import { useNavigate } from 'react-router-dom';
 
-import React from 'react'; 
-import {
-  HomeIcon,
-  ShoppingCartIcon,
-  UsersIcon,
-  CalendarDaysIcon,
-  WrenchIcon,
-  Cog6ToothIcon,
-  BuildingOfficeIcon,
-} from './IconComponents'; 
+export default function Sidebar() {
 
-// Recebe `activeItem` e `setActiveItem` como props para controlar o estado
-const Sidebar = ({ activeItem, setActiveItem }) => {
-  const navItems = [
-    { name: 'Início', icon: HomeIcon },
-    { name: 'Empréstimos', icon: ShoppingCartIcon },
-    { name: 'Funcionários', icon: UsersIcon },
-    { name: 'Agenda', icon: CalendarDaysIcon },
-    { name: 'Estoque', icon: WrenchIcon },
-    { name: 'Configuração', icon: Cog6ToothIcon },
-    { name: 'Departamento', icon: BuildingOfficeIcon },
-  ];
+  const navigate = useNavigate()
 
   return (
-    <aside className="w-64 bg-gray-100 text-gray-800 flex-shrink-0">
-        <nav className="p-4">
-          <ul>
-            {navItems.map((item) => {
-              const Icon = item.icon;
-              const isActive = item.name === activeItem;
-              return (
-                <li key={item.name} className="px-2 mb-1">
-                  <a
-                    href="#"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setActiveItem(item.name);
-                    }}
-                    className={`flex items-center py-2.5 px-4 rounded-md transition-colors duration-200
-                    ${isActive
-                      ? 'bg-gray-300 text-violet-900 font-bold shadow-sm'
-                      : 'text-gray-600 hover:bg-gray-200'
-                    }`}
-                  >
-                    <Icon className={`w-6 h-6 mr-3 ${isActive ? 'text-yellow-500' : 'text-gray-500'}`} />
-                    {item.name}
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
-      </aside>
+    <aside className="sidebar">
+      <nav className="sidebar-nav">
+        <ul>
+          <li className="active">
+            <a onClick={() => navigate (`/Home`)}>
+              <i className="fa fa-house"></i> <span>Início</span>
+            </a>
+          </li>
+          <li>
+            <a onClick={() => navigate (`/Emprestimo`)}>
+              <i className="fa fa-cart-shopping"></i> <span>Empréstimos</span>
+            </a>
+          </li>
+          <li>
+            <a onClick={() => navigate (`/Funcionarios`)}>
+              <i className="fa fa-user"></i> <span>Funcionários</span>
+            </a>
+          </li>
+          <li>
+            <a onClick={() => navigate (`/Agenda`)}>
+              <i className="fa fa-calendar"></i> <span>Agenda</span>
+            </a>
+          </li>
+          <li>
+            <a onClick={() => navigate (`/Estoque`)}>
+              <i className="fa fa-wrench"></i> <span>Estoque</span>
+            </a>
+          </li>
+          <li>
+            <a onClick={() => navigate (`/Configuracao`)}>
+              <i className="fa fa-gear"></i> <span>Configuração</span>
+            </a>
+          </li>
+          <li>
+            <a onClick={() => navigate (`/Departamento`)}>
+              <i className="fa fa-folder"></i> <span>Departamento</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
   );
-};
-
-export default Sidebar;
+}

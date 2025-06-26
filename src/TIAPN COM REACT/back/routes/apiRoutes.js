@@ -183,6 +183,65 @@ function criarRotaParaTabela(nomeTabela) {
     });
 }
 
+// Rotas para Lembrete
+
+// GET /Lembrete
+router.get('/Lembrete', async (req, res) => {
+  try {
+    const [rows] = await db.query('SELECT Codigo, Observacao FROM Lembrete ORDER BY Codigo DESC');
+    res.json(rows);
+    console.log(rows)
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Erro ao buscar lembretes' });
+    
+  }
+});
+
+
+
+
+  // POST /Lembrete
+  router.post('/Lembrete', async (req, res) => {
+    const { observacao, administrador_codigo } = req.body;
+
+    console.log(req.body);
+
+    if (!observacao || !administrador_codigo) {
+      return res.status(400).json({ error: 'Os campos observacao e administrador_codigo são obrigatórios.' });
+    }
+
+    try {
+      const [result] = await db.query(
+        `INSERT INTO Lembrete (Observacao, Administrador_Funcionario_Codigo) VALUES (?, ?)`,
+        [observacao, administrador_codigo]
+      );
+      res.status(201).json({ Codigo: result.insertId, Observacao: observacao });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Erro ao inserir lembrete', detalhes: err.sqlMessage });
+    }
+
+  });
+
+
+// DELETE /Lembrete/:id
+router.delete('/Lembrete/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const [result] = await db.query('DELETE FROM Lembrete WHERE Codigo = ?', [id]);
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: 'Lembrete não encontrado.' });
+    }
+    res.status(200).json({ message: 'Lembrete deletado com sucesso.' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Erro ao deletar lembrete' });
+  }
+});
+
+
 const tabelas = [
     'Departamento',
     'Funcionario',

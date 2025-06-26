@@ -4,7 +4,13 @@ import StockTable from '../components/StockTable';
 import AddItemModal from '../components/AddItemModal';
 import { PlusIcon } from '../components/IconComponents';
 import { getFerramentas, addFerramenta, updateFerramenta, deleteFerramenta } from '../services/api';
+import './../index.css';
+import Sidebar from '../components/SideBar';
+import Header from '../components/Header';
+import loginStylesHref from '../index.css?url';
+ 
 
+  
 function StockPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [stockItems, setStockItems] = useState([]);
@@ -13,6 +19,26 @@ function StockPage() {
   const [currentItem, setCurrentItem] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+
+
+   useEffect(() => {
+    // Cria o elemento <link>
+    const link = document.createElement('link');
+    link.href = loginStylesHref;
+    link.rel = 'stylesheet';
+    link.id = 'login-styles'; // ID para encontrar e remover depois
+ 
+    // Adiciona o CSS ao <head> da página
+    document.head.appendChild(link);
+ 
+    // Função de limpeza: será executada quando o componente sair da tela
+    return () => {
+      const linkElement = document.getElementById('login-styles');
+      if (linkElement) {
+        document.head.removeChild(linkElement);
+      }
+    };
+  }, []); // O array vazio [] garante que isso rode só uma vez
 
   const fetchStockItems = async () => {
     setIsLoading(true);
@@ -111,6 +137,11 @@ function StockPage() {
 
   return (
     <>
+
+    <Header/>
+    
+    <Sidebar/>
+
       <main className="flex-1 p-8 bg-gray-50">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-3xl font-bold text-gray-800">Estoque</h1>
