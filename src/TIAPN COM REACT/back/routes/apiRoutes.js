@@ -301,15 +301,16 @@ router.post('/Emprestimo', async (req, res) => {
     let data_dev = req.body.data_dev;
     let data_ret = req.body.data_ret;
     let desc = req.body.desc;
-    let codigo_emp = req.body.codigo_emp;
-
-    console.log(req.body)
 
     try {
     
-      const [result] = await db.query(`INSERT INTO Emprestimo (Codigo, Descricao, Data_Retirada, Data_Devolucao, Operario_Funcionario_Codigo) VALUES (?,?,?,?,?)`,[codigo_emp,desc,data_ret,data_dev,codigo_func]);
+        const [result] = await db.query(`INSERT INTO Emprestimo (Descricao, Data_Retirada, Data_Devolucao, Operario_Funcionario_Codigo, quantidade) VALUES (?,?,?,?,?)`,[desc,data_ret,data_dev,codigo_func, quantidade]);
 
-      const [result2] = await db.query(`INSERT INTO Emprestimo_Ferramenta (Codigo_Ferramenta, Emprestimo_Codigo) VALUES (?,?)`,[codigo_ferr,codigo_emp]);
+        const [result3] = await db.query(`SELECT codigo FROM Emprestimo WHERE codigo = (SELECT MAX(codigo) FROM Emprestimo);`,[codigo_ferr]);
+        
+        let cod_emp = result3[0].codigo
+
+        const [result2] = await db.query(`INSERT INTO Emprestimo_Ferramenta (Codigo_Ferramenta, Emprestimo_Codigo) VALUES (?, ?)`,[codigo_ferr, cod_emp]);
 
     } catch (err) {
       console.error("Erro ao inserir ferramenta:", err);

@@ -61,7 +61,6 @@ function Forms(){
       data_dev: dataEm,
       data_ret: ano + "-" + mes + "-" + dia,
       desc:descricao,
-      codigo_emp: emprestimos.length + 5
     }
 
     let res
