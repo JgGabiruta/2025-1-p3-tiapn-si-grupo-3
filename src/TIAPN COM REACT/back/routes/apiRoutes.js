@@ -169,7 +169,6 @@ router.delete('/Eventos/:codigo', async (req, res) => {
     }
 });
 
-
 // --- Rotas Genéricas (Limpas para evitar conflitos) ---
 function criarRotaParaTabela(nomeTabela) {
     router.get(`/${nomeTabela}`, async (req, res) => {
@@ -201,8 +200,8 @@ router.get('/Lembrete', async (req, res) => {
   }
 });
 
-  // POST /Lembrete
-  router.post('/Lembrete', async (req, res) => {
+// POST /Lembrete
+router.post('/Lembrete', async (req, res) => {
     const { observacao, administrador_codigo } = req.body;
 
     console.log(req.body);
@@ -222,7 +221,7 @@ router.get('/Lembrete', async (req, res) => {
       res.status(500).json({ error: 'Erro ao inserir lembrete', detalhes: err.sqlMessage });
     }
 
-  });
+});
 
 
 // DELETE /Lembrete/:id
@@ -239,6 +238,18 @@ router.delete('/Lembrete/:id', async (req, res) => {
     console.error(err);
     res.status(500).json({ error: 'Erro ao deletar lembrete' });
   }
+});
+
+router.get(`/ListaEmprestimos`, async (req, res) => {
+
+    try {
+        const [rows] = await db.query(`SELECT * FROM Emprestimo`);
+        res.json(rows);
+
+    } catch (err) {
+        console.error(`Erro ao buscar dados da tabela ${nomeTabela}:`, err);
+        res.status(500).json({ error: `Erro ao buscar dados da tabela ${nomeTabela}` });
+    }
 });
 
 router.get(`/EmprestimoAtrasado`, async (req, res) => {
@@ -292,6 +303,8 @@ router.post('/Emprestimo', async (req, res) => {
     let desc = req.body.desc;
     let codigo_emp = req.body.codigo_emp;
 
+    console.log(req.body)
+
     try {
     
       const [result] = await db.query(`INSERT INTO Emprestimo (Codigo, Descricao, Data_Retirada, Data_Devolucao, Operario_Funcionario_Codigo) VALUES (?,?,?,?,?)`,[codigo_emp,desc,data_ret,data_dev,codigo_func]);
@@ -304,7 +317,6 @@ router.post('/Emprestimo', async (req, res) => {
     }
 
 });  
-
 
 const tabelas = [
     'Departamento',

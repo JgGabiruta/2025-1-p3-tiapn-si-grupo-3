@@ -22,7 +22,7 @@ function Menu(){
     
           console.log(err);
         }
-      }
+    }
 
     useEffect(() => {
 

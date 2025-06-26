@@ -124,7 +124,6 @@ export const getFuncionarios = async () => {
   }
 };
 
-
 // Rotas para Lembrete
 // GET /Lembrete
 
@@ -152,7 +151,6 @@ export const postLembrete = async (observacao, administrador_codigo) => {
   } catch(erro){
     console.log(erro)
   }
-
 }
 
 export const deleteLembrete = async (codigo) => {
@@ -166,6 +164,20 @@ export const deleteLembrete = async (codigo) => {
   console.err('Erro ao deletar lembrete:', err);
     throw err;
   }
+}
+
+export const getEmprestimo = async () => {
+
+    try {
+
+      const response = await api.get('/ListaEmprestimos')
+      return response.data
+
+    } catch (error) {
+
+      console.error('Erro ao buscar emprestimo atrasado:', error);
+      throw error;
+    }
 }
 
 export const getEmprestimoAtrasado = async () => {
@@ -206,6 +218,19 @@ export const deleteEmprestimo = async (codigo) => {
 
   console.log('Erro ao deletar emprestimo:', err);
     throw err;
+  }
+}
+
+export const postEmprestimo = async (req, res) => {
+
+  try{
+
+    const response = await api.post(`/Emprestimo`, req);
+    return response.data;
+
+  } catch(erro){
+    
+    console.log(erro)
   }
 }
 

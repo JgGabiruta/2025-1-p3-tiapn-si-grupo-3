@@ -2,7 +2,7 @@ import './../styles/emprestimo.css'
 import Axios from 'axios'
 import { BsCalendar3 } from "react-icons/bs";
 import {useEffect, useState, useRef} from 'react'
-
+import { getFerramentas, getFuncionarios, getEmprestimo, postEmprestimo } from '../services/api'
 function Forms(){
 
   const [codFunc, setCodFunc] = useState([]);
@@ -15,31 +15,32 @@ function Forms(){
   const [dataEm, setData] = useState("")
   const [descricao, setDescricao] = useState("")
 
+  const fetchDados = async () => {
+      
+    try{
+            
+      const data = await getFerramentas();
+      setCodFerr(data)
+
+      const data2 = await getFuncionarios();
+      setCodFunc(data2)
+
+      const data3 = await getEmprestimo();
+      setEmprestimos(data3)
+      
+    }catch(err){
+      
+      console.log(err);
+    }
+  }
+
   useEffect(() =>{
 
-    Axios.get("http://localhost:3000/funcionario").then((data) => {
+    fetchDados();
 
-      setCodFunc(data.data)
-    })
-  },[codFunc])
-
-  useEffect(() =>{
-
-    Axios.get("http://localhost:3000/ferramenta").then((data) => {
-
-      setCodFerr(data.data)
-    })
-  },[codFerr])
-
-  useEffect(() =>{
-
-    Axios.get("http://localhost:3000/emprestimo").then((data) => {
-
-      setEmprestimos(data.data)
-    })
   },[emprestimos])
 
-  function criaEmprestimo() {
+  async function criaEmprestimo() {
 
     const date = new Date();
     let ano = date.getFullYear();
@@ -63,13 +64,24 @@ function Forms(){
       codigo_emp: emprestimos.length + 5
     }
 
-    fetch('http://localhost:3000/Emprestimo',{
+    let res
+    
+      try{
+    
+        res = await postEmprestimo(data);
+    
+      }catch(er){
+    
+        console.log(er);
+      }
+    
+      if (res.ok) {
+    
+        //setInput('');
+        const updated = await res.json();
+        setEmprestimos((prev) => [...prev, updated]);
+      }
 
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body:JSON.stringify(data)
-    })
-    .then(response => console.log(response.status))
 }
 
   return (
