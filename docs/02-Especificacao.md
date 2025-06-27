@@ -113,7 +113,7 @@ Com base na análise das personas, foram identificadas as seguintes histórias d
 | RF-002 | A empresa deve conseguir fazer login com seu usuário e senha. | ALTA |
 | RF-003 | A empresa deve conseguir recuperar seus dados de login. | MÉDIA |
 | RF-004 | A empresa deve conseguir criar departamentos de empréstimos. | ALTA |
-| RF-005 | Cada departamento criado deve permitir a adição de produtos com código/nome únicos que serão emprestados, assim como a quantidade específica de cada objeto. | ALTA |
+| RF-005 |A empresa deve conseguir realizar a adição de produtos (ferramentas) com código único que serão emprestados, assim como a quantidade específica e localização de cada objeto. | ALTA |
 | RF-006 | Cada departamento criado deve permitir a adição de clientes (sejam internos ou externos), com código único, nome e CPF. | ALTA |
 | RF-007 | O sistema deverá ter uma tela para realizar empréstimos, onde será necessário adicionar o código do cliente, o objeto, a quantidade de objetos e a data do empréstimo, assim como a data para devolução. | ALTA |
 | RF-008 | O sistema deverá registrar o código, nome e CPF do cliente, a quantidade de objetos emprestados, os objetos, a data do empréstimo e a data de devolução. | MÉDIA |
