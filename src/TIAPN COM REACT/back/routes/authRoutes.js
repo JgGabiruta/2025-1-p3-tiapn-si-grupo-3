@@ -54,9 +54,15 @@ router.post('/register', async (req, res) => {
 });
 
 // Rota de Login - POST /login
+// Rota de Login - POST /login (COM DEBUG)
 router.post('/login', async (req, res) => {
     const { email, senha } = req.body;
-    if (!email || !senha) return res.status(400).json({ error: 'Email e senha são obrigatórios.' });
+    console.log(`[LOGIN TENTATIVA] Recebido login para o email: ${email}`);
+
+    if (!email || !senha) {
+        console.log('[LOGIN FALHA] Email ou senha não fornecidos.');
+        return res.status(400).json({ error: 'Email e senha são obrigatórios.' });
+    }
 
     try {
         const [admRows] = await db.query(
@@ -65,22 +71,31 @@ router.post('/login', async (req, res) => {
              WHERE a.Email = ?`, [email]
         );
 
-        if (admRows.length === 0) return res.status(401).json({ error: 'Credenciais inválidas.' });
-        
+        if (admRows.length === 0) {
+            console.log(`[LOGIN FALHA] Nenhum usuário encontrado com o email: ${email}`);
+            return res.status(401).json({ error: 'Credenciais inválidas.' });
+        }
+
         const admin = admRows[0];
+        console.log('[LOGIN INFO] Usuário encontrado no banco:', admin); // Mostra o hash que veio do banco
+
+        console.log('[LOGIN INFO] Comparando a senha fornecida com o hash do banco...');
         const match = await bcrypt.compare(senha, admin.hash);
+        console.log(`[LOGIN INFO] O resultado da comparação (bcrypt.compare) foi: ${match}`); // true ou false?
 
-        if (!match) return res.status(401).json({ error: 'Credenciais inválidas.' });
-        
-        // Se precisar de token JWT no futuro, aqui é o lugar para gerar
-        // const token = jwt.sign({ id: admin.id, tipo: 'administrador' }, JWT_SECRET, { expiresIn: '8h' });
+        if (!match) {
+            console.log(`[LOGIN FALHA] A comparação de senha falhou para o usuário: ${email}`);
+            return res.status(401).json({ error: 'Credenciais inválidas.' });
+        }
 
+        console.log(`[LOGIN SUCESSO] Login bem-sucedido para: ${email}`);
         return res.json({
             message: 'Login de administrador bem-sucedido.',
             user: { id: admin.id, nome: admin.nome, email: admin.email, tipo: 'administrador' }
         });
+
     } catch (err) {
-        console.error('Erro no login:', err);
+        console.error('[LOGIN ERRO CRÍTICO] Ocorreu um erro inesperado na rota de login:', err);
         return res.status(500).json({ error: 'Erro interno no servidor.' });
     }
 });
