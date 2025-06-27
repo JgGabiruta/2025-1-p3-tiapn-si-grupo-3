@@ -1,7 +1,7 @@
 # Código do projeto
 
 
-[Código do front-end](../src/front-end) -- repositório do código do front-end
+[Código do front-end](../src/TIAPN-COM-REACT/front-end) -- repositório do código do front-end
 
 [Código do back-end](../src/back)  -- repositório do código do back-end
 
