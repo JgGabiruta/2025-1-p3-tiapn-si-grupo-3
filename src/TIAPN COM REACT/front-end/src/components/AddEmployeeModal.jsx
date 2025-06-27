@@ -23,16 +23,22 @@ const AddEmployeeModal = ({ isOpen, onClose, onSuccess }) => {
   };
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
+    
     try {
+
       const dataToSend = {
-          ...formData,
-          Departamento_Codigo: formData.Departamento_Codigo ? parseInt(formData.Departamento_Codigo, 10) : null,
-          Numero: formData.Numero ? parseInt(formData.Numero, 10) : null,
+        
+        ...formData,
+        Departamento_Codigo: formData.Departamento_Codigo ? parseInt(formData.Departamento_Codigo, 10) : null,
+        Numero: formData.Numero ? parseInt(formData.Numero, 10) : null,
       }
+
       await createEmployee(dataToSend); // Apenas esperamos a confirmação de que salvou
       onSuccess(); // 👇 Apenas notificamos o App.jsx do sucesso
       setFormData(initialFormState);
+    
     } catch (error) {
       console.error("Erro ao salvar:", error);
       alert(`Erro ao salvar: ${error.message}`);

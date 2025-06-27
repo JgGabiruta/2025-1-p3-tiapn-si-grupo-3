@@ -1,19 +1,23 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function Sidebar() {
 
   const navigate = useNavigate()
+  const location = useLocation();
+
+  console.log(location.pathname)
+  let teste = location.pathname
 
   return (
     <aside className="sidebar">
       <nav className="sidebar-nav">
         <ul>
-          <li className="active">
+          <li className={teste == "/Home" ? "active" : ""}>
             <a onClick={() => navigate (`/Home`)}>
               <i className="fa fa-house"></i> <span>Início</span>
             </a>
           </li>
-          <li>
+          <li className={teste == "/Emprestimo" || teste == "/ListaEmprestimos" || teste == "/GerarEmprestimo" ? "active" : ""}>
             <a onClick={() => navigate (`/Emprestimo`)}>
               <i className="fa fa-cart-shopping"></i> <span>Empréstimos</span>
             </a>

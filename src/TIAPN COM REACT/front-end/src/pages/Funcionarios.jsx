@@ -4,9 +4,33 @@ import EmployeeCard from '../components/EmployeeCard';
 import AddEmployeeModal from '../components/AddEmployeeModal';
 import EditEmployeeModal from '../components/EditEmployeeModal';
 import { getEmployees, getEmployeeById } from '../services/api.js';
-import '../styles/Funcionarios.css';
+import FuncionariosStylesHref from './../styles/Funcionarios.css?url';
+
+const STYLESHEET_ID = 'Funcionarios-styles';
 
 function App() {
+
+  useEffect(() => {
+    
+    const link = document.createElement('link');
+    
+    link.id = STYLESHEET_ID;
+    link.rel = 'stylesheet';
+    link.href = FuncionariosStylesHref;
+      
+    document.head.appendChild(link);
+  
+    // Função de limpeza que remove o CSS quando o componente sai da tela
+    return () => {
+      
+      const styleElement = document.getElementById(STYLESHEET_ID);
+      
+      if (styleElement) {
+        document.head.removeChild(styleElement);
+      }
+    };
+  }, []);
+
   const [employees, setEmployees] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(true);
@@ -48,7 +72,7 @@ function App() {
   const handleOpenEditModal = async (codigo) => {
     try {
       const employeeData = await getEmployeeById(codigo);
-      console.log(employeeData)
+      
       setSelectedEmployee(employeeData);
       setEditModalOpen(true);
     } catch (err) {

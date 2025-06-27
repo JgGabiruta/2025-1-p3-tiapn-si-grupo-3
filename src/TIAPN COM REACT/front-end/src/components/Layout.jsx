@@ -1,20 +1,60 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import logoManejo from '../assets/Logo_Manejo_Laranja.png';
 import logoEmpresa from '../assets/Logo_Fernandes_Prado.png';
 
-// Componente da Sidebar
+// Componente da Sideba
+let navigate
 const Sidebar = ({ isVisible }) => (
+
   <aside className={`sidebar ${!isVisible ? 'hidden' : ''}`}>
+    {navigate = useNavigate()}
     <nav className="sidebar-nav">
       <ul>
-        {/* Adicionei NavLink do react-router-dom para links futuros */}
-        <li><a href="#"><i className="fa fa-house"></i><span>Início</span></a></li>
-        <li><a href="#"><i className="fa fa-cart-shopping"></i><span>Empréstimos</span></a></li>
-        <li className="active"><a href="#"><i className="fa fa-user"></i><span>Funcionários</span></a></li>
-        <li><a href="#"><i className="fa fa-calendar"></i><span>Agenda</span></a></li>
-        <li><a href="#"><i className="fa fa-wrench"></i><span>Estoque</span></a></li>
-        <li><a href="#"><i className="fa fa-gear"></i><span>Configuração</span></a></li>
-        <li><a href="#"><i className="fa fa-folder"></i><span>Departamento</span></a></li>
+
+        <li>
+          <a onClick={() => navigate('/Home')}>
+            <i className="fa fa-house"></i>
+            <span>Início</span>
+          </a>
+        </li>
+
+        <li>
+          <a onClick={() => navigate (`/Emprestimo`)}>
+            <i className="fa fa-cart-shopping"></i>
+            <span>Empréstimos</span>
+          </a>
+        </li>
+
+        <li className="active">
+          <a onClick={() => navigate (`/Funcionarios`)}>
+            <i className="fa fa-user"></i>
+            <span>Funcionários</span>
+          </a>
+        </li>
+
+        <li>
+          <a onClick={() => navigate (`/Agenda`)}>
+            <i className="fa fa-calendar"></i>
+            <span>Agenda</span>
+          </a>
+        </li>
+
+        <li>
+          <a onClick={() => navigate (`/Estoque`)}>
+            <i className="fa fa-wrench"></i>
+            <span>Estoque</span>
+          </a>
+        </li>
+
+        <li>
+          <a onClick={() => navigate (`/Configuracao`)}>
+            <i className="fa fa-gear"></i>
+            <span>Configuração</span>
+          </a>
+        </li>
+
+        <li><a onClick={() => navigate (`/Departamento`)}><i className="fa fa-folder"></i><span>Departamento</span></a></li>
       </ul>
     </nav>
   </aside>

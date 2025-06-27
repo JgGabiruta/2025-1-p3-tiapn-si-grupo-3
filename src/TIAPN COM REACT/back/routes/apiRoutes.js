@@ -335,8 +335,6 @@ const tabelas = [
 
 tabelas.forEach(criarRotaParaTabela);
 
-
-
 //Rota abrir funcionario
 
 router.get('/funcionario/:codigo', async (req, res) => {
@@ -357,6 +355,119 @@ router.get('/funcionario/:codigo', async (req, res) => {
   } catch (err) {
     console.error('Erro ao buscar funcionário:', err);
     res.status(500).json({ error: 'Erro interno ao buscar dados do funcionário.' });
+  }
+});
+
+router.post('/funcionario', async (req, res) => {
+  let {
+    Cargo,
+    Nome,
+    Telefone,
+    Data_Nascimento,
+    Rua,
+    Numero,
+    Cidade,
+    CPF,
+    Departamento_Codigo
+  } = req.body;
+
+  // Validação dos campos obrigatórios
+  if (!Nome || !Cargo || !CPF) {
+    return res.status(400).json({ error: 'Campos Nome, Cargo e CPF são obrigatórios.' });
+  }
+
+  let dataFormatada = null;
+  if (Data_Nascimento) {
+    dataFormatada = Data_Nascimento.split('T')[0]; 
+  }
+
+  try {
+    const [result] = await db.query(
+      `INSERT INTO Funcionario
+         (Cargo, Nome, Telefone, Data_Nascimento, Rua, Numero, Cidade, CPF, Departamento_Codigo)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      
+      [
+        Cargo,
+        Nome,
+        Telefone || null,
+        dataFormatada,
+        Rua || null,
+        Numero || null,
+        Cidade || null,
+        CPF,
+        Departamento_Codigo || null
+      ]
+    );
+    return res
+      .status(201)
+      .json({ message: 'Funcionário cadastrado com sucesso.', id: result.insertId });
+  } catch (err) {
+    console.error('Erro ao cadastrar funcionário:', err);
+  
+    if (err.code === 'ER_NO_REFERENCED_ROW_2') {
+      return res.status(400).json({ error: 'O Departamento informado não existe.' });
+    }
+    
+    if (err.code === 'ER_DUP_ENTRY') {
+      return res.status(409).json({ error: 'Este CPF ou outro campo único já está cadastrado.' });
+    }
+
+    return res.status(500).json({ error: 'Erro interno ao cadastrar funcionário.' });
+  }
+});
+
+router.put('/funcionario/:codigo', async (req, res) => {
+  const { codigo } = req.params; // Pega o código da URL
+
+  const {
+    Cargo,
+    Nome,
+    Telefone,
+    Data_Nascimento,
+    Rua,
+    Numero,
+    Cidade,
+    CPF,
+    Departamento_Codigo
+  } = req.body;
+
+  if (!Nome || !Cargo || !CPF) {
+    return res.status(400).json({ error: 'Campos Nome, Cargo e CPF são obrigatórios.' });
+  }
+
+  try {
+    
+    const sql = `
+      UPDATE Funcionario
+      SET
+        Cargo = ?, Nome = ?, Telefone = ?, Data_Nascimento = ?,
+        Rua = ?, Numero = ?, Cidade = ?, CPF = ?, Departamento_Codigo = ?
+      WHERE
+        Codigo = ?
+    `;
+
+    const [result] = await db.query(sql, [
+      Cargo, Nome, Telefone, Data_Nascimento, Rua, Numero,
+      Cidade, CPF, Departamento_Codigo, codigo
+    ]);
+    
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: 'Funcionário não encontrado para atualização.' });
+    }
+
+  
+    res.json({ message: 'Funcionário atualizado com sucesso.' });
+
+  } catch (err) {
+    console.error('Erro ao atualizar funcionário:', err);
+
+    
+    if (err.code === 'ER_DUP_ENTRY') {
+      return res.status(409).json({ error: 'Este CPF já pertence a outro funcionário.' });
+    }
+    
+    res.status(500).json({ error: 'Erro interno ao atualizar o funcionário.' });
   }
 });
 

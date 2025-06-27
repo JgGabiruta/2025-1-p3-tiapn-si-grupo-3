@@ -8,7 +8,6 @@ import homeStylesHref from './../styles/home.css?url';
 
 const STYLESHEET_ID = 'home-styles';
 
-
 export default function Home() {
   const username = JSON.parse(localStorage.getItem('user'))?.nome || 'Usuário';
 
@@ -29,11 +28,9 @@ export default function Home() {
     };
   }, []);
   
-  
-
   return (
     <>
-      <Navbar />
+      <Navbar size={100}/>
       <div id="layout">
         <Sidebar />
         <main className="main-content">

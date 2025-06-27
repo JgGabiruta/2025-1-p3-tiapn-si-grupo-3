@@ -7,11 +7,15 @@ const mascaraTelefone = (value) => { /* ...código da máscara... */ let v=value
 
 // 👇 As props onSave e onDelete foram renomeadas para onSuccess
 const EditEmployeeModal = ({ isOpen, onClose, onSuccess, employeeData }) => {
+  
   const [formData, setFormData] = useState({});
 
   useEffect(() => {
-    if (employeeData) {
+
+    if (employeeData){
+
       const formattedData = {
+
         ...employeeData,
         Data_Nascimento: employeeData.Data_Nascimento 
           ? new Date(employeeData.Data_Nascimento).toISOString().split('T')[0] 
@@ -22,19 +26,27 @@ const EditEmployeeModal = ({ isOpen, onClose, onSuccess, employeeData }) => {
   }, [employeeData]);
 
   const handleChange = (e) => {
+
     const { name, value } = e.target;
     let finalValue = value;
+
     if (name === 'CPF') finalValue = mascaraCPF(value);
     if (name === 'Telefone') finalValue = mascaraTelefone(value);
+
     setFormData(prev => ({ ...prev, [name]: finalValue }));
   };
 
   const handleUpdate = async (e) => {
+
     e.preventDefault();
+
     try {
+
       await updateEmployee(formData.Codigo, formData);
       onSuccess(); // 👇 Notifica o sucesso
+
     } catch (error) {
+      
       console.error("Erro ao atualizar:", error);
       alert(`Erro ao atualizar: ${error.message}`);
     }

@@ -263,30 +263,31 @@ export const getEmployeeById = async (codigo) => {
 
 // Função para criar um novo funcionário
 export const createEmployee = async (employeeData) => {
-  const response = await fetch(API_URL, {
-    method: 'POST',
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(employeeData)
-  });
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(errorText || "Erro ao salvar funcionário.");
+
+  try{
+
+    const response = await api.post('/Funcionario', employeeData);
+  
+    return response.data;
+
+  }catch(err){
+
+    console.log(err)
   }
-  return response.json();
 };
 
 // Função para atualizar um funcionário
 export const updateEmployee = async (codigo, employeeData) => {
-  const response = await fetch(`${API_URL}/${codigo}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(employeeData)
-  });
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(errorText || "Erro ao atualizar funcionário.");
+
+  try {
+    
+    const response = await api.put(`/Funcionario/${codigo}`,employeeData);
+    return response.data;
+
+  } catch (error) {
+    
+    console.log(error)
   }
-  return response.json();
 };
 
 // Função para excluir um funcionário
