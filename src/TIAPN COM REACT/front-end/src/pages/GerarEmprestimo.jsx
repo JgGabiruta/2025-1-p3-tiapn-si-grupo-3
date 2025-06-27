@@ -3,15 +3,15 @@ import Nav from '../components/Header'
 import Aside from '../components/SideBar'
 import Forms from '../components/Forms'
 
-import appStylesHref from './../App.css?url';
+import gerarEmprestimoStylesHref from './../styles/emprestimo.css?url';
 
-const STYLESHEET_ID = 'gerar-emprestimo-styles';
+const STYLESHEET_ID = 'emprestimo-styles';
 function GerarEmprestimo(){
     useEffect(() => {
     const link = document.createElement('link');
     link.id = STYLESHEET_ID;
     link.rel = 'stylesheet';
-    link.href = appStylesHref;
+    link.href = gerarEmprestimoStylesHref;
     
     document.head.appendChild(link);
 

@@ -3,9 +3,9 @@ import Nav from './../components/Header.jsx'
 import Aside from './../components/SideBar.jsx'
 import PesquisaEmprestimo from '../components/PesquisaEmprestimo.jsx'
 
-import appStylesHref from './../App.css?url';
+import listarEmprestimoStylesHref from './../styles/emprestimo.css?url';
 
-const STYLESHEET_ID = 'lista-emprestimos-styles';
+const STYLESHEET_ID = 'emprestimo-styles';
 
 
 function ListaEmprestimos(){
@@ -13,7 +13,7 @@ function ListaEmprestimos(){
     const link = document.createElement('link');
     link.id = STYLESHEET_ID;
     link.rel = 'stylesheet';
-    link.href = appStylesHref;
+    link.href = listarEmprestimoStylesHref;
     
     document.head.appendChild(link);
 
