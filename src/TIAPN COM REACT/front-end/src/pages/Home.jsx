@@ -9,8 +9,18 @@ import homeStylesHref from './../styles/home.css?url';
 const STYLESHEET_ID = 'home-styles';
 
 export default function Home() {
-  const username = JSON.parse(localStorage.getItem('user'))?.nome || 'Usuário';
-
+  let username = 'Usuário'; // Define um valor padrão
+  try {
+    const userStored = localStorage.getItem('user');
+    // Verifica se o item existe e não é a string "undefined"
+    if (userStored && userStored !== 'undefined') {
+      const userData = JSON.parse(userStored);
+      username = userData?.nome || 'Usuário'; // Pega o nome ou usa o valor padrão
+    }
+  } catch (e) {
+    console.error("Falha ao analisar os dados do usuário do localStorage", e);
+  }
+  
    useEffect(() => {
     const link = document.createElement('link');
     link.id = STYLESHEET_ID;
