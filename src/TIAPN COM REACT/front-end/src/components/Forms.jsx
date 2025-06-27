@@ -1,4 +1,3 @@
-import './../styles/emprestimo.css'
 import Axios from 'axios'
 import { BsCalendar3 } from "react-icons/bs";
 import {useEffect, useState, useRef} from 'react'

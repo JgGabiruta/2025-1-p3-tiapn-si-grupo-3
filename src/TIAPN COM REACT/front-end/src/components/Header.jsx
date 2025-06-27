@@ -1,4 +1,3 @@
-import './../styles/home.css';
 import Logo from './../assets/Logo_Manejo_Laranja.png';
 import logoFP from './../assets/Logo_Fernandes_Prado.png';
 

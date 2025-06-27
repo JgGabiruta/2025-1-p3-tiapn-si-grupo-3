@@ -1,42 +1,44 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, useNavigate, Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
+// Importe os componentes para cada etapa do fluxo
 import AuthPage from "./components/AuthPage";
-import ForgotPassword from "./components/ForgotPassword";
-import ResetPassword from "./components/ResetPassword";
-
-import Agenda from "./pages/Agenda";
-import StockPage from "./pages/StockPage";
-
+import SubscriptionPage from './pages/SubscriptionPage';
 
 function App() {
-  // O estado principal controla se estamos na autenticação ou no dashboard
-  // Começamos na tela de 'Login'
-  const [appState, setAppState] = useState("Auth");
+  // Este estado controla em qual etapa o usuário está
+  const [userFlow, setUserFlow] = useState('AUTH'); // AUTH, SUBSCRIPTION, DASHBOARD
+  const navigate = useNavigate();
 
-  // Estado para controlar a PÁGINA ATIVA DENTRO do dashboard
-  const [activeDashboardPage, setActiveDashboardPage] = useState("Agenda");
+  // Função para ser chamada quando o login for bem-sucedido
+  const handleLoginSuccess = () => {
+    // Muda o fluxo para a etapa de assinatura
+    setUserFlow('SUBSCRIPTION');
+  };
 
-  // Estado para o token de redefinição de senha
-  const [resetToken, setResetToken] = useState(null);
+  // Função para ser chamada quando a assinatura for concluída
+  const handleSubscriptionSuccess = () => {
+    // Muda o fluxo para o painel principal
+    setUserFlow('DASHBOARD');
+  };
 
-  // Estado para a página ativa DENTRO da autenticação
-  const [activeAuthPage, setActiveAuthPage] = useState("Login");
-
-  // Efeito para verificar se a URL é de redefinição de senha
+  // Este efeito "escuta" as mudanças no estado do fluxo
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const token = params.get("token");
-    if (token && window.location.pathname.includes("reset-password")) {
-      setResetToken(token);
-      setActiveAuthPage("ResetPassword");
+    // Se o fluxo chegou em 'DASHBOARD', é hora de navegar para a Home
+    if (userFlow === 'DASHBOARD') {
+      navigate('/Home');
     }
-  }, []);
+  }, [userFlow, navigate]); // Roda sempre que userFlow ou navigate mudarem
 
-
-  return (
-    <AuthPage/>    
-  )
+  // Renderiza o componente correto baseado no estado do fluxo
+  switch (userFlow) {
+    case 'SUBSCRIPTION':
+      return <SubscriptionPage onSubscriptionSuccess={handleSubscriptionSuccess} />;
+    
+    case 'AUTH':
+    default:
+      return <AuthPage onLoginSuccess={handleLoginSuccess} />;
+  }
 }
 
 export default App;

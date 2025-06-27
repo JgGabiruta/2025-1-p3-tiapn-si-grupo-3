@@ -1,12 +1,33 @@
+import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Header';
 import Widget from '../components/Widget';
 import ReminderList from '../components/ReminderList';
 import Sidebar from '../components/SideBar';
-import './../styles/home.css'
+
+import homeStylesHref from './../styles/home.css?url';
+
+const STYLESHEET_ID = 'home-styles';
 
 
 export default function Home() {
   const username = JSON.parse(localStorage.getItem('user'))?.nome || 'Usuário';
+
+   useEffect(() => {
+    const link = document.createElement('link');
+    link.id = STYLESHEET_ID;
+    link.rel = 'stylesheet';
+    link.href = homeStylesHref;
+    
+    document.head.appendChild(link);
+
+    // Função de limpeza que remove o CSS
+    return () => {
+      const styleElement = document.getElementById(STYLESHEET_ID);
+      if (styleElement) {
+        document.head.removeChild(styleElement);
+      }
+    };
+  }, []);
   
   
 

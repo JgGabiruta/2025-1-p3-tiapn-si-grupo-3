@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // Recebe onLoginSuccess e onNavigate como props
-function SignInForm() {
+function SignInForm({onLoginSuccess}) {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [message, setMessage] = useState('');
@@ -34,7 +34,7 @@ function SignInForm() {
         setMessageType('success');
         localStorage.setItem('user', JSON.stringify(data.user));
         // Chama a função de sucesso do App.jsx em vez de navegar diretamente
-        navigate('/Home');
+        onLoginSuccess();
 
       } else {
         setMessage(data.error || 'Credenciais inválidas.');

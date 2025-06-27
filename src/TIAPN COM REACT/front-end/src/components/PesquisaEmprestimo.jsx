@@ -1,4 +1,3 @@
-import './../styles/emprestimo.css'
 import Axios from 'axios'
 import {useEffect, useState, useRef} from 'react'
 import {useNavigate} from "react-router-dom"
