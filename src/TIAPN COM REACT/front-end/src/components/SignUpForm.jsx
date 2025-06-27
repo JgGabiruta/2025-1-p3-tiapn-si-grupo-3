@@ -143,64 +143,63 @@ function SignUpForm({ onSignUpSuccess }) {
    * Lida com o envio final do formulário após todas as etapas.
    * @param {Event} e - O evento de envio do formulário.
    */
- const handleSubmit = async (e) => {
+ // Dentro do componente SignUpForm
+
+const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage('');
     setMessageType('');
 
-    // Validação final (pode manter como está)
+    // Validação final, pode manter se quiser
     if (
       !formData.nome || !formData.email || !formData.senha ||
       !formData.cargo || !formData.cpf || !formData.telefone || !formData.nascimento ||
       !formData.rua || !formData.numero || !formData.cidade
     ) {
-      setMessage('Por favor, preencha todos os campos do formulário para finalizar o cadastro.');
+      setMessage('Por favor, preencha todos os campos para finalizar o cadastro.');
       setMessageType('error');
       return;
     }
 
     try {
       const dataToSend = {
-          nome: formData.nome,
-          email: formData.email,
-          senha: formData.senha,
-          cargo: formData.cargo,
-          cpf: formData.cpf.replace(/\D/g, ''),
-          telefone: formData.telefone.replace(/\D/g, ''),
-          nascimento: formData.nascimento,
-          rua: formData.rua,
-          numero: formData.numero,
-          cidade: formData.cidade,
-      }
-      
-      // Faz uma ÚNICA chamada para a nova rota /api/register
-      const response = await api.post('/auth/register', dataToSend);
+        nome: formData.nome,
+        email: formData.email,
+        senha: formData.senha,
+        cargo: formData.cargo,
+        cpf: formData.cpf.replace(/\D/g, ''), // Limpa o CPF
+        telefone: formData.telefone.replace(/\D/g, ''), // Limpa o telefone
+        nascimento: formData.nascimento,
+        rua: formData.rua,
+        numero: formData.numero,
+        cidade: formData.cidade,
+      };
 
-      // Se a resposta não for OK (ex: 409 - e-mail duplicado)
-      if (!response.ok) {
-        const err = await response.json();
-        setMessage(err.error || 'Ocorreu um erro no cadastro.'); // Mostra o erro do backend
-        setMessageType('error');
-        return;
-      }
+      // AQUI USAMOS O 'api.post' que já tem o endereço certo do Render
+      await api.post('/auth/register', dataToSend);
 
-      // Se chegou aqui, o cadastro foi um sucesso
       setMessage('Cadastro realizado com sucesso!');
       setMessageType('success');
+
+      // Limpa o formulário e chama a função de sucesso
+      // (essa lógica você já tinha e estava correta)
       setFormData({
-        nome: '', email: '', senha: '', cargo: '', cpf: '',
+        nome: '', email: '', senha: '', confirmarSenha: '', cargo: '', cpf: '',
         telefone: '', nascimento: '', rua: '', numero: '', cidade: ''
       });
       setCurrentStep(0);
-      onSignUpSuccess();
+      if(onSignUpSuccess) {
+        onSignUpSuccess();
+      }
 
-    } catch (error) {
-      const errorMsg = err.response?.data?.error || 'Erro ao realizar cadastro.';
+    } catch (err) { // Aqui a variável se chama 'err'
+      // E usamos 'err' de forma consistente aqui dentro
+      const errorMsg = err.response?.data?.error || 'Erro ao realizar o cadastro.';
       setMessage(errorMsg);
       setMessageType('error');
-      console.error("Erro na requisição:", err);
+      console.error("Erro na requisição de cadastro:", err);
     }
-  };
+};
 
   return (
     <div className="form-container sign-up-container">
