@@ -91,7 +91,12 @@ router.post('/login', async (req, res) => {
         console.log(`[LOGIN SUCESSO] Login bem-sucedido para: ${email}`);
         return res.json({
             message: 'Login de administrador bem-sucedido.',
-            user: { id: admin.id, nome: admin.nome, email: admin.email, tipo: 'administrador' }
+        user: { 
+            id: admin.id, 
+            nome: admin.nome, 
+            email: admin.email, 
+            tipo: 'administrador' 
+         }
         });
 
     } catch (err) {
