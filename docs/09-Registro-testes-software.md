@@ -21,6 +21,10 @@ Para cada caso de teste definido no <a href="08-Plano-testes-software.md"> Plano
 | Requisito associado | RF-018 O sistema deverá permitir a criação de lembretes de tarefas a serem feitas. |
 | Registro de evidência |  [Teste Criação Lembrete](https://drive.google.com/file/d/1OSIfO9uy3BSxYGjahiTFpTFONgi1Ev-U/view?usp=sharing) |
 
+| **Caso de teste** 	| **CT-002 – Criar Conta** 	|
+|:---:	|:---:	|
+| Requisito associado | RF-001 A empresa deve criar um usuário e senha. |
+| Registro de evidência |  [Teste Criação Conta](https://drive.google.com/file/d/1-Ibsfg-szzXgZ5Lhhxpgwhbt90aMl39S/view?usp=sharing) |
 
 > **Links úteis**:
 > - [Screencast: entenda o que é e como gravar vídeos com ele](https://rockcontent.com/br/blog/screencast/) 
