@@ -21,13 +21,13 @@ app.use('/api/auth', authRoutes);
 
 app.use('/api', apiRoutes);
 
-
+/* COMENTANDO PARA HOSPEDAR
 app.use(express.static(path.join(__dirname, '..', 'front', 'dist'))); // Assumindo que a pasta do build é 'dist'
 
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'front', 'dist', 'index.html'));
-});
+});*/
 
 // 5. Inicia o servidor
 const PORT = process.env.PORT || 3000;
