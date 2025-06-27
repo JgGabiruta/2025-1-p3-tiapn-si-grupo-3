@@ -24,14 +24,41 @@ Paralelamente ao desenvolvimento técnico, o projeto busca aprimorar as competê
 * Amália Soares Vieira de Vasconcelos 
 
 ## Instruções de utilização
+### Sistema de Gestão de Ferramentas e Funcionários
 
-Assim que a primeira versão do sistema estiver disponível, deverá complementar com as instruções de utilização. Descreva como instalar eventuais dependências e como executar a aplicação.
+Este projeto tem como objetivo facilitar o controle de ferramentas, lembretes, agenda e gerenciamento de funcionários em uma empresa. A aplicação é composta por um front-end em **React** e um back-end em **Node.js** com banco de dados **MySQL**.
 
-Não deixe de informar o link onde a aplicação estará disponível para acesso (por exemplo: https://adota-pet.herokuapp.com/src/index.html).
+---
 
-Se houver usuário de teste, o login e a senha também deverão ser informados aqui (por exemplo: usuário - admin / senha - admin).
+#### 💻 Funcionalidades
 
-O link e o usuário/senha descritos acima são apenas exemplos de como tais informações deverão ser apresentadas.
+- Cadastro e visualização de lembretes
+- Gestão de funcionários
+- Controle de ferramentas em estoque
+- Acesso rápido a agenda e departamentos
+- Interface amigável e responsiva
+
+---
+
+#### 🚀 Instalação e Execução
+
+##### Requisitos
+
+- Node.js (v16 ou superior)
+- MySQL Server
+- Gerenciador de pacotes `npm`
+
+Para iniciar, o usuário deve clonar o repositório e instalar as dependências de cada parte. No terminal, acesse primeiro a pasta front e execute o comando npm install para instalar as bibliotecas do React. Em seguida, vá para a pasta back e rode também npm install para instalar as dependências do servidor Node.js.
+
+- Com tudo instalado e configurado, o servidor pode ser iniciado com o comando node index.js dentro da pasta back. Isso ativará a API na porta 3000, disponível localmente em http://localhost:3000.
+- O front-end pode ser iniciado na pasta front com o comando npm run dev, e ficará acessível através do navegador no endereço http://localhost:5173.
+
+- Link da Hospedagem ( https://adota-pet.herokuapp.com/src/index.html).
+
+#### 🚀 Credenciais de Teste
+ - Ao rodar o projeto pela primeira vez, é conveniente acessar a tela de login e utilizar as seguintes credenciais de teste:
+ - Email: admin@dominio.com
+ - Senha: 123456
 
 # Documentação
 
