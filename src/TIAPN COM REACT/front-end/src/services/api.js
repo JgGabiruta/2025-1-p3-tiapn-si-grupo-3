@@ -145,18 +145,19 @@ export const getLembrete = async () => {
   }
 };
 
-export const postLembrete = async (observacao, administrador_codigo) => {
+export const postLembrete = async ({ observacao, administrador_codigo }) => {
   try {
-    const response = await api.post(
-      `/Lembrete`,
+    const response = await api.post('/Lembrete', {
       observacao,
       administrador_codigo
-    );
-    return response.data;
+    });
+    return response; // importante!
   } catch (erro) {
-    console.log(erro);
+    console.log('Erro ao postar lembrete:', erro);
+    throw erro;
   }
 };
+
 
 export const deleteLembrete = async (codigo) => {
   try {
