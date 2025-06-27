@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import api from '../services/api';
 // Recebe onLoginSuccess e onNavigate como props
 function SignInForm({onLoginSuccess}) {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState('');
-  const backendUrl = 'http://localhost:3000'; // Corrigido para a porta do backend
+//  const backendUrl = 'http://localhost:3000'; // Corrigido para a porta do backend
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,12 +22,9 @@ function SignInForm({onLoginSuccess}) {
     }
 
     try {
-      const response = await fetch(`${backendUrl}/api/auth/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, senha })
-      });
-      const data = await response.json();
+      const response = await api.post('/auth/login', { email, senha });
+      
+      const data = response.data;
 
       if (response.ok) {
         setMessage('Login bem-sucedido!');
@@ -40,9 +38,11 @@ function SignInForm({onLoginSuccess}) {
         setMessageType('error');
       }
     } catch (err) {
-      console.error("Erro na requisição:", err);
-      setMessage('Erro ao conectar ao servidor. Tente novamente.');
+
+      const errorMsg = err.response?.data?.error || 'Erro ao conectar ao servidor. Tente novamente.';
+      setMessage(errorMsg);
       setMessageType('error');
+      console.error("Erro na requisição:", err);
     }
   };
 
