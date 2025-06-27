@@ -37,6 +37,14 @@ Por exemplo:
 | Critério de êxito | - Lembrete gerado com sucesso. |
 | Responsável pela elaboração do caso de teste | João Felipe da Silva Prado. |
 
+| **Caso de teste**  | **CT-002 – Criar Conta**  |
+|:---: |:---: |
+| Requisito associado | RF-001	A empresa deve criar um usuário e senha. |
+| Objetivo do teste | Verificar se o usuário consegue cadastrar a conta. |
+| Passos | - Clicar em "Criar conta" <br> - Preencher os campos obrigatórios (e-mail, nome completo, celular, CPF, senha, cargo, data de nascimento, confirmação de senha, rua, numero e cidade) <br> - Clicar em "Criar Conta" |
+| Critério de êxito | - Usuário será direcionado para a tela de login para logar na conta criada. |
+| Responsável pela elaboração do caso de teste | João Gabriel Soares Da Silva Franco. |
+
 ## Ferramentas de testes (opcional)
 
 Comente sobre as ferramentas de testes utilizadas.
