@@ -9,7 +9,7 @@ const STYLESHEET_ID = 'tailwind-dynamic-subscription-styles';
 
 const PaymentOption = ({ title, children, isOpen = false }) => (
   <div className="mb-4">
-    <div className={`flex justify-between items-center p-4 bg-violet-600 text-white font-bold cursor-pointer ${isOpen ? 'rounded-t-lg' : 'rounded-lg'}`}>
+    <div className={`flex justify-between items-center p-4 bg-yellow-400 text-white font-bold cursor-pointer ${isOpen ? 'rounded-t-lg' : 'rounded-lg'}`}>
       <span>{title}</span>
       <ChevronUpIcon className={`h-5 w-5 transition-transform ${isOpen ? '' : 'transform rotate-180'}`} />
     </div>
@@ -48,34 +48,38 @@ const SubscriptionPage = ({ onSubscriptionSuccess }) => {
 
   return (
     <div className="min-h-screen flex font-sans">
-      <div className="w-1/2 bg-yellow-400 flex flex-col items-center justify-center p-12 text-white">
+      {/* LADO ESQUERDO AGORA ROXO */}
+      <div className="w-1/2 bg-violet-900 flex flex-col items-center justify-center p-12 text-yellow-400">
         <div className="max-w-md flex flex-col items-center text-center">
           <div className="flex flex-col items-center space-y-2">
             <p className="text-2xl">Faça uma</p>
             <h1 className="text-8xl font-extrabold leading-none">ASSINATURA</h1>
             <p className="text-3xl font-bold">Para continuar !</p>
           </div>
-          <p className="mt-6 text-xl">
+          <p className="mt-6 text-xl text-white">
             Realize o pagamento e use nossos serviços
           </p>
-          <img src="/imgs/Logo-Manejo_Laranja.png" alt="Logo Manejo" className="h-25 mt-10 bg-violet-900" />
+          {/* Logo agora com fundo amarelo para contraste */}
+          <img src="/imgs/Logo.png" alt="Logo Manejo" className="h-50 mt-10 p-2 rounded" />
         </div>
       </div>
 
-      <div className="w-1/2 bg-violet-900 flex items-center justify-center p-12">
+      {/* LADO DIREITO AGORA AMARELO */}
+      <div className="w-1/2 bg-yellow-400 flex items-center justify-center p-12">
         <div className="w-full max-w-lg relative">
-          <div className="bg-violet-900 text-white text-2xl font-bold p-4 rounded-xl text-center shadow-lg w-3/4 mx-auto mb-8 -mt-16 z-10 relative">
+          {/* Banner com cores invertidas */}
+          <div className="bg-yellow-400 text-slate-800 text-2xl font-bold p-4 rounded-xl text-center shadow-lg w-3/4 mx-auto mb-8 -mt-16 z-10 relative">
             Forma de Pagamento
           </div>
-          <div className="bg-violet-800 p-8 rounded-2xl border-4 border-yellow-400 shadow-2xl">
-            <div className="bg-violet-900 p-6 rounded-lg">
-              <h2 className="text-white text-xl font-bold mb-4">Escolha a Forma de Pagamento</h2>
+          {/* Caixa de pagamento com fundo branco e borda roxa */}
+          <div className="bg-white p-8 rounded-2xl border-4 border-gray-300 shadow-2xl">
+            <div className="bg-gray-50 p-6 rounded-lg">
+              <h2 className="text-slate-800 text-xl font-bold mb-4">Escolha a Forma de Pagamento</h2>
               
               <PaymentOption title="Cartão de Crédito" isOpen={true}>
                 <p className="text-gray-600 text-sm mb-6">
                   Digite os detalhes do seu cartão de crédito para confirmar a compra.
                 </p>
-                {/* FORMULÁRIO RESTAURADO AQUI */}
                 <form className="space-y-4">
                   <div>
                     <label htmlFor="card-number" className="block text-sm font-medium text-gray-700">Número do Cartão</label>
@@ -118,7 +122,7 @@ const SubscriptionPage = ({ onSubscriptionSuccess }) => {
                   <button 
                     type="button" 
                     onClick={handleConfirmPurchase} 
-                    className="w-full bg-yellow-400 text-slate-800 font-bold py-3 px-4 rounded-lg hover:bg-yellow-500 transition-colors mt-6"
+                    className="w-full bg-yellow-400 text-white font-bold py-3 px-4 rounded-lg hover:bg-violet-900 transition-colors mt-6"
                   >
                     Confirmar compra
                   </button>
