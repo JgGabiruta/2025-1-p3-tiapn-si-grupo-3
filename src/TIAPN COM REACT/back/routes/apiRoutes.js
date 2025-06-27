@@ -383,25 +383,28 @@ router.post('/funcionario', async (req, res) => {
 
   try {
     const [result] = await db.query(
-      `INSERT INTO Funcionario
-         (Cargo, Nome, Telefone, Data_Nascimento, Rua, Numero, Cidade, CPF, Departamento_Codigo)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      `INSERT INTO Funcionario (Cargo, Nome, Telefone, Data_Nascimento, Rua, Numero, Cidade, CPF,Departamento_Codigo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       
-      [
-        Cargo,
+      [Cargo,
         Nome,
         Telefone || null,
         dataFormatada,
         Rua || null,
         Numero || null,
         Cidade || null,
-        CPF,
-        Departamento_Codigo || null
-      ]
+        CPF,Departamento_Codigo || null]
     );
+
+    const [result2] = await db.query(`SELECT codigo FROM Funcionario WHERE codigo = (SELECT MAX(codigo) FROM Funcionario);`);
+
+    let funcionario_codigo = result2[0].codigo
+
+    const [result3] = await db.query(`INSERT INTO Operario (saldo, funcionario_codigo) VALUES (?,?);`, [0, funcionario_codigo])
+
     return res
       .status(201)
       .json({ message: 'Funcionário cadastrado com sucesso.', id: result.insertId });
+
   } catch (err) {
     console.error('Erro ao cadastrar funcionário:', err);
   
