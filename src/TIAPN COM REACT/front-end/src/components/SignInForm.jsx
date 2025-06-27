@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
 // Recebe onLoginSuccess e onNavigate como props
 function SignInForm({onLoginSuccess}) {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [message, setMessage] = useState('');
-  const navigate = useNavigate();
   const [messageType, setMessageType] = useState('');
   const backendUrl = 'http://localhost:3000'; // Corrigido para a porta do backend
 
@@ -55,7 +54,7 @@ function SignInForm({onLoginSuccess}) {
         <input type="password" placeholder="Senha" value={senha} onChange={(e) => setSenha(e.target.value)} required />
         <button type="submit">Entrar</button>
         {/* Link para "Esqueceu a senha?" agora chama a prop onNavigate */}
-        {/*<p><a><Link to = "/forgot-password">Esqueceu a senha?</Link></a></p> */}
+        <p><Link to = "/RecuperarSenha">Esqueceu a senha?</Link></p>
         {message && (
           <p className={`message-box ${messageType === 'success' ? 'message-success' : 'message-error'}`}>
             {message}

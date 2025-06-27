@@ -9,6 +9,8 @@ import GerarEmprestimo from './pages/GerarEmprestimo.jsx'
 import ListaEmprestimos from './pages/ListaEmprestimos.jsx'
 import Agenda from './pages/Agenda.jsx';
 import Funcionarios from './pages/Funcionarios.jsx'
+import ForgotPassword from './components/ForgotPassword.jsx';
+import ResetPassword from './components/ResetPassword.jsx';
 
 // Cria a raiz da aplicação usando a API moderna do React 18
 //const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -43,6 +45,12 @@ const router = createBrowserRouter([
   },{
     path: "/Funcionarios",
     element: <Funcionarios/>
+  },{
+    path: "/RecuperarSenha",
+    element: <ForgotPassword/>
+  },{
+    path: "/TrocarSenha",
+    element: <ResetPassword/>
   }
 ])
 

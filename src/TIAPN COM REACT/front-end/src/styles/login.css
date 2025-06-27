@@ -33,7 +33,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  transition: all 0.6s ease-in-out;
+  transition: all 6ms ease-in-out;
 }
 .form-container form {
   position: relative;

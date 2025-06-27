@@ -4,10 +4,10 @@ import React, { useState, useEffect } from 'react'; // ✅ Passo 1: Adicionado o
 
 // ✅ Passo 2: Importando a URL do CSS, em vez do arquivo inteiro
 import forgotStylesHref from '../styles/forgot.css?url';
-
+import { Link } from 'react-router-dom';
 // Recebe onNavigate e o token como props
 function ResetPassword({ onNavigate, token }) {
-  const backendUrl = 'http://localhost:3001';
+  const backendUrl = 'http://localhost:3000';
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -85,7 +85,9 @@ function ResetPassword({ onNavigate, token }) {
         <input type="password" placeholder="Nova senha" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} required />
         <input type="password" placeholder="Confirme a nova senha" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
         <button type="submit" className='forgotbtn'>Redefinir</button>
-        <button type="button" className='forgotbtn' onClick={() => onNavigate('Login')}>Voltar</button>
+        <Link to="/">
+          <button type="button" className='forgotbtn'>Voltar</button>
+        </Link>
       </form>
       {message && (
         <p className={`message-box ${messageType === 'success' ? 'message-success' : 'message-error'}`}>

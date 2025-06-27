@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 
 // Passo 1: Importe a URL do CSS do formulário de "esqueci a senha"
 import forgotStylesHref from '../styles/forgot.css?url';
+import { Link } from 'react-router-dom';
 
 function ForgotPassword({ onNavigate }) {
 
@@ -25,10 +26,6 @@ function ForgotPassword({ onNavigate }) {
     };
   }, []); // Array vazio para rodar apenas ao montar/desmontar
 
-  const handleBackToLogin = (e) => {
-    e.preventDefault();
-    onNavigate('Login');
-  };
 
   return (
     <div className="container">
@@ -37,9 +34,11 @@ function ForgotPassword({ onNavigate }) {
       <form>
         <input type="email" placeholder="Seu e-mail" required />
         <button type="submit">Enviar Link</button>
-        <button type="button" className="forgotbtn" onClick={handleBackToLogin} style={{ marginTop: '10px', backgroundColor: '#6c757d' }}>
+        <Link to="/">
+        <button type="button" className="forgotbtn" style={{ marginTop: '10px'}}>
           Voltar para o Login
         </button>
+        </Link>
       </form>
     </div>
   );

@@ -18,6 +18,7 @@ function SignUpForm({ onSignUpSuccess }) {
     nome: '',
     email: '',
     senha: '',
+    confirmarSenha: '',
     cargo: '',
     cpf: '',
     telefone: '',
@@ -100,6 +101,11 @@ function SignUpForm({ onSignUpSuccess }) {
         setMessageType('error');
         return;
       }
+      if (formData.senha !== formData.confirmarSenha) {
+        setMessage('As senhas não coincidem. Tente Novamente.');
+        setMessageType('error');
+        return;
+      }
     }
     // Validação da Etapa 2
     else if (currentStep === 1) {
@@ -155,7 +161,7 @@ function SignUpForm({ onSignUpSuccess }) {
 
     try {
       // Faz uma ÚNICA chamada para a nova rota /api/register
-      const response = await fetch(`${backendUrl}/api/register`, {
+      const response = await fetch(`${backendUrl}/api/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         // Envia todos os dados do formulário de uma vez
@@ -225,6 +231,14 @@ function SignUpForm({ onSignUpSuccess }) {
             name="senha"
             placeholder="Senha"
             value={formData.senha}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="password"
+            name="confirmarSenha"
+            placeholder="Confirmar Senha"
+            value={formData.confirmarSenha}
             onChange={handleChange}
             required
           />
