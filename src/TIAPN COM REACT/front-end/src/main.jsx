@@ -8,6 +8,7 @@ import Emprestimo from './pages/Emprestimo.jsx'
 import GerarEmprestimo from './pages/GerarEmprestimo.jsx'
 import ListaEmprestimos from './pages/ListaEmprestimos.jsx'
 import Agenda from './pages/Agenda.jsx';
+import Funcionarios from './pages/Funcionarios.jsx'
 
 // Cria a raiz da aplicação usando a API moderna do React 18
 //const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -39,6 +40,9 @@ const router = createBrowserRouter([
   },{
      path: "/Agenda",
     element: <Agenda/>
+  },{
+    path: "/Funcionarios",
+    element: <Funcionarios/>
   }
 ])
 

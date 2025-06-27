@@ -335,4 +335,29 @@ const tabelas = [
 
 tabelas.forEach(criarRotaParaTabela);
 
+
+
+//Rota abrir funcionario
+
+router.get('/funcionario/:codigo', async (req, res) => {
+  const { codigo } = req.params;
+  console.log("teste")
+  try {
+    
+    const [rows] = await db.query('SELECT * FROM Funcionario WHERE Codigo = ?', [codigo]);
+
+   
+    if (rows.length === 0) {
+      return res.status(404).json({ error: 'Funcionário não encontrado.' });
+    }
+
+   
+    res.json(rows[0]);
+
+  } catch (err) {
+    console.error('Erro ao buscar funcionário:', err);
+    res.status(500).json({ error: 'Erro interno ao buscar dados do funcionário.' });
+  }
+});
+
 module.exports = router;

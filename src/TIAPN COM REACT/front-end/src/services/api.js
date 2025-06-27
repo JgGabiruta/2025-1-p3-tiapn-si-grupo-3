@@ -51,23 +51,23 @@ export const deleteFerramenta = async (codigo) => {
 };
 
 export const getEmprestimos = async () => {
-    try {
-        const response = await axios.get(`${API_BASE_URL}/Emprestimos`);
-        return response.data;
-    } catch (error) {
-        console.error('Erro ao buscar empréstimos:', error);
-        throw error; // Propaga o erro para ser tratado no componente
-    }
+  try {
+    const response = await axios.get(`${API_BASE_URL}/Emprestimos`);
+    return response.data;
+  } catch (error) {
+    console.error('Erro ao buscar empréstimos:', error);
+    throw error; // Propaga o erro para ser tratado no componente
+  }
 };
 
 export const getEventos = async () => {
-    try {
-        const response = await axios.get(`${API_BASE_URL}/Eventos`);
-        return response.data;
-    } catch (error) {
-        console.error('Erro ao eventos:', error);
-        throw error;
-    }
+  try {
+    const response = await axios.get(`${API_BASE_URL}/Eventos`);
+    return response.data;
+  } catch (error) {
+    console.error('Erro ao eventos:', error);
+    throw error;
+  }
 };
 
 export const addEvento = async (eventoData) => {
@@ -102,13 +102,13 @@ export const deleteEvento = async (codigo) => {
 
 // Funções para outras tabelas (exemplo)
 export const getDepartamentos = async () => {
-    try {
-        const response = await api.get('/Departamento');
-        return response.data;
-    } catch (error) {
-        console.error('Erro ao buscar departamentos:', error);
-        throw error;
-    }
+  try {
+    const response = await api.get('/Departamento');
+    return response.data;
+  } catch (error) {
+    console.error('Erro ao buscar departamentos:', error);
+    throw error;
+  }
 };
 
 export const getFuncionarios = async () => {
@@ -118,7 +118,7 @@ export const getFuncionarios = async () => {
     const response = await api.get('/Funcionario');
     return response.data;
 
-  }catch (error) {
+  } catch (error) {
     console.error('Erro ao buscar funcionários:', error);
     throw error;
   }
@@ -129,12 +129,12 @@ export const getFuncionarios = async () => {
 
 export const getLembrete = async () => {
 
-  try{
+  try {
 
     const response = await api.get('/Lembrete');
     return response.data;
 
-  } catch(error){
+  } catch (error) {
 
     console.error('Erro ao buscar lembretes aqui:', error);
     throw error;
@@ -143,95 +143,162 @@ export const getLembrete = async () => {
 
 export const postLembrete = async (observacao, administrador_codigo) => {
 
-  try{
+  try {
 
-  const response = await api.post(`/Lembrete`, observacao, administrador_codigo);
-  return response.data;
+    const response = await api.post(`/Lembrete`, observacao, administrador_codigo);
+    return response.data;
 
-  } catch(erro){
+  } catch (erro) {
     console.log(erro)
   }
 }
 
 export const deleteLembrete = async (codigo) => {
 
-  try{
+  try {
 
     const response = await api.delete(`/Lembrete/${codigo}`);
 
-  }catch(err){
+  } catch (err) {
 
-  console.err('Erro ao deletar lembrete:', err);
+    console.err('Erro ao deletar lembrete:', err);
     throw err;
   }
 }
 
 export const getEmprestimo = async () => {
 
-    try {
+  try {
 
-      const response = await api.get('/ListaEmprestimos')
-      return response.data
+    const response = await api.get('/ListaEmprestimos')
+    return response.data
 
-    } catch (error) {
+  } catch (error) {
 
-      console.error('Erro ao buscar emprestimo atrasado:', error);
-      throw error;
-    }
+    console.error('Erro ao buscar emprestimo atrasado:', error);
+    throw error;
+  }
 }
 
 export const getEmprestimoAtrasado = async () => {
 
-    try {
+  try {
 
-      const response = await api.get('/EmprestimoAtrasado')
-      return response.data
+    const response = await api.get('/EmprestimoAtrasado')
+    return response.data
 
-    } catch (error) {
+  } catch (error) {
 
-      console.error('Erro ao buscar emprestimo atrasado:', error);
-      throw error;
-    }
+    console.error('Erro ao buscar emprestimo atrasado:', error);
+    throw error;
+  }
 }
 
 export const getEmprestimoFuncionario = async () => {
 
-    try {
+  try {
 
-      const response = await api.get('/EmprestimoFuncionario')
-      return response.data
+    const response = await api.get('/EmprestimoFuncionario')
+    return response.data
 
-    } catch (error) {
+  } catch (error) {
 
-      console.error('Erro ao buscar emprestimo:', error);
-      throw error;
-    }
+    console.error('Erro ao buscar emprestimo:', error);
+    throw error;
+  }
 }
 
 export const deleteEmprestimo = async (codigo) => {
 
-  try{
+  try {
 
     const response = await api.delete(`/Emprestimo/${codigo}`);
 
-  }catch(err){
+  } catch (err) {
 
-  console.log('Erro ao deletar emprestimo:', err);
+    console.log('Erro ao deletar emprestimo:', err);
     throw err;
   }
 }
 
 export const postEmprestimo = async (req, res) => {
 
-  try{
+  try {
 
     const response = await api.post(`/Emprestimo`, req);
     return response.data;
 
-  } catch(erro){
-    
+  } catch (erro) {
+
     console.log(erro)
   }
 }
+const API_URL = "http://localhost:3000/funcionario";
+
+// Função para buscar todos os funcionários
+export const getEmployees = async () => {
+
+  try {
+    const response = await api.get(`/Funcionario`)
+    // if (!response.ok) throw new Error("Erro ao buscar funcionários.");
+    return response.data
+  } catch (error) {
+    console.error('Erro ao buscar funcionario:', error);
+    throw error;
+  }
+};
+
+// Função para buscar um único funcionário pelo código
+export const getEmployeeById = async (codigo) => {
+  try {
+    const response = await api.get(`/Funcionario/${codigo}`);
+    return response.data;
+
+  } catch (error) {
+    
+    console.error('Erro ao buscar funcionario:', error);
+    throw error;
+  }
+};
+
+// Função para criar um novo funcionário
+export const createEmployee = async (employeeData) => {
+  const response = await fetch(API_URL, {
+    method: 'POST',
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(employeeData)
+  });
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(errorText || "Erro ao salvar funcionário.");
+  }
+  return response.json();
+};
+
+// Função para atualizar um funcionário
+export const updateEmployee = async (codigo, employeeData) => {
+  const response = await fetch(`${API_URL}/${codigo}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(employeeData)
+  });
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(errorText || "Erro ao atualizar funcionário.");
+  }
+  return response.json();
+};
+
+// Função para excluir um funcionário
+export const deleteEmployee = async (codigo) => {
+  const response = await fetch(`${API_URL}/${codigo}`, {
+    method: "DELETE"
+  });
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(errorText || "Erro ao excluir funcionário.");
+  }
+  return response.json();
+};
 
 export default api;
