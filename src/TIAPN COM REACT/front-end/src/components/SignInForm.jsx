@@ -22,29 +22,25 @@ function SignInForm({onLoginSuccess}) {
     }
 
     try {
+      // 1. A chamada com api.post está correta!
       const response = await api.post('/auth/login', { email, senha });
       
+      // 2. Se a linha acima não deu erro, o login foi um sucesso.
       const data = response.data;
+      
+      setMessage('Login bem-sucedido!');
+      setMessageType('success');
+      localStorage.setItem('user', JSON.stringify(data.user));
+      onLoginSuccess(); // Chama a função para navegar para a próxima página
 
-      if (response.ok) {
-        setMessage('Login bem-sucedido!');
-        setMessageType('success');
-        localStorage.setItem('user', JSON.stringify(data.user));
-        // Chama a função de sucesso do App.jsx em vez de navegar diretamente
-        onLoginSuccess();
-
-      } else {
-        setMessage(data.error || 'Credenciais inválidas.');
-        setMessageType('error');
-      }
     } catch (err) {
-
-      const errorMsg = err.response?.data?.error || 'Erro ao conectar ao servidor. Tente novamente.';
-      setMessage(errorMsg);
+      // 3. Se o login falhou (senha errada, etc.), o código cairá AQUI.
+      const errorMsg = err.response?.data?.error || 'Erro ao conectar ao servidor.';
+      setMessage(errorMsg); // Mostra a mensagem de erro vinda do back-end ("Credenciais inválidas.")
       setMessageType('error');
-      console.error("Erro na requisição:", err);
+      console.error("Erro na requisição de login:", err);
     }
-  };
+};
 
   return (
     <div className="form-container sign-in-container">
