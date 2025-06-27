@@ -118,7 +118,7 @@ Com base na análise das personas, foram identificadas as seguintes histórias d
 | RF-007 | O sistema deverá ter uma tela para realizar empréstimos, onde será necessário adicionar o código do cliente, o objeto, a quantidade de objetos e a data do empréstimo, assim como a data para devolução. | ALTA |
 | RF-008 | O sistema deverá registrar o código, nome e CPF do cliente, a quantidade de objetos emprestados, os objetos, a data do empréstimo e a data de devolução. | MÉDIA |
 | RF-009 | O sistema deverá aceitar a devolução de emprestimos | ALTA |
-| RF-010 | O sistema deverá mostrar a lista de objetos emprestados com o código do cliente em um dia específico. | ALTA |
+| RF-010 | O sistema deverá mostrar a lista de objetos emprestados. | ALTA |
 | RF-011 | A empresa deverá conseguir editar o nome dos departamentos e dos objetos. | MÉDIA |
 | RF-012 | A empresa deverá conseguir excluir departamentos e objetos. | MÉDIA |
 | RF-013 | A empresa deverá conseguir apagar clientes. | MÉDIA |
