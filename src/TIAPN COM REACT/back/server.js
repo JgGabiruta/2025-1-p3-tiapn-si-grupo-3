@@ -5,7 +5,7 @@ const cors = require('cors');
 const path = require('path');
 require('dotenv').config(); 
 
-
+// Forçando commit do back
 const authRoutes = require('./routes/authRoutes');
 const apiRoutes = require('./routes/apiRoutes');
 
