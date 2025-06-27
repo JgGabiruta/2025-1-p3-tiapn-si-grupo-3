@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import api from '../services/api';
 
 /**
  * Componente do formulário de cadastro em múltiplas etapas.
@@ -8,7 +9,6 @@ import React, { useState } from 'react';
  */
 
 function SignUpForm({ onSignUpSuccess }) {
-  const backendUrl = 'http://localhost:3000';
   const [currentStep, setCurrentStep] = useState(0); // Controla a etapa atual do formulário
   const [message, setMessage] = useState(''); // Estado para mensagens de feedback
   const [messageType, setMessageType] = useState(''); // 'success' ou 'error'
@@ -160,12 +160,7 @@ function SignUpForm({ onSignUpSuccess }) {
     }
 
     try {
-      // Faz uma ÚNICA chamada para a nova rota /api/register
-      const response = await fetch(`${backendUrl}/api/auth/register`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        // Envia todos os dados do formulário de uma vez
-        body: JSON.stringify({
+      const dataToSend = {
           nome: formData.nome,
           email: formData.email,
           senha: formData.senha,
@@ -176,8 +171,10 @@ function SignUpForm({ onSignUpSuccess }) {
           rua: formData.rua,
           numero: formData.numero,
           cidade: formData.cidade,
-        })
-      });
+      }
+      
+      // Faz uma ÚNICA chamada para a nova rota /api/register
+      const response = await api.post('/auth/register', dataToSend);
 
       // Se a resposta não for OK (ex: 409 - e-mail duplicado)
       if (!response.ok) {
@@ -198,9 +195,10 @@ function SignUpForm({ onSignUpSuccess }) {
       onSignUpSuccess();
 
     } catch (error) {
-      console.error("Erro na requisição:", error);
-      setMessage('Erro ao conectar ao servidor. Verifique sua conexão ou tente novamente mais tarde.');
+      const errorMsg = err.response?.data?.error || 'Erro ao realizar cadastro.';
+      setMessage(errorMsg);
       setMessageType('error');
+      console.error("Erro na requisição:", err);
     }
   };
 
